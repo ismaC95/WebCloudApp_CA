@@ -7,10 +7,11 @@ const CourseCarousel = () => {
     return (
         <Box 
         sx={{
-            maxWidth: '80em',
-            mx: 'auto',
-            my: '3em',
-            p: '2em',
+            // maxWidth: '80em',
+            // mx: 'auto',
+            m: '3em',
+            mx: '10em',
+            p: '3em',
             bgcolor: '#f5f5f5',
             borderRadius: 2,        
         }}>
@@ -23,6 +24,7 @@ const CourseCarousel = () => {
                 overflowX: 'auto', 
                 gap: '1.5em', 
                 p: '1em',
+                px: '10em',
                 pb: '2em',
                 // scrollbarWidth: 'none',
                 // '&::-webkit-scrollbar': { display: 'none' },
