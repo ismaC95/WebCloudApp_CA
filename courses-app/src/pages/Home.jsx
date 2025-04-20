@@ -15,7 +15,7 @@ const Home = () => {
             value={filter}
             exclusive
             onChange={(e, newVal) => setFilter(newVal)}
-            sx={{ mt: 2, display: 'flex', justifyContent: 'left' }}>
+            sx={{ m: '2em', pl: '2em', display: 'flex', justifyContent: 'left' }}>
             <ToggleButton value="top">Top rated</ToggleButton>
             <ToggleButton value="new">Newest</ToggleButton>
           </ToggleButtonGroup>

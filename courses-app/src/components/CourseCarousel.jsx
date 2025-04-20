@@ -10,7 +10,7 @@ const CourseCarousel = () => {
             maxWidth: '80em',
             mx: 'auto',
             my: '3em',
-            px: '2em',
+            p: '2em',
             bgcolor: '#f5f5f5',
             borderRadius: 2,        
         }}>
@@ -22,7 +22,8 @@ const CourseCarousel = () => {
                 display: 'flex', 
                 overflowX: 'auto', 
                 gap: '1.5em', 
-                py: '1.5em',
+                p: '1em',
+                pb: '2em',
                 // scrollbarWidth: 'none',
                 // '&::-webkit-scrollbar': { display: 'none' },
                 }}>

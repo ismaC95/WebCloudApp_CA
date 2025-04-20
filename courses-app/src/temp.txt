@@ -1,46 +1,20 @@
 import React from 'react';
-import { Box, Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
+import { Tabs, Tab, Box } from '@mui/material';
 
-const courses = new Array(4).fill({title: 'Course Description'});
+const categories = [
+  'Technology', 'Business', 'Finance', 'Data Science',
+  'IT Certifications', 'Leadership',
+];
 
-const CourseCarousel = () => {
-    return (
-        <Box mt={4} p={2} bgcolor="#f5f5f5" borderRadius={2}>
-            <Typography variant="h6" gutterBottom sx={{mr: '4em'}}>
-                Featured Courses
-            </Typography>
+const CategoryTabs = () => (
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt:2, overflowX: 'auto'}}>
+        <Tabs value={0} variant="scrollable" scrollButtons="auto">
+            {categories.map((cat, index) => (
+                <Tab label={cat} key={index} />
+            ))}
+        </Tabs>
+    </Box>
+);
 
-            <Box sx={{
-                display: 'flex', 
-                overflowX: 'auto', 
-                gap: '1.5em', 
-                py: '1.5em',
-                }}>
-                {courses.map((courses, index) => (
-                    <Card key={index} sx={{minWidth: '17em', flex: '0 0 auto'}}>
-                        <Box height="8em" bgcolor="#e0e0e0" />
-                        <CardContent>
-                            <Typography fontWeight="bold">{courses.title}</Typography>
-                        </CardContent>
-                    </Card>
-                ))}
-            </Box>
 
-            <Box mt={2} display="flex" justifyContent="center" gap="0.5em">
-                {[0, 1, 2, 3].map((dot) => (
-                    <Box
-                    key={dot}
-                    sx={{
-                        width: '0.6em',
-                        height: '0.6em',
-                        bgcolor: dot === 0 ? 'black' : 'gray',
-                        borderRadius: '50%',
-                    }}
-                    />
-                ))}
-            </Box>
-        </Box>
-    );
-};
-
-export default CourseCarousel;
+export default CategoryTabs;
