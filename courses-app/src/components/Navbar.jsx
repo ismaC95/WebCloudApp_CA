@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <AppBar position="static" color="default">
+        <AppBar position="fixed" color="default">
             <Toolbar>
                 <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr:2}}>
                     <MenuIcon/>

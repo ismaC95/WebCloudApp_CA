@@ -11,7 +11,7 @@ const Home = () => {
     const [filter, setFilter] = React.useState('top');
     
     return (
-        <Box>
+        <Box sx={{mt: '8em'}}>
           <SearchBar />
           <CategoryTabs />
           <ToggleButtonGroup
