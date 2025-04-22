@@ -4,6 +4,7 @@ import CategoryTabs from '../components/CategoryTabs';
 import CourseCarousel from '../components/CourseCarousel';
 import ReviewsSection from '../components/ReviewSection';
 import SpecialOffers from '../components/SpecialOffers';
+import Footer from '../components/Footer';
 import { Box, ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
           <CourseCarousel />
           <ReviewsSection />
           <SpecialOffers />
+          <Footer />
         </Box>
       );
 };

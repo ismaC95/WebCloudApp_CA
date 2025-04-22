@@ -15,6 +15,7 @@ const SpecialOffers = () => {
         m: '3em',
         mt: '8em',
         mx: '10em',
+        mb: '10em',
         p: '3em',
         bgcolor: '#f5f5f5',
         borderRadius: 2,
