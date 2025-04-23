@@ -3,8 +3,9 @@ import { Grid } from '@mui/material'
 
 
 import SearchBar from "../components/SearchBar"
-import CourseFilter from "../components/CourseFilter"
+import CourseFilterBtn from "../components/CourseFilterBtn"
 import FilterChip from "../components/FilterChip"
+import CourseCard from '../components/CourseCard'
 
 
 function CourseList() {
@@ -17,31 +18,35 @@ function CourseList() {
 
     
   return (
-    <Grid container>
-        <Grid size={{xs: 12, sm: 8}} offset={{xs: 0, sm: 2}}>
-            <Grid container 
-                // spacing={2} 
-                sx={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-                // style ={{border:"1px solid yellow"}}
-                >
+    <Grid container justifyContent={"center"}>
+        <Grid size={{xs: 12, sm: 8}}>
+            <Grid container spacing={2} justifyContent={"center"} alignItems="center">
                 <Grid size={12}>
                     <SearchBar />
                 </Grid>
+
+                {/* ----Main Content---- */}
                 <Grid container size= {12}>
+                    {/* Left column */}
                     <Grid size={{xs: 12, sm: 4, md: 3, lg: 3}}>
-                        <CourseFilter filters={filters} setFilters={setFilters}/>
+                        <CourseFilterBtn filters={filters} setFilters={setFilters}/>
                     </Grid>
-                    <Grid size={{sm: 8, md: 7}} style ={{border:"1px solid yellow"}}>
-                        <FilterChip filters={filters} setFilters={setFilters}/>
-                    </Grid>
-                    <Grid size={2} style ={{border:"1px solid yellow"}}>
-                        <p>Results</p>
-                    </Grid>
-                    <Grid size={{xs: 12, sm: 8, md: 7}} style ={{border:"1px solid red"}}>
-                        Courses
+
+                    {/* Right Row top */}
+                    <Grid size={{xs: 12, sm: 8, md: 9}}>
+                        <Grid container spacing={2}>
+                            <Grid size={8}>
+                                <FilterChip filters={filters} setFilters={setFilters}/>
+                            </Grid>
+                            <Grid size={4}>
+                                <p>Results</p>
+                            </Grid>
+                        </Grid>
+                        
+                        {/* Bottom right column (Courses) */}
+                        <Grid size={12}>
+                            <CourseCard />
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>

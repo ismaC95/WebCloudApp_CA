@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemButton, ListItemText, Checkbox, Collapse } from '@mui/material';
+import { List, ListItemButton, ListItemText, Checkbox, Collapse } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 const CheckboxFilter = ({ title, options, selected, onChange }) => {

@@ -6,7 +6,7 @@ import CheckboxFilter from './CheckboxFilter';
 
 // const sortByOptions = ['Most Popular', 'Highest Rated', 'Newest']
 
-const CourseFilter = ({filters, setFilters}) => {
+const CourseFilterBtn = ({filters, setFilters}) => {
     const [sortBy, setSortBy] = useState('');
 
     const handleChange = (e) => {
@@ -79,4 +79,4 @@ const CourseFilter = ({filters, setFilters}) => {
   )
 }
 
-export default CourseFilter;
+export default CourseFilterBtn;
