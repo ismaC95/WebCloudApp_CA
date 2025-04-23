@@ -6,21 +6,13 @@ import CheckboxFilter from './CheckboxFilter';
 
 // const sortByOptions = ['Most Popular', 'Highest Rated', 'Newest']
 
-export const CourseFilter = () => {
+const CourseFilter = ({filters, setFilters}) => {
     const [sortBy, setSortBy] = useState('');
 
     const handleChange = (e) => {
         setSortBy(e.target.value);
     }
-
-    const [filters, setFilters] = useState({
-        duration:[],
-        price: [],
-        category: [],
-        level: [],
-    })
     
-
   return (
     <Grid 
         container 
@@ -63,26 +55,28 @@ export const CourseFilter = () => {
                 title="Video Duration" 
                 options={['0-1 Hour', '1-3 Hours', '3-6 Hours', '+6 Hours']} 
                 selected={filters.duration}
-                onChange={(newChecked) => setFilters({...filters, level: newChecked})}
+                onChange={(selected) => {setFilters({...filters, duration: selected})}}
             />
             <CheckboxFilter 
                 title="Price" 
                 options={['Paid', 'Free']} 
                 selected={filters.price}
-                onChange={(newChecked) => setFilters({...filters, price: newChecked})}/>
+                onChange={(selected) => setFilters({...filters, price: selected})}/>
             <CheckboxFilter 
                 title="Category" 
                 options={['Marketing', 'HR', 'Finance', 'Software Development', 'Data Analytics', 'Sales & Customer Success']} 
                 selected={filters.category}
-                onChange={(newChecked) => setFilters({...filters, category: newChecked})}
+                onChange={(selected) => setFilters({...filters, category: selected})}
             />
             <CheckboxFilter 
                 title="Level" 
                 options={['Beginner', 'Intermediate', 'Advanced']} 
                 selected={filters.level}
-                onChange={(newChecked) => setFilters({...filters, level: newChecked})}
+                onChange={(selected) => setFilters({...filters, level: selected})}
                 />
         </Grid>
     </Grid>
   )
 }
+
+export default CourseFilter;

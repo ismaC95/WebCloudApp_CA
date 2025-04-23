@@ -11,15 +11,15 @@ const CheckboxFilter = ({ title, options, selected, onChange }) => {
 
   const handleToggle = (value) => () => {
     const currentIndex = selected.indexOf(value);
-    const newChecked = [...selected];
+
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      selected.push(value);
     } else {
-      newChecked.splice(currentIndex, 1);
+      selected.splice(currentIndex, 1);
     }
 
-    onChange(newChecked);
+    onChange(selected);
   };
 
   return (
@@ -35,16 +35,16 @@ const CheckboxFilter = ({ title, options, selected, onChange }) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>
           {options.map((label) => (
-            <ListItem key={label} disablePadding>
-              <ListItemButton onClick={handleToggle(label)}>
+            <ListItemButton key={label} onClick={handleToggle(label)} >
                 <ListItemText primary={label} />
                 <Checkbox
                   size="small"
                   edge="end"
-                  selected={selected.includes(label)}
+                  checked ={selected.includes(label)}
+                  onChange={handleToggle(label)}
+                  onClick={(e) => e.stopPropagation()}
                 />
-              </ListItemButton>
-            </ListItem>
+            </ListItemButton>
           ))}
         </List>
       </Collapse>

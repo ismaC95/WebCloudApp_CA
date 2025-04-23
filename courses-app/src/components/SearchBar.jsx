@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField, InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 
-export const SearchBar = () => {
+const SearchBar = () => {
 
   return (
     <TextField
@@ -22,3 +22,5 @@ export const SearchBar = () => {
 
   )
 }
+
+export default SearchBar;
