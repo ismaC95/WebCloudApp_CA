@@ -1,3 +1,4 @@
+
 // src/App.jsx
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -71,5 +72,4 @@ function App() {
     </ThemeProvider>
   );
 }
-
 export default App;
