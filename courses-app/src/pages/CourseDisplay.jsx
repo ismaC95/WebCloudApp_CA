@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Box, Typography, Drawer, List, ListItem, ListItemText, Avatar, Divider, Chip } from '@mui/material';
+import { Box, Typography, Drawer, List, ListItem, ListItemText, Avatar, Divider, Chip, IconButton } from '@mui/material';
 import { VideoLibrary, AccessTime, Star } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useParams } from 'react-router-dom';
@@ -12,24 +12,52 @@ const modules = [
     "Downloading the tools"
 ];
 
+
 const CourseDisplay = () => {
     const {id} = useParams();
+
+    const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const toggleDrawer = (open) => () => {
+        setDrawerOpen(open);
+    };
+    
     return (
         <Box /* Main content */sx={{ display: 'flex', mt: '5em', p: '2em'}}> 
-            <Box /*Main content*/ sx={{flex: 1, pr: '2em'}}> 
+            <Box /*Main content*/ sx={{
+                flexGrow: 1, 
+                transition: 'padding-right 0.3s ease',
+                pr: drawerOpen ? '18em' : '2em',
+                pl: '2em',
+                
+            }}
+            > 
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <IconButton onClick={toggleDrawer(true)}>
+                        <MenuIcon />
+                    </IconButton>
+                </Box>
+
                 <Box /* Course Video */
                 sx={{
-                    width: '100%',
-                    height: '20em',
-                    bgcolor: '#e0e0e0',
-                    mb: 3,
-                    display: 'flex',
-                    alignItems: 'center',
-                    alignContent: 'center',
-                    borderRadius: 2,
-                    border: '2px solid #30caf9'
+                    position: 'relative',
+                    paddingBottom: '56.25%',
+                    height: 0,
+                    mt: 2
                 }}>
-                    <Typography variant="h6">Course Video</Typography>
+                    <iframe
+                    src="https://youtu.be/7fPXI_MnBOY?feature=shared"
+                    title="Course Video"
+                    frameBorder="0"
+                    allowFullScreen
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                    }}
+                    ></iframe>
                 </Box>
 
                 <Box /* Instructor Info */ 
@@ -40,7 +68,8 @@ const CourseDisplay = () => {
                     bgcolor: '#fafafa', 
                     p: 2,
                     borderRadius:2
-                }}>
+                }}
+                >
                     <Avatar sx={{width: 64, height: 64, mr: 2}}>Photo</Avatar>
                     <Box>
                         <Typography fontWeight="bold">Instructor Name</Typography>
@@ -66,23 +95,22 @@ const CourseDisplay = () => {
                         <Star sx={{ color: '#fbc02d' }} fontSize="small" />
                         <Typography variant="body2">(16,320 Reviews)</Typography>
                     </Box>
-                    <Typography variant="body2">
-                        Description details......
-                    </Typography>
+                        <Typography variant="body2">
+                            Description details......
+                        </Typography>
                 </Box>
             </Box>
 
             {/* Right Drawer - Module List */}
             <Drawer 
-            variant="permanent"
             anchor="right"
+            open={drawerOpen}
+            onClose={toggleDrawer(false)}
             PaperProps={{
                 sx: {
                     width: '16em',
                     mt: '4em',
-                    bgcolor: '#f0f0f0',
-                    borderLeft: '1px solid #ccc'
-                }
+                    bgcolor: '#f0f0f0'},
             }}
             >
                 <Typography variant="subtitle1" sx={{ p: 2}}>Modules</Typography>

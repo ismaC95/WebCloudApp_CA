@@ -1,20 +1,39 @@
-import React from 'react';
-import { Tabs, Tab, Box } from '@mui/material';
+                <Box /* Instructor Info */ 
+                sx={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    mb: 3,
+                    bgcolor: '#fafafa', 
+                    p: 2,
+                    borderRadius:2
+                }}
+                >
+                    <Avatar sx={{width: 64, height: 64, mr: 2}}>Photo</Avatar>
+                    <Box>
+                        <Typography fontWeight="bold">Instructor Name</Typography>
+                        <Typography variant="body2">Profession: Computer Science</Typography>
+                        <Typography variant="body2">
+                            Courses: <a href="#">C++ basic</a>, <a href="#">Object oriented programming</a>
+                        </Typography>
+                    </Box>
+                </Box>
 
-const categories = [
-  'Technology', 'Business', 'Finance', 'Data Science',
-  'IT Certifications', 'Leadership',
-];
-
-const CategoryTabs = () => (
-    <Box sx={{ display: 'flex', justifyContent: 'center', mt:2, overflowX: 'auto'}}>
-        <Tabs value={0} variant="scrollable" scrollButtons="auto">
-            {categories.map((cat, index) => (
-                <Tab label={cat} key={index} />
-            ))}
-        </Tabs>
-    </Box>
-);
-
-
-export default CategoryTabs;
+                <Box /*Course Description*/
+                sx={{
+                    bgcolor: '#f5f5f5', 
+                    p: 3,
+                    borderRadius: 2
+                }}>
+                    <Typography fontWeight="bold" gutterBottom>Course Description</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb:1 }}>
+                        <AccessTime fontSize="small" />
+                        <Typography variant="body2">32.5 hours</Typography>
+                        <VideoLibrary fontSize="small" />
+                        <Typography variant="body2">16 Videos</Typography>
+                        <Star sx={{ color: '#fbc02d' }} fontSize="small" />
+                        <Typography variant="body2">(16,320 Reviews)</Typography>
+                    </Box>
+                    <Typography variant="body2">
+                        Description details......
+                    </Typography>
+                </Box>
