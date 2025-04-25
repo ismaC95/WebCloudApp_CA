@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 
 
 import SearchBar from "../components/SearchBar"
@@ -35,16 +35,19 @@ function CourseList() {
                     {/* Right Row top */}
                     <Grid size={{xs: 12, sm: 8, md: 9}}>
                         <Grid container spacing={2}>
-                            <Grid size={8}>
+                            <Grid size={9}>
                                 <FilterChip filters={filters} setFilters={setFilters}/>
                             </Grid>
-                            <Grid size={4}>
-                                <p>Results</p>
+                            <Grid size={3}>
+                                <Typography fontWeight='bold' variant='h6'>4 Results</Typography>
                             </Grid>
                         </Grid>
                         
                         {/* Bottom right column (Courses) */}
                         <Grid size={12}>
+                            <CourseCard />
+                            <CourseCard />
+                            <CourseCard />
                             <CourseCard />
                         </Grid>
                     </Grid>
