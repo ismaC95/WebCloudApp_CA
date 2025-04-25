@@ -23,7 +23,7 @@ const Navbar = () => {
                     
 
                     <Button variant="outlined">Sign In</Button>
-                    <IconButton color="inherit">
+                    <IconButton color="inherit" component={Link} to="/checkout">
                         <ShoppingCartIcon />
                     </IconButton>
                 </Box>

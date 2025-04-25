@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import CourseDisplay from './pages/CourseDisplay';
+import Checkout from './pages/Checkout';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/coursedisplay" element={<CourseDisplay />} /> {/*PH for course id */}
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
   );
