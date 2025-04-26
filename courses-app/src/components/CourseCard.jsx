@@ -6,7 +6,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 
 
-const CourseCard = () => {
+const CourseCard = ({course}) => {
   return (
     <Card sx={{marginBottom: 2}}>
       <CardActionArea>
@@ -20,7 +20,7 @@ const CourseCard = () => {
             component="img"
             sx={{ height: 'auto', width: 200 }}
             image="/Course_images/placeholder.png"
-            title="course placeholder image"
+            title={course.title}
           />
 
           {/* Content */}
@@ -45,26 +45,26 @@ const CourseCard = () => {
               {/* Title & Subheader */}
               <Box sx={{ flex: 1 }}>
                 <Typography variant="h6" fontWeight="bold">
-                  React for Dummies
+                  {course.title}
                 </Typography>
                 <Typography
                   variant="body2"
                   color="text.secondary"
                   sx={{ mt: 0.5 }}
                 >
-                  In this course you will learn how to not use React
+                  {course.description}
                 </Typography>
               </Box>
 
               {/* Pricing */}
               <Stack alignItems="flex-end">
-                <Typography fontWeight="bold">$10.99</Typography>
+                <Typography fontWeight="bold">{course.price}</Typography>
                 <Typography
                   fontSize="0.9rem"
                   color="text.secondary"
                   sx={{ textDecoration: 'line-through' }}
                 >
-                  $24.99
+                  {course.originalPrice}
                 </Typography>
               </Stack>
             </Stack>
@@ -77,7 +77,7 @@ const CourseCard = () => {
               sx={{ mt: 1 }}
               flexWrap="wrap"
             >
-              <Typography fontWeight="bold">4.8</Typography>
+              <Typography fontWeight="bold">{course.rating}</Typography>
               <Stack direction="row">
                 <StarIcon fontSize="small" />
                 <StarIcon fontSize="small" />
@@ -85,7 +85,7 @@ const CourseCard = () => {
                 <StarIcon fontSize="small" />
                 <StarHalfIcon fontSize="small" />
               </Stack>
-              <Typography color="text.secondary">(1,256)</Typography>
+              <Typography color="text.secondary">({course.reviews})</Typography>
             </Stack>
 
             {/* Course info (duration, modules, level) */}
@@ -95,9 +95,9 @@ const CourseCard = () => {
               flexWrap="wrap"
               sx={{ mt: 1 }}
             >
-              <Typography variant="body2">2.5 Hours</Typography>
-              <Typography variant="body2">15 Modules</Typography>
-              <Typography variant="body2">Beginner</Typography>
+              <Typography variant="body2">{course.duration}</Typography>
+              <Typography variant="body2">{course.modules}</Typography>
+              <Typography variant="body2">{course.level}</Typography>
             </Stack>
           </Stack>
         </Stack>

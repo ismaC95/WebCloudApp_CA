@@ -5,7 +5,8 @@ import { Grid, Typography } from '@mui/material'
 import SearchBar from "../components/SearchBar"
 import CourseFilterBtn from "../components/CourseFilterBtn"
 import FilterChip from "../components/FilterChip"
-import CourseCard from '../components/CourseCard'
+
+import CoursesDisplay from '../components/CoursesDisplay'
 
 
 function CourseList() {
@@ -44,11 +45,8 @@ function CourseList() {
                         </Grid>
                         
                         {/* Bottom right column (Courses) */}
-                        <Grid size={12}>
-                            <CourseCard />
-                            <CourseCard />
-                            <CourseCard />
-                            <CourseCard />
+                        <Grid size={12} sx={{marginTop: 2}}>
+                            <CoursesDisplay/>
                         </Grid>
                     </Grid>
                 </Grid>
