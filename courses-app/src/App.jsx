@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import CourseDisplay from './pages/CourseDisplay';
 import Checkout from './pages/Checkout';
+import PaymentSuccessful from './pages/PaymentSuccessful';
+
 
 const App = () => {
   return (
@@ -15,6 +17,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/coursedisplay" element={<CourseDisplay />} /> {/*PH for course id */}
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment-successful" element={<PaymentSuccessful />} />
       </Routes>
     </Router>
   );
