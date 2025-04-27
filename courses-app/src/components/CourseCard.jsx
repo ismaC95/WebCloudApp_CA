@@ -4,6 +4,7 @@ import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
+import RatingStars from './RatingStars';
 
 
 const CourseCard = ({course}) => {
@@ -19,7 +20,7 @@ const CourseCard = ({course}) => {
           <CardMedia
             component="img"
             sx={{ height: 'auto', width: 200 }}
-            image="/Course_images/placeholder.png"
+            image={course.image}
             title={course.title}
           />
 
@@ -78,13 +79,7 @@ const CourseCard = ({course}) => {
               flexWrap="wrap"
             >
               <Typography fontWeight="bold">{course.rating}</Typography>
-              <Stack direction="row">
-                <StarIcon fontSize="small" />
-                <StarIcon fontSize="small" />
-                <StarIcon fontSize="small" />
-                <StarIcon fontSize="small" />
-                <StarHalfIcon fontSize="small" />
-              </Stack>
+              <RatingStars rating={course.rating}/>
               <Typography color="text.secondary">({course.reviews})</Typography>
             </Stack>
 

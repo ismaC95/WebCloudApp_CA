@@ -5,12 +5,12 @@ const courses = [
         description: "Learn the fundamentals of digital marketing, SEO, and advertising.",
         price: 'Free',
         originalPrice: '€19.99',
-        rating: 4.6,
+        rating: 5,
         reviews: 856,
         duration: "1-3 Hours",
         modules: 8,
         level: "Beginner",
-        image: "/Course_images/marketing1.png",
+        image: "/Course_images/marketing1.jpeg",
         category: "Marketing"
     },
     {
@@ -24,7 +24,7 @@ const courses = [
         duration: "3-6 Hours",
         modules: 12,
         level: "Intermediate",
-        image: "/Course_images/marketing2.png",
+        image: "/Course_images/marketing2.jpeg",
         category: "Marketing"
     },
     {
@@ -33,7 +33,7 @@ const courses = [
         description: "Learn how to optimize websites for Google search rankings.",
         price: 9.99,
         originalPrice: 24.99,
-        rating: 4.4,
+        rating: 3.7,
         reviews: 612,
         duration: "0-1 Hour",
         modules: 5,

@@ -9,7 +9,7 @@ const CoursesDisplay = () => {
   return (
     <Stack direction='column'>
         {courses.map(course=>(
-            <CourseCard kye={course.id} course={course}/>
+            <CourseCard key={course.id} course={course}/>
         ))}
     <PaginationComp />
     </Stack>
