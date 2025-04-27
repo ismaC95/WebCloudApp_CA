@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItemButton, ListItemText, Checkbox, Collapse } from '@mui/material';
+import { List, ListItemButton, ListItemText, Checkbox, Collapse, Typography } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 const CheckboxFilter = ({ title, options, selected, onChange }) => {
@@ -23,32 +23,30 @@ const CheckboxFilter = ({ title, options, selected, onChange }) => {
   };
 
   return (
-    <List sx={{ width: '100%' }} disablePadding>
-      <ListItemButton onClick={handleClick}>
-        <ListItemText
-          className="filter-category"
-          primary={title}
-          primaryTypographyProps={{ fontWeight: 'bold' }}
-        />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List disablePadding>
-          {options.map((label) => (
-            <ListItemButton key={label} onClick={handleToggle(label)} >
-                <ListItemText primary={label} />
-                <Checkbox
-                  size="small"
-                  edge="end"
-                  checked ={selected.includes(label)}
-                  onChange={handleToggle(label)}
-                  onClick={(e) => e.stopPropagation()}
-                />
-            </ListItemButton>
-          ))}
-        </List>
-      </Collapse>
-    </List>
+      <List sx={{width: "100%"}}>
+        <ListItemButton onClick={handleClick} sx={{ justifyContent:"space-between", paddingX: 1, width:"100%"}}>
+          <Typography fontWeight={"bold"}>
+            {title}
+          </Typography>
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List disablePadding>
+            {options.map((label) => (
+              <ListItemButton key={label} onClick={handleToggle(label)} sx={{paddingX: 1, paddingY: 0}}>
+                  <ListItemText primary={label} />
+                  <Checkbox
+                    size="small"
+                    edge="end"
+                    checked ={selected.includes(label)}
+                    onChange={handleToggle(label)}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+              </ListItemButton>
+            ))}
+          </List>
+        </Collapse>
+      </List>
   );
 };
 

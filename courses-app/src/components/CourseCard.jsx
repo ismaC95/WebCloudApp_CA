@@ -14,7 +14,7 @@ const CourseCard = ({course}) => {
         <Stack
           direction={{ sm: 'column', md: 'row' }}
           spacing={2}
-          alignItems="flex-start"
+          alignItems="center"
         >
           {/* Image */}
           <CardMedia
