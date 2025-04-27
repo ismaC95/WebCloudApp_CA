@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, Button, Select, InputLabel, FormControl, MenuItem, Stack, Box } from '@mui/material';
+import { Grid, Button, Select, InputLabel, FormControl, MenuItem } from '@mui/material';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 
 const CourseFilterBtn = ({onToggleFilter}) => {

@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { Box, Fade, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 
 
 import SearchBar from "../components/SearchBar"
@@ -14,7 +14,7 @@ function CourseList() {
     const [filters, setFilters] = useState({
         // Providing filters categories
         duration:[],
-        price: [],
+        paymentType: [],
         category: [],
         level: [],
     });
@@ -44,7 +44,7 @@ function CourseList() {
                         sm: 4, 
                         md: 3,
                         lg: 2}}>
-                        <CourseFilterBtn filters={filters} setFilters={setFilters} onToggleFilter = {toggleFilter}/>
+                        <CourseFilterBtn onToggleFilter = {toggleFilter}/>
                     </Grid>
 
                     {/* Chips & Results */}
@@ -80,7 +80,7 @@ function CourseList() {
                         sm: filtersVisible ? 8 : 12, 
                         md: filtersVisible ? 9 : 12,
                         lg: filtersVisible ? 10 : 12}}>
-                        <CoursesDisplay />
+                        <CoursesDisplay filters={filters}/>
                     </Grid>
                 </Grid>
             </Grid>

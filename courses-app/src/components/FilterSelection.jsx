@@ -1,4 +1,4 @@
-import { Box, Grid, Stack } from "@mui/material"
+import { Grid } from "@mui/material"
 
 
 import CheckboxFilter from "./CheckboxFilter"
@@ -16,8 +16,8 @@ const FilterSelection = ({filters, setFilters}) => {
             <CheckboxFilter 
                 title="Price" 
                 options={['Paid', 'Free']} 
-                selected={filters.price}
-                onChange={(selected) => setFilters({...filters, price: selected})}/>
+                selected={filters.paymentType}
+                onChange={(selected) => setFilters({...filters, paymentType: selected})}/>
             <CheckboxFilter 
                 title="Category" 
                 options={['Marketing', 'HR', 'Finance', 'Software Development', 'Data Analytics', 'Sales & Customer Success']} 

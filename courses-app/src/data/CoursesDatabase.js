@@ -1,4 +1,4 @@
-const courses = [
+const rawCourses = [
     {
         id: 1,
         title: "Introduction to Digital Marketing",
@@ -420,5 +420,10 @@ const courses = [
         category: "Finance"
     }
 ];
-        
+
+const courses = rawCourses.map(course => ({
+    ...course,
+    paymentType: course.price == "Free" ? "Free" : "Paid"
+}))
+
 export default courses;
