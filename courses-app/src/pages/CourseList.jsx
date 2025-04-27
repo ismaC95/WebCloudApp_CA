@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar"
 import CourseFilterBtn from "../components/CourseFilterBtn"
 import FilterChip from "../components/FilterChip"
 
+import courses from '../data/CoursesDatabase'
 import CoursesDisplay from '../components/CoursesDisplay'
 import FilterSelection from '../components/FilterSelection'
 
@@ -18,6 +19,14 @@ function CourseList() {
         category: [],
         level: [],
     });
+
+    //filtered courses
+    const filteredCourses = courses.filter(course => {
+        return Object.keys(filters).every(key => {
+          if (filters[key].length === 0) return true;
+          return filters[key].includes(course[key]);
+        });
+      });
 
     //Filter button functionality
     const [filtersVisible, setFiltersVisible] = useState(true);
@@ -53,7 +62,9 @@ function CourseList() {
                             <FilterChip filters={filters} setFilters={setFilters} />
                         </Grid>
                         <Grid size={3} display={'flex'} alignItems="center" justifyContent={'flex-end'}>
-                            <Typography fontWeight='bold' variant='h6'>4 Results</Typography>
+                            <Typography fontWeight={"bold"} variant="h6">
+                                {filteredCourses.length} {filteredCourses.length === 1 ? "Result" : "Results"}
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -80,7 +91,7 @@ function CourseList() {
                         sm: filtersVisible ? 8 : 12, 
                         md: filtersVisible ? 9 : 12,
                         lg: filtersVisible ? 10 : 12}}>
-                        <CoursesDisplay filters={filters}/>
+                        <CoursesDisplay filteredCourses={filteredCourses}/>
                     </Grid>
                 </Grid>
             </Grid>
