@@ -5,9 +5,6 @@ import { Stack } from '@mui/material';
 
 
 const RatingStars = (course) => {
-    //import courses.rating
-    //rating %1 != 0 then half-star
-    //loop of rating - i = 1, -2, -3. when it's negative stop. Give as many stars as i - 1
   return (
     <Stack direction="row">
         {Array.from({length: 5}).map((_, index) => {

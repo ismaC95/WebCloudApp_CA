@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material'
 
 import CourseCard from '../components/CourseCard'
-import PaginationComp from '../components/PaginationComp'
+import PaginationComp from '../PaginationComp'
 
 
 const CoursesDisplay = ({filteredCourses}) => {

@@ -3,12 +3,12 @@ import { Grid, Typography } from '@mui/material'
 
 
 import SearchBar from "../components/SearchBar"
-import CourseFilterBtn from "../components/CourseFilterBtn"
-import FilterChip from "../components/FilterChip"
+import CourseFilterBtn from "../components/courseList/CourseFilterBtn"
+import FilterChip from "../components/courseList/FilterChip"
 
 import courses from '../data/CoursesDatabase'
-import CoursesDisplay from '../components/CoursesDisplay'
-import FilterSelection from '../components/FilterSelection'
+import CoursesDisplay from '../components/courseList/CoursesDisplay'
+import FilterSelection from '../components/courseList/FilterSelection'
 
 
 function CourseList() {

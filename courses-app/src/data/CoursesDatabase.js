@@ -5,7 +5,7 @@ const rawCourses = [
         description: "Learn the fundamentals of digital marketing, SEO, and advertising.",
         price: 'Free',
         originalPrice: '€19.99',
-        rating: 5,
+        rating: 4.7,
         reviews: 856,
         duration: "1-3 Hours",
         modules: 8,
