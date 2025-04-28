@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material'
 
-import CourseCard from '../components/CourseCard'
+import CourseCard from '../courseList/CourseCard'
 import PaginationComp from '../PaginationComp'
 
 

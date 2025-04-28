@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardActionArea, Box, CardMedia, Stack, Typography } from '@mui/material'
 
-import RatingStars from './RatingStars';
+import RatingStars from '../RatingStars';
 
 
 const CourseCard = ({course}) => {
