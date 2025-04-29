@@ -22,18 +22,18 @@ const PaginationComp = () => {
         md: 3,
         lg: 1
       }}>
-        <FormControl fullWidth>
+        {/*<FormControl fullWidth>
           <Select
               size="small"
               variant="outlined"
               >
-              {/* value={sortBy}> */}
-              {/* // onChange={handleChange} */}
-              <MenuItem value={'10 pages'}>10 Pages</MenuItem>
+               value={sortBy}> 
+               // onChange={handleChange} 
+               <MenuItem value={'10 pages'}>10 Pages</MenuItem>
               <MenuItem value={'30 Pages'}>30 Pages</MenuItem>
               <MenuItem value={'50 Pages'}>50 Pages</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
       </Grid>
     </Grid>
     

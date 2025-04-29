@@ -18,11 +18,10 @@ const Navbar = () => {
                     <Button color="inherit" component={Link} to="/about">About</Button>
                     <Button color="inherit" component={Link} to="/coursedisplay">My Course</Button>
 
-                    <Button color="inherit" >Courses</Button>
-                    <Button color="inherit" >Sign Up</Button>
-                    
+                    <Button color="inherit" component={Link} to="/courses" >Courses</Button>
+                    <Button color="inherit" component={Link} to="/signup">Sign Up</Button>
 
-                    <Button variant="outlined">Sign In</Button>
+                    <Button variant="outlined" component={Link} to="/login">Sign In</Button>
                     <IconButton color="inherit" component={Link} to="/checkout">
                         <ShoppingCartIcon />
                     </IconButton>
