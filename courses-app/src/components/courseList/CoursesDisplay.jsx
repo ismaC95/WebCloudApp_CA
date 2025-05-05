@@ -1,7 +1,6 @@
 import { Stack } from '@mui/material'
 
 import CourseCard from '../courseList/CourseCard'
-import PaginationComp from '../PaginationComp'
 
 
 const CoursesDisplay = ({filteredCourses}) => {
@@ -11,7 +10,6 @@ const CoursesDisplay = ({filteredCourses}) => {
         {filteredCourses.map(course=>(
             <CourseCard key={course.id} course={course}/>
         ))}
-    <PaginationComp />
     </Stack>
   )
 }

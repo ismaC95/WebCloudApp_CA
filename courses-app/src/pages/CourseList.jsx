@@ -9,6 +9,7 @@ import FilterChip from "../components/courseList/FilterChip"
 import courses from '../data/CoursesDatabase'
 import CoursesDisplay from '../components/courseList/CoursesDisplay'
 import FilterSelection from '../components/courseList/FilterSelection'
+import PaginationComp from '../components/PaginationComp'
 
 
 function CourseList() {
@@ -56,6 +57,14 @@ function CourseList() {
 
     const sortedCourses = sortCourses(filteredCourses, sortBy);
 
+    //pagination functionality
+    const coursesPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const paginatedCourses = sortedCourses.slice(
+        (currentPage - 1) * coursesPerPage,
+        currentPage * coursesPerPage
+    );
     
   return (
     <Grid container justifyContent={"center"} >
@@ -114,8 +123,18 @@ function CourseList() {
                     <Grid size={{xs: 12, 
                         sm: filtersVisible ? 8 : 12, 
                         md: filtersVisible ? 9 : 12,
-                        lg: filtersVisible ? 10 : 12}}>
-                        <CoursesDisplay filteredCourses={sortedCourses}/>
+                        lg: filtersVisible ? 10 : 12}}
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                        <CoursesDisplay 
+                        filteredCourses={paginatedCourses}/>
+                        <PaginationComp 
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            totalCourses={sortedCourses.length}
+                            coursesPerPage={coursesPerPage}/>
                     </Grid>
                 </Grid>
             </Grid>

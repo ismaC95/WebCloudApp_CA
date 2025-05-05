@@ -1,7 +1,7 @@
 import { Grid, Select, FormControl, MenuItem } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 
-const PaginationComp = () => {
+const PaginationComp = ({currentPage, setCurrentPage, totalCourses, coursesPerPage}) => {
   return (
     <Grid container size={12}
       sx={{
@@ -15,7 +15,16 @@ const PaginationComp = () => {
         lg: 11
         }}
         display='flex' spacing={2} justifyContent='center'>
-        <Pagination count={10} shape="rounded" showFirstButton showLastButton boundaryCount={1} siblingCount={1}/>
+        <Pagination 
+        count={Math.ceil(totalCourses / coursesPerPage)}
+        page={currentPage}
+        onChange={(e, value) => setCurrentPage(value)}
+        shape="rounded" 
+        showFirstButton 
+        showLastButton 
+        // boundaryCount={1} 
+        // siblingCount={1}
+        />
       </Grid>
       <Grid size={{
         xs: 3,
