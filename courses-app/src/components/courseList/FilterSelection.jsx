@@ -8,7 +8,7 @@ const FilterSelection = ({filters, setFilters}) => {
     <Grid size={12}>
     {/* Filter Checkboxes */}
             <CheckboxFilter 
-                title="Video Duration" 
+                title="Duration" 
                 options={['0-1 Hour', '1-3 Hours', '3-6 Hours', '+6 Hours']} 
                 selected={filters.duration}
                 onChange={(selected) => {setFilters({...filters, duration: selected})}}

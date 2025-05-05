@@ -2,12 +2,7 @@ import { useState } from 'react';
 import { Grid, Button, Select, InputLabel, FormControl, MenuItem } from '@mui/material';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 
-const CourseFilterBtn = ({onToggleFilter}) => {
-    const [sortBy, setSortBy] = useState('');
-
-    const handleChange = (e) => {
-        setSortBy(e.target.value);
-    }
+const CourseFilterBtn = ({onToggleFilter, sortBy, handleSortBy}) => {
     
   return (
     <Grid container spacing={2}>
@@ -28,10 +23,10 @@ const CourseFilterBtn = ({onToggleFilter}) => {
                     variant="outlined"
                     label="Sort by"
                     value={sortBy}
-                    onChange={handleChange}>
+                    onChange={handleSortBy}>
                     <MenuItem value={'Most Popular'}>Most Popular</MenuItem>
-                    <MenuItem value={'Highest Rated'}>Highest Rated</MenuItem>
-                    <MenuItem value={'Newest'}>Newest</MenuItem>
+                    <MenuItem value={'Top Rated'}>Top Rated</MenuItem>
+                    <MenuItem value={'Cheapest'}>Cheapest</MenuItem>
                 </Select>
             </FormControl>
         </Grid>

@@ -3,8 +3,8 @@ const rawCourses = [
         id: 1,
         title: "Introduction to Digital Marketing",
         description: "Learn the fundamentals of digital marketing, SEO, and advertising.",
-        price: 'Free',
-        originalPrice: '€19.99',
+        price: 0.00,
+        originalPrice: 19.99,
         rating: 4.7,
         reviews: 856,
         duration: "1-3 Hours",
@@ -17,8 +17,8 @@ const rawCourses = [
         id: 2,
         title: "Advanced Facebook Ads Strategies",
         description: "Master Facebook ads for high-converting campaigns.",
-        price: '€12.99',
-        originalPrice: '€29.99',
+        price: 12.99,
+        originalPrice: 29.99,
         rating: 4.7,
         reviews: 452,
         duration: "3-6 Hours",
@@ -59,7 +59,7 @@ const rawCourses = [
         id: 5,
         title: "Recruitment and Talent Acquisition",
         description: "Learn best practices in hiring and retaining top talent.",
-        price: 'Free',
+        price: 0.00,
         originalPrice: 14.99,
         rating: 4.3,
         reviews: 278,
@@ -143,7 +143,7 @@ const rawCourses = [
         id: 11,
         title: "Python Programming for Beginners",
         description: "A gentle introduction to Python programming.",
-        price: 'Free',
+        price: 0.00,
         originalPrice: 19.99,
         rating: 4.5,
         reviews: 932,
@@ -199,7 +199,7 @@ const rawCourses = [
         id: 15,
         title: "Data Visualization with Tableau",
         description: "Create beautiful dashboards and visualizations with Tableau.",
-        price: 'Free',
+        price: 0.00,
         originalPrice: 14.99,
         rating: 4.5,
         reviews: 577,
@@ -227,7 +227,7 @@ const rawCourses = [
         id: 17,
         title: "Customer Success Foundations",
         description: "Build lasting customer relationships and drive loyalty.",
-        price: 'Free',
+        price: 0.00,
         originalPrice: 17.99,
         rating: 4.3,
         reviews: 245,
@@ -325,7 +325,7 @@ const rawCourses = [
         id: 24,
         title: "Data Science for Beginners",
         description: "An introduction to key data science concepts and Python libraries.",
-        price: 'Free',
+        price: 0.00,
         originalPrice: 24.99,
         rating: 4.7,
         reviews: 1021,
@@ -381,7 +381,7 @@ const rawCourses = [
         id: 28,
         title: "Personal Branding for Sales Success",
         description: "Build a powerful personal brand to boost your sales career.",
-        price: 'Free',
+        price: 0.00,
         originalPrice: 12.99,
         rating: 4.3,
         reviews: 205,
@@ -421,9 +421,16 @@ const rawCourses = [
     }
 ];
 
+const euro = new Intl.NumberFormat('en-DE', {
+    style: 'currency',
+    currency:'EUR',
+});
+
 const courses = rawCourses.map(course => ({
     ...course,
-    paymentType: course.price == "Free" ? "Free" : "Paid"
+    paymentType: course.price == 0.00 ? "Free" : "Paid",
+    priceDisplay: course.price == 0.00 ? "Free" : euro.format(course.price),
+    originalPriceDisplay: euro.format(course.originalPrice)
 }))
 
 export default courses;

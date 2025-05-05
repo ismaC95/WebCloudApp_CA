@@ -56,13 +56,13 @@ const CourseCard = ({course}) => {
 
               {/* Pricing */}
               <Stack alignItems="flex-end">
-                <Typography fontWeight="bold">{course.price}</Typography>
+                <Typography fontWeight="bold">{course.priceDisplay}</Typography>
                 <Typography
                   fontSize="0.9rem"
                   color="text.secondary"
                   sx={{ textDecoration: 'line-through' }}
                 >
-                  {course.originalPrice}
+                  {course.originalPriceDisplay}
                 </Typography>
               </Stack>
             </Stack>

@@ -35,6 +35,27 @@ function CourseList() {
         setFiltersVisible(!filtersVisible);
         console.log(filtersVisible);
     }
+
+    //Sort by button functionality
+    const [sortBy, setSortBy] = useState('');
+
+    const handleSortBy = (e) => {
+        setSortBy(e.target.value)
+    }
+
+    const sortCourses = (courses, sortBy) => {
+        const sorted = [...courses];
+        const sortFunctions = {
+            'Most Popular': (a, b) => b.reviews - a.reviews,
+            'Top Rated': (a, b) => b.rating - a.rating,
+            'Cheapest': (a, b) => a.price - b.price,
+        };
+
+        return sortFunctions[sortBy] ? sorted.sort(sortFunctions[sortBy]) : sorted;
+    }
+
+    const sortedCourses = sortCourses(filteredCourses, sortBy);
+
     
   return (
     <Grid container justifyContent={"center"} >
@@ -53,7 +74,10 @@ function CourseList() {
                         sm: 4, 
                         md: 3,
                         lg: 2}}>
-                        <CourseFilterBtn onToggleFilter = {toggleFilter}/>
+                        <CourseFilterBtn 
+                            onToggleFilter={toggleFilter}
+                            sortBy={sortBy}
+                            handleSortBy={handleSortBy}/>
                     </Grid>
 
                     {/* Chips & Results */}
@@ -91,7 +115,7 @@ function CourseList() {
                         sm: filtersVisible ? 8 : 12, 
                         md: filtersVisible ? 9 : 12,
                         lg: filtersVisible ? 10 : 12}}>
-                        <CoursesDisplay filteredCourses={filteredCourses}/>
+                        <CoursesDisplay filteredCourses={sortedCourses}/>
                     </Grid>
                 </Grid>
             </Grid>
