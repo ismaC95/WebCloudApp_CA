@@ -1,47 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Box, Typography, Card, CardContent, Avatar, Stack, IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import CoursesDatabase from '../../data/CoursesDatabase';
 import RatingStars from '../RatingStars';
 
-const reviewCourseIds = [8, 6, 10, 22, 30];
-
 const reviewsData = [
-  {
-    courseId: 8,
-    reviewer: 'Anna Muller',
-    text: "This course exceeded my expectations. Clear explanations and practical examples!",
-  },
-
-  {
-    courseId: 6,
-    reviewer: 'James OConnor',
-    text: "Engaging from start to finish. The instructor really knows their stuff.",
-  },
-  {
-    courseId: 10,
-    reviewer: 'Fatima Beaty',
-    text: "Perfect for beginners. Loved the pace and the visuals!",
-  },
-  {
-    courseId: 22,
-    reviewer: 'Lukas McCann',
-    text: "Very detailed and helpful for my job in analytics.",
-  },
-  {
-    courseId: 30,
-    reviewer: 'Isabelle Higgins',
-    text: "Exactly what I needed to improve my skills quickly.",
-  },
+  { courseId: 8, reviewer: 'Anna Muller', text: "This course exceeded my expectations. Clear explanations and practical examples!" },
+  { courseId: 6, reviewer: 'James OConnor', text: "Engaging from start to finish. The instructor really knows their stuff." },
+  { courseId: 10, reviewer: 'Fatima Beaty', text: "Perfect for beginners. Loved the pace and the visuals!" },
+  { courseId: 22, reviewer: 'Lukas McCann', text: "Very detailed and helpful for my job in analytics." },
+  { courseId: 30, reviewer: 'Isabelle Higgins', text: "Exactly what I needed to improve my skills quickly." },
+  { courseId: 1, reviewer: 'Eleanor Hughes', text: "An insightful and concise course. Really helped me grasp the basics." },
+  { courseId: 2, reviewer: 'Carl Lucas', text: "Loved the structure and hands-on examples. Highly recommend!" },
+  { courseId: 9, reviewer: 'Sophia Lee', text: "Well-organized and informative. The quizzes were a nice touch." },
+  { courseId: 14, reviewer: 'Terry Slattery', text: "Excellent pace and very beginner-friendly. Great visuals too." },
+  { courseId: 18, reviewer: 'Linda OBrien', text: "I learned more in this short course than in weeks of self-study!" },
 ];
 
 const ReviewSection =() => {
+  const [showNext, setShowNext] = useState(false);
+  const currentReviews = showNext ? reviewsData.slice(5) : reviewsData.slice(0,5);  
+  
   const reviewedCourses = CoursesDatabase.filter(course => 
-    reviewCourseIds.includes(course.id)
+    reviewsData.map(r => r.courseId).includes(course.id)
   );
 
-  const reviewsToRender = reviewsData.map(review => {
+  const reviewsToRender = currentReviews.map(review => {
     const course = reviewedCourses.find(c => c.id === review.courseId);
     return { ...review, course };
   });
@@ -54,12 +40,47 @@ const ReviewSection =() => {
         p: '3em',
         bgcolor: '#f5f5f5',
         borderRadius: 2,
+        position: 'relative',
         }}
     >
-      <Typography variant="h6" gutterBottom>
-        What our Learners Say
-      </Typography>
+        <Typography variant="h6" gutterBottom>
+          What our Learners Say
+        </Typography>
 
+        {/* Left Arrow */}
+        {showNext && (
+          <IconButton
+          onClick={() => setShowNext(false)}
+          sx={{
+            position: 'absolute',
+            top:'50%',
+            left: 0,
+            transform: 'translateY(-50%)',
+            zIndex: 1,
+          }}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        )}
+
+        {/* Right Arrow */}
+        {!showNext && (
+          <IconButton
+          onClick={() => setShowNext(true)}
+          sx={{
+            position: 'absolute',
+            top:'50%',
+            right: 0,
+            transform: 'translateY(-50%)',
+            zIndex: 1,
+          }}
+          >
+            <ChevronRightIcon />
+          </IconButton>
+        )}
+
+
+      {/* Review Cards */}
       <Box
       sx={{
         display: 'flex',

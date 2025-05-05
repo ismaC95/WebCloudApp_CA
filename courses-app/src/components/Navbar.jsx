@@ -8,9 +8,6 @@ const Navbar = () => {
     return (
         <AppBar position="fixed" color="default">
             <Toolbar>
-                <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr:2}}>
-                    <MenuIcon/>
-                </IconButton>
                 <Typography variant="h6" sx={{flexGrow: 1}}>Logo</Typography> 
                 
                 <Box sx={{display: 'flex', gap:2}}>
