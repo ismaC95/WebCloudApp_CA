@@ -4,6 +4,9 @@ import { VideoLibrary, AccessTime, Star } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useParams } from 'react-router-dom';
 
+import CoursesDatabase from '../data/CoursesDatabase';
+import RatingStars from '../components/RatingStars';
+
 const modules = [
     "Programming introduction",
     "Intro to Computer Languagues",

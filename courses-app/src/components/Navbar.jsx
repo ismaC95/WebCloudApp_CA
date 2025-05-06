@@ -1,6 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Icon } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Toolbar, Typography, Button, IconButton, Box } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {Link} from 'react-router-dom';
 
@@ -14,6 +13,7 @@ const Navbar = () => {
                     <Button color="inherit" component={Link} to="/">Home</Button>
                     <Button color="inherit" component={Link} to="/about">About</Button>
                     <Button color="inherit" component={Link} to="/coursedisplay">My Course</Button>
+                    <Button color="inherit" component={Link} to="/CourseDetails">Course Details</Button>
 
                     <Button color="inherit" component={Link} to="/courses" >Courses</Button>
                     <Button color="inherit" component={Link} to="/signup">Sign Up</Button>
