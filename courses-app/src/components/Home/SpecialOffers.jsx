@@ -1,11 +1,17 @@
-import React from 'react';
-import { Box, Typography, Card, CardContent } from '@mui/material';
+import React, {useState} from 'react';
+import { Box, Typography, Card, CardContent, IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 import CoursesDatabase from '../../data/CoursesDatabase';
 
-const offerCourseIds = [1, 2, 3, 4, 5];
-const offers = CoursesDatabase.filter(course => offerCourseIds.includes(course.id));
+const offerCourseIds = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11];
 
 const SpecialOffers = () => {
+  const [showNext, setShowNext] = useState(false);
+  const offers = CoursesDatabase.filter(course => offerCourseIds.includes(course.id));
+  const currentOffers = showNext ? offers.slice(5) : offers.slice(0, 5);
+
   return (
     <Box
     sx={{
@@ -15,11 +21,44 @@ const SpecialOffers = () => {
       p: '3em',
       bgcolor: '#f5f5f5',
       borderRadius: 2,
+      position: 'relative',
     }}
     >
       <Typography variant="h6" gutterBottom>
         Special Offers
       </Typography>
+
+      {/* Left Arrow  */}
+      {showNext && (
+        <IconButton
+        onClick={() => setShowNext(false)}
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: 0,
+          transform: 'translateY(-50%)',
+          zIndex: 1,
+        }}
+        >
+          <ChevronLeftIcon />
+        </IconButton>
+      )}
+
+      {/* Right Arrow  */}
+      {!showNext && (
+        <IconButton
+        onClick={() => setShowNext(true)}
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          right: 0,
+          transform: 'translateY(-50%)',
+          zIndex: 1,
+        }}
+        >
+          <ChevronRightIcon />
+        </IconButton>
+      )}
 
       <Box 
       sx={{
@@ -30,7 +69,7 @@ const SpecialOffers = () => {
         px: '0',
       }}
       >
-        {offers.map((offer) => (
+        {currentOffers.map((offer) => (
           <Card 
           key={offer.id} 
           sx={{ 
