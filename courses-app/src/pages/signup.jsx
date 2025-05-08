@@ -1,5 +1,5 @@
-// src/pages/signup.jsx
-import React from 'react';
+// src/pages/Signup.jsx
+import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
 import {
@@ -9,15 +9,14 @@ import {
   Checkbox,
   CssBaseline,
   FormControlLabel,
-  Grid,
   Link,
   Paper,
   TextField,
   Typography,
   useMediaQuery
 } from '@mui/material';
-import SchoolIcon from '@mui/icons-material/School';  // use the same icon as the login page
-import signupIllustration from '../assets/images/bwink_edu_01_single_04.jpg'; // update to your image path
+import SchoolIcon from '@mui/icons-material/School';
+import signupIllustration from '../assets/images/bwink_edu_01_single_04.jpg';
 
 export default function Signup() {
   return (
@@ -29,97 +28,147 @@ export default function Signup() {
 }
 
 function SignupContent() {
-  const muiTheme = useTheme();
-  const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));  // show illustration on md+
+  const muiTheme   = useTheme();
+  const showImage  = useMediaQuery(muiTheme.breakpoints.up('md'));
 
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const [error,   setError]   = useState('');
+  const [success, setSuccess] = useState('');
+
+  /* ─────────────────────────────────────
+     input change handler
+  ───────────────────────────────────── */
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  /* ─────────────────────────────────────
+     submit handler  →  sends to Node API
+  ───────────────────────────────────── */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    if (formData.password !== formData.confirmPassword) {
+      return setError('Passwords do not match!');
+    }
+    if (formData.password.length < 6) {
+      return setError('Password must be at least 6 characters');
+    }
+
+    try {
+      const res = await fetch('http://localhost:4000/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: formData.firstName.trim(),
+          lastName:  formData.lastName.trim(),
+          email:     formData.email.trim(),
+          password:  formData.password
+        })
+      });
+
+      if (!res.ok) {
+        const { msg } = await res.json();
+        throw new Error(msg || 'Registration failed');
+      }
+
+      setSuccess('Account created! You can now log in.');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      });
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  /* ─────────────────────────────────────
+     UI  (unchanged except success/error)
+  ───────────────────────────────────── */
   return (
-    <Grid 
-      container
-      component="main"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      spacing={8}
-      sx={{ height: '100vh', backgroundColor: '#F0F2F5' }}
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        height: '100vh',
+        backgroundColor: '#F0F2F5'
+      }}
     >
-      {/* Left illustration panel */}
       {showImage && (
-        <Grid
-          item
-          md={6}
+        <Box
           sx={{
+            flexBasis: '50%',
             display: 'flex',
-            justifyContent: 'center',
             alignItems: 'center',
+            justifyContent: 'center',
+            px: 4
           }}
         >
-          <Box sx={{ px: 4 }}>
-            <Box
-              component="img"
-              src={signupIllustration}
-              alt="Signup illustration"
-              sx={{ maxWidth: '500px', height: 'auto' }} // change dimensions of this image
-            />
-          </Box>
-        </Grid>
+          <Box
+            component="img"
+            src={signupIllustration}
+            alt="Signup illustration"
+            sx={{ maxWidth: '500px', height: 'auto', width: '100%' }}
+          />
+        </Box>
       )}
 
-      {/* Right signup form panel */}
-      <Grid
-        item
-        xs={12}
-        md={6}
+      <Box
         sx={{
+          flexGrow: 1,
+          flexBasis: { xs: '100%', md: '50%' },
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100%',
-          p: 2,
+          p: 2
         }}
       >
         <Paper
           elevation={8}
-          square
           sx={{
             width: '100%',
             maxWidth: 480,
             borderRadius: 4,
             bgcolor: '#FFFFFF',
-            p: 4,
+            p: 4
           }}
-          id="signup-paper"
         >
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: 56, height: 56 }} id="avatar-icon">
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: 56, height: 56 }}>
               <SchoolIcon fontSize="large" />
             </Avatar>
 
-            <Typography component="h1" variant="h2" color="primary" id="signup-title" sx={{ mb: 1 }}>
+            <Typography component="h1" variant="h2" color="primary" sx={{ mb: 1 }}>
               Sign Up
             </Typography>
 
-            <Typography
-              variant="h5"
-              sx={{ mb: 3, fontWeight: 700 }}
-              id="signup-subtitle"
-            >
+            <Typography variant="h5" sx={{ mb: 3, fontWeight: 700 }}>
               Create Your Account
             </Typography>
 
-            <Box
-              component="form"
-              id="signup-form"
-              noValidate
-              sx={{ width: '100%' }}
-            >
+            <Box component="form" noValidate sx={{ width: '100%' }} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="first-name"
                 label="First Name"
-                name="first-name"
+                name="firstName"
                 autoComplete="given-name"
+                value={formData.firstName}
+                onChange={handleChange}
                 autoFocus
               />
               <TextField
@@ -128,8 +177,10 @@ function SignupContent() {
                 fullWidth
                 id="last-name"
                 label="Last Name"
-                name="last-name"
+                name="lastName"
                 autoComplete="family-name"
+                value={formData.lastName}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
@@ -139,6 +190,8 @@ function SignupContent() {
                 label="Email"
                 name="email"
                 autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
@@ -149,47 +202,62 @@ function SignupContent() {
                 label="Password"
                 type="password"
                 autoComplete="new-password"
+                value={formData.password}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="confirm-password"
-                name="confirm-password"
+                name="confirmPassword"
                 label="Confirm Password"
                 type="password"
                 autoComplete="new-password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
               />
 
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 2, mb: 3 }}>
+              {error && (
+                <Typography color="error" sx={{ mt: 2 }}>
+                  {error}
+                </Typography>
+              )}
+              {success && (
+                <Typography color="primary" sx={{ mt: 2 }}>
+                  {success}
+                </Typography>
+              )}
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  mt: 2,
+                  mb: 3
+                }}
+              >
                 <FormControlLabel
-                  control={<Checkbox color="primary" id="terms-checkbox" />}
+                  control={<Checkbox color="primary" />}
                   label="I agree to the Terms and Conditions"
-                  id="terms-label"
                 />
               </Box>
 
-              <Button
-                type="submit"
-                fullWidth
-                variant="type1"
-                size="large"
-                sx={{ mb: 2 }}
-                id="signup-button"
-              >
+              <Button type="submit" fullWidth variant="contained" size="large" sx={{ mb: 2 }}>
                 Sign Up
               </Button>
 
-              <Typography variant="body2" align="center" id="login-prompt">
+              <Typography variant="body2" align="center">
                 Already have an account?{' '}
-                <Link href="/login" variant="body2" id="login-link">
+                <Link href="/login" variant="body2">
                   Log In
                 </Link>
               </Typography>
             </Box>
           </Box>
         </Paper>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 }
