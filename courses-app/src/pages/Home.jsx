@@ -8,7 +8,8 @@ import Footer from '../components/Footer';
 import { Box, ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 const Home = () => {
-    const [selectedCategory, setSelectedCategory] = React.useState('Marketing');
+    //setting the marketing as default
+    const [selectedCategory, setSelectedCategory] = React.useState('Marketing'); 
     
     return (
         <Box sx={{mt: '8em'}}>

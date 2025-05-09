@@ -9,11 +9,13 @@ const offerCourseIds = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11];
 
 const SpecialOffers = () => {
   const [showNext, setShowNext] = useState(false);
+
+  // filter the courses only include discounted ones
   const offers = CoursesDatabase.filter(course => offerCourseIds.includes(course.id));
   const currentOffers = showNext ? offers.slice(5) : offers.slice(0, 5);
 
   return (
-    <Box
+    <Box // outer container
     sx={{
       m: '3em',
       mx: '10em',
@@ -35,7 +37,7 @@ const SpecialOffers = () => {
         sx={{
           position: 'absolute',
           top: '50%',
-          left: 0,
+          left: 0, // position to the left
           transform: 'translateY(-50%)',
           zIndex: 1,
         }}
@@ -60,6 +62,8 @@ const SpecialOffers = () => {
         </IconButton>
       )}
 
+
+      {/* offer cards */}
       <Box 
       sx={{
         display: 'flex',

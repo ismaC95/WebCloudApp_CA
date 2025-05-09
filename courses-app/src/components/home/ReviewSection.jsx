@@ -6,6 +6,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CoursesDatabase from '../../data/CoursesDatabase';
 import RatingStars from '../RatingStars';
 
+// static array of manually written reviews
 const reviewsData = [
   { courseId: 8, reviewer: 'Anna Muller', text: "This course exceeded my expectations. Clear explanations and practical examples!" },
   { courseId: 6, reviewer: 'James OConnor', text: "Engaging from start to finish. The instructor really knows their stuff." },
@@ -19,28 +20,38 @@ const reviewsData = [
   { courseId: 18, reviewer: 'Linda OBrien', text: "I learned more in this short course than in weeks of self-study!" },
 ];
 
-const ReviewSection =() => {
-  const [showNext, setShowNext] = useState(false);
-  const currentReviews = showNext ? reviewsData.slice(5) : reviewsData.slice(0,5);  
-  
-  const reviewedCourses = CoursesDatabase.filter(course => 
-    reviewsData.map(r => r.courseId).includes(course.id)
-  );
 
+// functional component
+const ReviewSection =() => {
+
+  // Toggle between the first and the second page.
+  // showNext is a boolean, and setShowNext is the function to toggle
+  const [showNext, setShowNext] = useState(false);
+  const currentReviews = showNext ? reviewsData.slice(5) : reviewsData.slice(0,5); // (0,5) is the first 5 
+  
+  // // filter the courses that have reviews <not needed>
+  // const reviewedCourses = CoursesDatabase.filter(course => 
+
+  //   // get course ids from reviewsData
+  //   reviewsData.map(r => r.courseId).includes(course.id)
+  // );
+
+
+  // find matching reviews with course id
   const reviewsToRender = currentReviews.map(review => {
-    const course = reviewedCourses.find(c => c.id === review.courseId);
-    return { ...review, course };
-  });
+    const course = CoursesDatabase.find(c => c.id === review.courseId);
+    return course ? { ...review, course } : null; //filter out null entries
+  }).filter(Boolean);
 
   return (
-    <Box 
+    <Box // main container
       sx={{ 
         m: '3em', 
         mx: '10em',
         p: '3em',
         bgcolor: '#f5f5f5',
         borderRadius: 2,
-        position: 'relative',
+        position: 'relative', // allowing arrows inside placed absolute position
         }}
     >
         <Typography variant="h6" gutterBottom>
@@ -56,7 +67,7 @@ const ReviewSection =() => {
             top:'50%',
             left: 0,
             transform: 'translateY(-50%)',
-            zIndex: 1,
+            zIndex: 1, // stays above other elements when overlapped
           }}
           >
             <ChevronLeftIcon />
@@ -84,7 +95,7 @@ const ReviewSection =() => {
       <Box
       sx={{
         display: 'flex',
-        overflowX: 'auto',
+        overflowX: 'auto', 
         gap: '1.5em',
         p: '1em',
         pb: '2em',
@@ -107,20 +118,25 @@ const ReviewSection =() => {
                 variant="h6" 
                 fontWeight='bold' 
                 component="a"
-                href={`/courses/${course.id}`}
+                href={`/courses/${course.id}`} // for each course details course
                 sx={{ textDecoration: 'none', color: 'inherit', '&:hover': {textDecoration: 'underline'} }}
               >
+                {/* from coursesDatabase */}
                 {course.title}
               </Typography>
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#8A58F5' }}>
                 <RatingStars rating={course.rating} />
-                <Typography variant="body2" sx={{ color: '#8A58F5' }}>
-                  ({course.reviews})
+                <Typography variant="body2" sx={{ color: '#8A58F5' }}> 
+
+                   {/* from coursesDatabase */}
+                  ({course.no_reviews}) 
                 </Typography>
               </Box>
 
               <Typography variant="body2" color="text.secondary" mt={1}>
+
+                {/* from coursesDatabase */}
                 "{text}"
               </Typography>
               

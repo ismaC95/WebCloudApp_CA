@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Typography } from '@mui/material';
 
+
 const About = () => {
   return (
     <Container sx={{ mt: '6em' }}>

@@ -9,7 +9,7 @@ const CourseCarousel = ({ selectedCategory }) => {
     );
 
     return (
-        <Box 
+        <Box // outer container
         sx={{
             m: '3em',
             mx: '10em',
@@ -18,11 +18,13 @@ const CourseCarousel = ({ selectedCategory }) => {
             borderRadius: 2,        
             }}
         >
+
+            {/* Category heading - Interactive */}
             <Typography variant="h6" gutterBottom>
                 {selectedCategory} Courses
             </Typography>
 
-            <Box 
+            <Box // smaller box for cards (invisible)
             sx={{
                 display: 'flex', 
                 overflowX: 'auto', 
@@ -37,8 +39,8 @@ const CourseCarousel = ({ selectedCategory }) => {
                     key={course.id} 
                     sx={{
                         width: '25em', 
-                        flex: '0 0 auto',
-                        flexDirection: 'colum',
+                        flex: '0 0 auto', // prevents card from shrinking
+                        flexDirection: 'column',
                         }}
                     >
                         <CardMedia
@@ -51,18 +53,19 @@ const CourseCarousel = ({ selectedCategory }) => {
                         sx={{ 
                             display: 'flex', 
                             flexDirection: 'column', 
-                            gap: '0.8em', 
+                            gap: '0.8em', // between text blocks
                             }}
                         >
-                            <Typography fontWeight="bold" gutterBottom noWrap>
+                            <Typography fontWeight="bold" gutterBottom noWrap> 
+                                {/* leave 0.35em at the bottom, and overflow will show as ...*/}
                                 {course.title}
                             </Typography>
 
                             <Typography variant="body2" color="text.secondary"
                             sx={{
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                display: '-webkit-box',
+                                overflow: 'hidden', 
+                                textOverflow: 'ellipsis', // ... at the end of cut off text
+                                display: '-webkit-box', //flexible box with line limits
                                 WebkitLineClamp: 3, // limit to 3 lines
                                 WebkitBoxOrient: 'vertical',
 
@@ -75,14 +78,14 @@ const CourseCarousel = ({ selectedCategory }) => {
                                 {course.price == 'Free' ? 'Free' : `€${course.price}`} &nbsp;
                                 {course.originalPrice && (
                                     <span style={{ textDecoration: 'line-through', color: 'gray'}}>
-                                        {course.originalPrice}
+                                        €{course.originalPrice}
                                     </span>
                                 )}
                             </Typography>
 
                             <RatingStars rating={course.rating} />
                             <Typography variant="caption">
-                            ({course.reviews} reviews)
+                            ({course.no_reviews} reviews)
                             </Typography>                            
                             
                         </CardContent>
