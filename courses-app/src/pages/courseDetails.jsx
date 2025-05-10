@@ -83,7 +83,7 @@ const CourseDetails = () => {
             color="secondary"
             size="large"
             sx={{ color: '#FFFFFF' }}
-            href="#"
+            href="/Checkout"
           >
             Enroll Now
           </Button>
