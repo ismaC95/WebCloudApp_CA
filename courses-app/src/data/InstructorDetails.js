@@ -19,7 +19,7 @@ const instructors = [
       id: 3, 
       name: "Alice Johnson", 
       role: "AI Researcher at OpenAI",
-      courses: [6, 12, 16, 17, 24], 
+      courses: [6, 12, 17, 24], 
     },
     { 
       id: 4, 
