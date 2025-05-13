@@ -13,7 +13,8 @@ import {
   Paper,
   TextField,
   Typography,
-  useMediaQuery
+  useMediaQuery,
+  Grid
 } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
 import signupIllustration from '../assets/images/bwink_edu_01_single_04.jpg';
@@ -28,8 +29,8 @@ export default function Signup() {
 }
 
 function SignupContent() {
-  const muiTheme   = useTheme();
-  const showImage  = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const muiTheme = useTheme();
+  const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -39,19 +40,13 @@ function SignupContent() {
     confirmPassword: ''
   });
 
-  const [error,   setError]   = useState('');
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  /* ─────────────────────────────────────
-     input change handler
-  ───────────────────────────────────── */
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  /* ─────────────────────────────────────
-     submit handler  →  sends to Node API
-  ───────────────────────────────────── */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -70,9 +65,9 @@ function SignupContent() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           firstName: formData.firstName.trim(),
-          lastName:  formData.lastName.trim(),
-          email:     formData.email.trim(),
-          password:  formData.password
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim(),
+          password: formData.password
         })
       });
 
@@ -94,16 +89,14 @@ function SignupContent() {
     }
   };
 
-  /* ─────────────────────────────────────
-     UI  (unchanged except success/error)
-  ───────────────────────────────────── */
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
-        height: '100vh',
-        backgroundColor: '#F0F2F5'
+        minHeight: '100vh',
+        backgroundColor: '#F0F2F5',
+        overflowY: 'auto'
       }}
     >
       {showImage && (
@@ -132,14 +125,16 @@ function SignupContent() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          p: 2
+          p: 2,
+          mt: 10,
+          mb: 10
         }}
       >
         <Paper
           elevation={8}
           sx={{
             width: '100%',
-            maxWidth: 480,
+            maxWidth: 540,
             borderRadius: 4,
             bgcolor: '#FFFFFF',
             p: 4
@@ -159,64 +154,71 @@ function SignupContent() {
             </Typography>
 
             <Box component="form" noValidate sx={{ width: '100%' }} onSubmit={handleSubmit}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="first-name"
-                label="First Name"
-                name="firstName"
-                autoComplete="given-name"
-                value={formData.firstName}
-                onChange={handleChange}
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="last-name"
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                autoComplete="new-password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="confirm-password"
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                autoComplete="new-password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="first-name"
+                    label="First Name"
+                    name="firstName"
+                    autoComplete="given-name"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="last-name"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="family-name"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    autoComplete="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="password"
+                    name="password"
+                    label="Password"
+                    type="password"
+                    autoComplete="new-password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="confirm-password"
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="password"
+                    autoComplete="new-password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                  />
+                </Grid>
+              </Grid>
 
               {error && (
                 <Typography color="error" sx={{ mt: 2 }}>

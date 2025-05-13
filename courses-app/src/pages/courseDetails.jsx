@@ -1,4 +1,4 @@
-// src/pages/CourseDetails.jsx
+// src/pages/CourseDetails.jsx   (capital “C” keeps the filename consistent)
 import React, { useEffect, useState } from 'react';
 import {
   Box,
@@ -6,8 +6,9 @@ import {
   Typography,
   Button,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
 } from '@mui/material';
+import { useParams } from 'react-router-dom';        
 import RatingStars from '../components/RatingStars';
 import courses from '../data/CoursesDatabase';
 import reviewsData from '../data/ReviewsDataBase';
@@ -19,22 +20,28 @@ const CourseDetails = () => {
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // MANUAL COURSE ID INPUT
-  const selectedCourseId = 3;
+  /* ─── 1.  Get the ID from the URL  ─── */
+  const { courseId } = useParams();                 
+  const selectedCourseId = parseInt(courseId, 10);  
 
+  /* ─── 2.  Look up the course  ─── */
   const course = courses.find(c => c.id === selectedCourseId);
 
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      const filtered = reviewsData.filter(r => r.courseId === selectedCourseId);
-      const shuffled = filtered.sort(() => 0.5 - Math.random());
-      setReviews(shuffled.slice(0, 8));
+
+    const timeout = setTimeout(() => {
+      const filtered = reviewsData.filter(
+        r => r.courseId === selectedCourseId
+      );
+      // randomise & take 8
+      setReviews(filtered.sort(() => 0.5 - Math.random()).slice(0, 8));
     }, 500);
-  }, []);
-  
+
+    return () => clearTimeout(timeout);
+  }, [selectedCourseId]);                          
 
   if (!course) {
     return (
@@ -49,8 +56,7 @@ const CourseDetails = () => {
   const { title, description, rating, no_reviews } = course;
 
   return (
-    <Container
-      sx={{boxSizing: 'border-box', minWidth: '100vw'}}>
+    <Container sx={{ boxSizing: 'border-box', minWidth: '100vw', mt:10 }}>
       {/* — Hero Section — */}
       <Box
         sx={{
@@ -59,7 +65,7 @@ const CourseDetails = () => {
           py: isSmDown ? 2 : 4,
           boxSizing: 'border-box',
         }}
-        >
+      >
         <Container className="d-flex flex-column align-items-center text-center">
           <Typography variant="h1" gutterBottom>
             {title}
@@ -67,6 +73,7 @@ const CourseDetails = () => {
           <Typography variant="h4" gutterBottom>
             {description}
           </Typography>
+
           <Box className="d-flex align-items-center mb-4">
             <Box sx={{ color: '#FFD700' }}>
               <RatingStars rating={rating} />
@@ -78,6 +85,7 @@ const CourseDetails = () => {
               {no_reviews}
             </Typography>
           </Box>
+
           <Button
             variant="type1"
             color="secondary"
@@ -94,11 +102,14 @@ const CourseDetails = () => {
       <CourseIntroCard courseId={course.id} />
 
       {/* — Learning Outcomes + Modules — */}
-      <CourseContentDetails courseId={course.id} isSmDown={isSmDown} theme={theme} />
+      <CourseContentDetails
+        courseId={course.id}
+        isSmDown={isSmDown}
+        theme={theme}
+      />
 
       {/* — Testimonials — */}
       <Box sx={{ width: '100%', overflow: 'visible', pb: isSmDown ? 2 : 6 }}>
-
         <TestimonialCarousel reviews={reviews} />
 
         {/* — Enroll Button — */}

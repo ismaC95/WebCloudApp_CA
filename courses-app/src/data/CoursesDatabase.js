@@ -636,7 +636,7 @@ const rawCourses = [
         "modules": 15,
         "level": "Intermediate",
         "image": "/Course_images/dev4.png",
-        "category": "Software Development",
+        "category": "Technology",
         "intro_video": "https://www.youtube.com/watch?v=rJesac0_Ftw",
         "long_description": "This course explores building rest apis with node.js in detail, equipping learners with practical to",
         "instructor_id": 18,
@@ -908,7 +908,8 @@ const rawCourses = [
 
 const courses = rawCourses.map(course => ({
     ...course,
-    paymentType: course.price == "Free" ? "Free" : "Paid"
+    paymentType: course.price == "Free" ? "Free" : "Paid",
+    reviews: course.no_reviews
 }))
 
 export default courses;

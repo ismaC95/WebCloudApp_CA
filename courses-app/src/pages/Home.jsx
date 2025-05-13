@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import SearchBar from '../components/SearchBar';
 import CategoryTabs from '../components/home/CategoryTabs';
 import CourseCarousel from '../components/home/CourseCarousel';
@@ -22,5 +23,5 @@ const Home = () => {
         </Box>
       );
 };
-    
+
 export default Home;

@@ -66,9 +66,8 @@ const theme = createTheme({
           }
         }
       ],
-      // 3) Optionally, change the default mapping so your "type1" is used when you do `<Button color="secondary">`
       defaultProps: {
-        // variant: 'type1' // if you want every <Button> without a `variant` to be `type1`
+
       }
     }
   }
