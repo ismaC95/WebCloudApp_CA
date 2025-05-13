@@ -1,59 +1,114 @@
+// src/components/home/CourseCarousel.jsx
 import React from 'react';
-import { Box, Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
+import { Box, Typography, Card, CardContent, CardMedia } from '@mui/material';
+import { Link } from 'react-router-dom';                // → NEW
+import CoursesDatabase from '../data/CoursesDatabase';
+import RatingStars from '../components/RatingStars';
 
-const courses = new Array(4).fill({title: 'Course Description'});
+const CourseCarousel = ({ selectedCategory }) => {
+  const featuredCourses = CoursesDatabase.filter(
+    course => course.category === selectedCategory
+  );
 
-const CourseCarousel = () => {
-    return (
-        <Box 
+  return (
+    <Box
+      sx={{
+        m: '3em',
+        mx: '10em',
+        p: '3em',
+        bgcolor: '#f5f5f5',
+        borderRadius: 2,
+      }}
+    >
+      <Typography variant="h6" gutterBottom>
+        {selectedCategory} Courses
+      </Typography>
+
+      <Box
         sx={{
-            // maxWidth: '80em',
-            // mx: 'auto',
-            m: '3em',
-            mx: '10em',
-            p: '3em',
-            bgcolor: '#f5f5f5',
-            borderRadius: 2,        
-        }}>
-            <Typography variant="h6" gutterBottom>
-                Featured Courses
-            </Typography>
+          display: 'flex',
+          overflowX: 'auto',
+          gap: '1.5em',
+          p: '1em',
+          pb: '2em',
+        }}
+      >
+        {featuredCourses.map(course => (
+          <Card
+            key={course.id}
+            component={Link}                         
+            to={`/courses/${course.id}`}             
+            sx={{
+              width: '25em',
+              flex: '0 0 auto',
+              flexDirection: 'column',
+              textDecoration: 'none',               
+              color: 'inherit',
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="140"
+              image={course.image}
+              alt={course.title}
+            />
 
-            <Box sx={{
-                display: 'flex', 
-                overflowX: 'auto', 
-                gap: '1.5em', 
-                p: '1em',
-                px: '10em',
-                pb: '2em',
-                // scrollbarWidth: 'none',
-                // '&::-webkit-scrollbar': { display: 'none' },
-                }}>
-                {courses.map((courses, index) => (
-                    <Card key={index} sx={{minWidth: '17em', flex: '0 0 auto'}}>
-                        <Box height="9em" bgcolor="#e0e0e0" />
-                        <CardContent>
-                            <Typography fontWeight="bold">{courses.title}</Typography>
-                        </CardContent>
-                    </Card>
-                ))}
-            </Box>
+            <CardContent
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.8em',
+              }}
+            >
+              <Typography fontWeight="bold" gutterBottom noWrap>
+                {course.title}
+              </Typography>
 
-            <Box mt={2} display="flex" justifyContent="center" gap="0.5em">
-                {[0, 1, 2, 3].map((dot) => (
-                    <Box
-                    key={dot}
-                    sx={{
-                        width: '0.6em',
-                        height: '0.6em',
-                        bgcolor: dot === 0 ? 'black' : 'gray',
-                        borderRadius: '50%',
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                }}
+              >
+                {course.description}
+              </Typography>
+
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                mt={1}
+                color="#2674B2"
+              >
+                {course.price === 'Free' ? 'Free' : `€${course.price}`}&nbsp;
+                {course.originalPrice && (
+                  <span
+                    style={{
+                      textDecoration: 'line-through',
+                      color: 'gray',
                     }}
-                    />
-                ))}
-            </Box>
-        </Box>
-    );
+                  >
+                    €{course.originalPrice}
+                  </span>
+                )}
+              </Typography>
+
+              <RatingStars rating={course.rating} />
+              <Typography variant="caption">
+                (
+                {/* Use whichever field is present */}
+                {course.reviews ?? course.no_reviews} reviews)
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+    </Box>
+  );
 };
 
 export default CourseCarousel;

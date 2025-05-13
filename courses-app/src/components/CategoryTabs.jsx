@@ -11,6 +11,7 @@ const CategoryTabs = () => {
 
     const handleTabChange = (event, newValue) => {
         setSelectedTab(newValue);
+        onCategoryChange(categories[newValue]);
     };
 
     return (
