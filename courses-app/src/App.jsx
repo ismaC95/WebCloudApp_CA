@@ -28,8 +28,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <Navbar /> */}
-      <UserNavbar />
+      <Navbar />
+      {/* <UserNavbar /> */}
 
         <Box component="main" sx={{ flex: 1 }}>
           <Routes>
@@ -39,7 +39,7 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/payment-successful" element={<PaymentSuccessful />} />
             <Route path="/courses" element={<CourseList />} />
-            <Route path="/coursedetails" element={<CourseDetails />} />
+            <Route path="courses/:courseId" element={<CourseDetails />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />

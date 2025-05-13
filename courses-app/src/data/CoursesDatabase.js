@@ -873,7 +873,7 @@ const rawCourses = [
         "paymentType": "Paid"
       },
       {
-        "id": 30,
+        "id": 1,
         "title": "Financial Modeling with Excel",
         "description": "Build powerful financial models with Excel spreadsheets.",
         "price": 18.99,
