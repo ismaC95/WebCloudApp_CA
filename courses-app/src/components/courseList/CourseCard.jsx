@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, CardActionArea, Box, CardMedia, Stack, Typography } from '@mui/material'
 
 import RatingStars from '../RatingStars';
@@ -16,7 +15,7 @@ const CourseCard = ({course}) => {
           {/* Image */}
           <CardMedia
             component="img"
-            sx={{ height: 'auto', width: 200 }}
+            sx={{ height: 'auto', width: 200, borderRadius: 1 }}
             image={course.image}
             title={course.title}
           />
@@ -88,7 +87,7 @@ const CourseCard = ({course}) => {
               sx={{ mt: 1 }}
             >
               <Typography variant="body2">{course.duration}</Typography>
-              <Typography variant="body2">{course.modules}</Typography>
+              <Typography variant="body2">{course.modules} Modules</Typography>
               <Typography variant="body2">{course.level}</Typography>
             </Stack>
           </Stack>

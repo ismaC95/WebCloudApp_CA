@@ -1,10 +1,19 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Icon } from "@mui/material";
+import { useState } from 'react';
+import { AppBar, Toolbar, Typography, Button, IconButton, Box, Badge } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {Link} from 'react-router-dom';
+import ShoppingCartComp from './shoppingCart/ShoppingCartComp';
+import { useCart } from '../contexts/CartContext';
 
 const Navbar = () => {
+    const {addedToCart} = useCart();
+
+    const [openCart, setOpenCart] = useState(false);
+    const toggleCart = (e) => () => {
+        setOpenCart(e);
+    }
+
     return (
         <AppBar position="fixed" color="default">
             <Toolbar>
@@ -22,9 +31,15 @@ const Navbar = () => {
                     <Button color="inherit" component={Link} to="/signup">Sign Up</Button>
 
                     <Button variant="outlined" component={Link} to="/login">Sign In</Button>
-                    <IconButton color="inherit" component={Link} to="/checkout">
-                        <ShoppingCartIcon />
+
+                    {/* Removing Link from shoppoing cart icon */}
+                    <IconButton color="inherit" onClick={toggleCart(true)}>
+                    {/* To add Badge functionality on the badgeContent prop */}
+                        <Badge badgeContent={addedToCart.length} color="primary">
+                           <ShoppingCartIcon />
+                        </Badge>
                     </IconButton>
+                    <ShoppingCartComp openCart={openCart} toggleCart={toggleCart}/>
                 </Box>
             </Toolbar>
         </AppBar>

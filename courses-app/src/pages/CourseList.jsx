@@ -34,7 +34,6 @@ function CourseList() {
 
     const toggleFilter = () => {
         setFiltersVisible(!filtersVisible);
-        console.log(filtersVisible);
     }
 
     //Sort by button functionality
