@@ -1,5 +1,5 @@
 // src/pages/CourseDetails.jsx   (capital “C” keeps the filename consistent)
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Container,
@@ -15,6 +15,7 @@ import reviewsData from '../data/ReviewsDataBase';
 import CourseIntroCard from '../components/CourseIntroCard';
 import CourseContentDetails from '../components/CourseContentDetails';
 import TestimonialCarousel from '../components/TestimonialCarousel';
+import { useCart } from '../contexts/CartContext';
 
 const CourseDetails = () => {
   const theme = useTheme();
@@ -55,6 +56,9 @@ const CourseDetails = () => {
 
   const { title, description, rating, no_reviews } = course;
 
+  // Add course to cart functionality
+  const {addToCart} = useCart();
+
   return (
     <Container sx={{ boxSizing: 'border-box', minWidth: '100vw', mt:10 }}>
       {/* — Hero Section — */}
@@ -91,7 +95,7 @@ const CourseDetails = () => {
             color="secondary"
             size="large"
             sx={{ color: '#FFFFFF' }}
-            href="/Checkout"
+            onClick={() => addToCart(course)}
           >
             Enroll Now
           </Button>
@@ -114,7 +118,7 @@ const CourseDetails = () => {
 
         {/* — Enroll Button — */}
         <Box className="d-flex justify-content-center mt-6">
-          <Button variant="type1" size="large" href="#">
+          <Button variant="type1" size="large" onClick={() => addToCart(course)}>
             Enroll Now
           </Button>
         </Box>

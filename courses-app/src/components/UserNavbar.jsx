@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import ShoppingCartComp from './shoppingCart/ShoppingCartComp';
 import { useCart } from '../contexts/CartContext';
 
-const Navbar = () => {
+const UserNavbar = () => {
     const {addedToCart} = useCart();
 
     const [openCart, setOpenCart] = useState(false);
@@ -44,4 +44,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+export default UserNavbar;

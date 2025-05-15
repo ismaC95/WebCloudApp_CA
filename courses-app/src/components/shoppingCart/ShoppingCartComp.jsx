@@ -22,8 +22,7 @@ const ShoppingCartComp = ({openCart, toggleCart}) => {
             sx={{Width: {
                 //To refine width
                 xs: 'fullWidth',
-                sm: '100%'},
-                border: "1px solid red"}}
+                sm: '100%'}}}
             paddingX={2}
             paddingY={3}>
             {/* Header     */}
@@ -45,7 +44,7 @@ const ShoppingCartComp = ({openCart, toggleCart}) => {
             {addedToCart.length > 0 ? (
             // IF there are courses in the cart:
             <Box display="flex" flexDirection="column" justifyContent="flex-start">
-                <Box overflow="auto" sx={{border: "1px solid blue"}}>
+                <Box overflow="auto">
                 {addedToCart.map((course) => (
                 <Box key={course.id} mb={2}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" gap={2}>
@@ -58,7 +57,7 @@ const ShoppingCartComp = ({openCart, toggleCart}) => {
                     </Box> 
                 ))}
                 </Box>
-                <Box sx={{border: "1px solid blue"}}>
+                <Box>
                     <Typography variant="h6" fontWeight="bold">Total: {totalPriceCart.toFixed(2)}€</Typography>
                 </Box>
              </Box>

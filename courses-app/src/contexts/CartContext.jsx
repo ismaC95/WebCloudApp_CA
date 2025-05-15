@@ -1,43 +1,22 @@
-import React, { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [addedToCart, setAddedToCart] = useState([
-  {
-    id: 1,
-    title: "Introduction to Digital Marketing",
-    description:
-      "Learn the fundamentals of digital marketing, SEO, and advertising.",
-    price: 15.00,
-    originalPrice: 19.99,
-    rating: 4.7,
-    reviews: 856,
-    duration: "1-3 Hours",
-    modules: 8,
-    level: "Beginner",
-    image: "/Course_images/marketing1.jpeg",
-    category: "Marketing",
-    priceDisplay: "Free",
-    originalPriceDisplay: 19.99
-  },
-  {
-    id: 3,
-    title: "SEO Optimization Crash Course",
-    description: "Learn how to optimize websites for Google search rankings.",
-    price: 9.99,
-    originalPrice: 24.99,
-    rating: 3.7,
-    reviews: 612,
-    duration: "0-1 Hour",
-    modules: 5,
-    level: "Beginner",
-    image: "/Course_images/marketing3.png",
-    category: "Marketing",
-    priceDisplay: 9.99,
-    originalPriceDisplay: 24.99,
-  },
-]);
+  let storedCartCourses = [];
+
+  try {
+    const stored = localStorage.getItem('course');
+    storedCartCourses = stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error("Error parsing cart data from localStorage:", error);
+  }
+
+  const [addedToCart, setAddedToCart] = useState(storedCartCourses);
+
+  useEffect(()=> {
+    localStorage.setItem('course', JSON.stringify(addedToCart));
+  }, [addedToCart])
 
   const addToCart = (course) => {
     setAddedToCart((prev) => {

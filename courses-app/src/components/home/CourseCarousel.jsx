@@ -1,5 +1,4 @@
 // src/components/home/CourseCarousel.jsx
-import React from 'react';
 import { Box, Typography, Card, CardContent, CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';                // → NEW
 import CoursesDatabase from '../../data/CoursesDatabase';
@@ -84,7 +83,7 @@ const CourseCarousel = ({ selectedCategory }) => {
                 mt={1}
                 color="#2674B2"
               >
-                {course.price === 'Free' ? 'Free' : `€${course.price}`}&nbsp;
+                {course.priceDisplay}&nbsp;
                 {course.originalPrice && (
                   <span
                     style={{
@@ -92,7 +91,7 @@ const CourseCarousel = ({ selectedCategory }) => {
                       color: 'gray',
                     }}
                   >
-                    €{course.originalPrice}
+                    {course.originalPriceDisplay}
                   </span>
                 )}
               </Typography>

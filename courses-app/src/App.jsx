@@ -27,8 +27,8 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CartProvider>
         <CssBaseline />
-        <Navbar />
-        {/* <UserNavbar /> */}
+        {/* <Navbar /> */}
+        <UserNavbar />
 
           <Box component="main" sx={{ flex: 1 }}>
             <Routes>

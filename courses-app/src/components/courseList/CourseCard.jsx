@@ -1,11 +1,16 @@
 import { Card, CardActionArea, Box, CardMedia, Stack, Typography } from '@mui/material'
+import { Link } from 'react-router-dom';
 
 import RatingStars from '../RatingStars';
 
 
 const CourseCard = ({course}) => {
   return (
-    <Card sx={{marginBottom: 2}}>
+    <Card 
+      component={Link} 
+      to={`/courses/${course.id}`}
+      sx={{marginBottom: 2, textDecoration:"none"}}
+    >
       <CardActionArea>
         <Stack
           direction={{ sm: 'column', md: 'row' }}
