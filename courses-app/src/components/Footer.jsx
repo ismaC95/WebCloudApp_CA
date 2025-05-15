@@ -4,24 +4,24 @@ import { Router, Link as RouterLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <Box
+    <Box //Main footer box
       component="footer"
       sx={{
         mt: '6em',
-        py: '3em',
+        py: '2em',
         px: '2em',
         bgcolor: '#f5f5f5',
         textAlign: 'center',
         borderTop: '1px solid #ddd',
       }}
     >
-        <Box
+        <Box //inner content
         sx={{
             display: 'flex',
             justifyContent: 'space-evenly',
             flexWrap: 'wrap',
             textAlign: 'left',
-            gap: '2em'
+            gap: '1.5em'
         }}
         >
             <Box>
@@ -59,7 +59,7 @@ const Footer = () => {
         variant="body2" 
         color="text.secondary"
         align="center"
-        sx={{ mt: '5em' }}
+        sx={{ mt: '3em' }}
         >
             © {new Date().getFullYear()} MyCourseApp. All rights reserved.
         </Typography>
