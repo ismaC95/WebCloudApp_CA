@@ -136,7 +136,7 @@ const rawCourses = [
     description:
       "Understand financial basics even without a finance background.",
     price: 19.99,
-    originalPrice: "",
+    originalPrice: 25.99,
     rating: 4.8,
     no_reviews: 743,
     duration: "3-6 Hours",
