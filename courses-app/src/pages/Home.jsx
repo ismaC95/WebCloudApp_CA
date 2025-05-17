@@ -10,10 +10,18 @@ import { Box, ToggleButtonGroup, ToggleButton } from '@mui/material';
 const Home = () => {
     //setting the marketing as default
     const [selectedCategory, setSelectedCategory] = React.useState('Marketing'); 
+    const [searchKeyword, setSearchKeyword] = React.useState('');
+
+    React.useEffect(() => {
+      if (searchKeyword.trim() !== '') {
+        console.log('Searching for:', searchKeyword);
+        // filter course result here or redirect to another page.
+      }
+    }, [searchKeyword]);
     
     return (
-        <Box sx={{mt: '8em'}}>
-          <SearchBar />
+        <Box sx={{mt: '5em'}}>
+          <SearchBar keyword={searchKeyword} onKeywordChange={setSearchKeyword} />
           <CategoryTabs onCategoryChange={setSelectedCategory} />
           <CourseCarousel selectedCategory={selectedCategory} />          
           <ReviewSection />
