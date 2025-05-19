@@ -3,15 +3,6 @@ import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
 
-import { auth } from '../firebase';                   
-import {
-  signInWithEmailAndPassword,
-  setPersistence,
-  browserLocalPersistence,
-  browserSessionPersistence
-} from 'firebase/auth';
-
-
 import {
   Avatar,
   Box,
@@ -29,6 +20,15 @@ import {
 import SchoolIcon from '@mui/icons-material/School';
 import loginIllustration from '../assets/images/bwink_edu_01_single_04.jpg';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+
+
+import { auth } from '../firebase';
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence
+} from 'firebase/auth';
 
 export default function Login() {
   return (
@@ -53,43 +53,56 @@ function LoginContent() {
   const [error,   setError]   = useState('');
   const [success, setSuccess] = useState('');
 
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
     try {
-
+      /* pick persistence from the checkbox */
       await setPersistence(
         auth,
         rememberMe ? browserLocalPersistence : browserSessionPersistence
       );
 
- 
       const cred = await signInWithEmailAndPassword(
         auth,
         email.trim(),
         password
       );
 
+      
       const name = cred.user.displayName || cred.user.email;
       setSuccess(`Welcome back, ${name}!`);
 
+      
       setTimeout(() => navigate('/', { replace: true }), 800);
 
     } catch (err) {
+   
+      let msg;
 
-      setError(
-        (err.code || err.message)
-          .replace('auth/', '')
-          .replace(/-/g, ' ')
-          .replace(/\(.*?\)/, '')
-          .trim()
-      );
+      switch (err.code) {
+        case 'auth/user-not-found':
+        case 'auth/wrong-password':
+          msg = 'Combination email/password is wrong';
+          break;
+        case 'auth/invalid-email':
+          msg = 'Please enter a valid email address';
+          break;
+        default:
+          msg = (err.code || err.message)
+            .replace('auth/', '')
+            .replace(/-/g, ' ')
+            .replace(/\(.*?\)/, '')
+            .trim();
+      }
+
+      setError(msg);
     }
   };
-  
+
 
   return (
     <Grid
@@ -101,7 +114,7 @@ function LoginContent() {
       spacing={8}
       sx={{ height: '70vh', backgroundColor: '#F0F2F5' }}
     >
-    
+  
       {showImage && (
         <Grid
           item md={6}
@@ -118,7 +131,7 @@ function LoginContent() {
         </Grid>
       )}
 
-    
+   
       <Grid
         item xs={12} md={6}
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 2 }}
