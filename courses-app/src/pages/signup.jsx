@@ -2,6 +2,13 @@
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
+import { auth } from '../firebase';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile
+} from 'firebase/auth';
+
+
 import {
   Avatar,
   Box,
@@ -39,7 +46,6 @@ function SignupContent() {
     password: '',
     confirmPassword: ''
   });
-
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -60,21 +66,16 @@ function SignupContent() {
     }
 
     try {
-      const res = await fetch('http://localhost:4000/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: formData.firstName.trim(),
-          lastName: formData.lastName.trim(),
-          email: formData.email.trim(),
-          password: formData.password
-        })
-      });
 
-      if (!res.ok) {
-        const { msg } = await res.json();
-        throw new Error(msg || 'Registration failed');
-      }
+      const cred = await createUserWithEmailAndPassword(
+        auth,
+        formData.email.trim(),
+        formData.password
+      );
+
+      await updateProfile(cred.user, {
+        displayName: `${formData.firstName.trim()} ${formData.lastName.trim()}`
+      });
 
       setSuccess('Account created! You can now log in.');
       setFormData({
@@ -85,9 +86,17 @@ function SignupContent() {
         confirmPassword: ''
       });
     } catch (err) {
-      setError(err.message);
+
+      setError(
+        (err.code || err.message)
+          .replace('auth/', '')
+          .replace(/-/g, ' ')
+          .replace(/\(.*?\)/, '')
+          .trim()
+      );
     }
   };
+
 
   return (
     <Box
