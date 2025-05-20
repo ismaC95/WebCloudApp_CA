@@ -21,6 +21,7 @@ import ShoppingCart       from './pages/ShoppingCart';
 import Footer             from './components/Footer';
 
 import { useAuth } from './contexts/AuthContext';
+import { CartProvider } from './contexts/CartContext';
 
 const App = () => {
   const { currentUser } = useAuth();          
@@ -28,6 +29,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
+      <CartProvider>
 
       {currentUser ? <UserNavbar /> : <Navbar />}
 
@@ -69,6 +71,7 @@ const App = () => {
       </Grid>
 
       <Footer />
+      </CartProvider>
     </>
   );
 };
