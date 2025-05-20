@@ -2,13 +2,18 @@
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
+
+import { auth } from '../firebase';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile
+} from 'firebase/auth';
+
 import {
   Avatar,
   Box,
   Button,
-  Checkbox,
   CssBaseline,
-  FormControlLabel,
   Link,
   Paper,
   TextField,
@@ -29,7 +34,7 @@ export default function Signup() {
 }
 
 function SignupContent() {
-  const muiTheme = useTheme();
+  const muiTheme  = useTheme();
   const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));
 
   const [formData, setFormData] = useState({
@@ -39,13 +44,11 @@ function SignupContent() {
     password: '',
     confirmPassword: ''
   });
-
-  const [error, setError] = useState('');
+  const [error, setError]   = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,21 +63,15 @@ function SignupContent() {
     }
 
     try {
-      const res = await fetch('http://localhost:4000/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: formData.firstName.trim(),
-          lastName: formData.lastName.trim(),
-          email: formData.email.trim(),
-          password: formData.password
-        })
-      });
+      const cred = await createUserWithEmailAndPassword(
+        auth,
+        formData.email.trim(),
+        formData.password
+      );
 
-      if (!res.ok) {
-        const { msg } = await res.json();
-        throw new Error(msg || 'Registration failed');
-      }
+      await updateProfile(cred.user, {
+        displayName: `${formData.firstName.trim()} ${formData.lastName.trim()}`
+      });
 
       setSuccess('Account created! You can now log in.');
       setFormData({
@@ -85,7 +82,13 @@ function SignupContent() {
         confirmPassword: ''
       });
     } catch (err) {
-      setError(err.message);
+      setError(
+        (err.code || err.message)
+          .replace('auth/', '')
+          .replace(/-/g, ' ')
+          .replace(/\(.*?\)/, '')
+          .trim()
+      );
     }
   };
 
@@ -231,26 +234,13 @@ function SignupContent() {
                 </Typography>
               )}
 
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  mt: 2,
-                  mb: 3
-                }}
-              >
-                <FormControlLabel
-                  control={<Checkbox color="primary" />}
-                  label="I agree to the Terms and Conditions"
-                />
-              </Box>
+              {/* removed Terms & Conditions checkbox */}
 
-              <Button type="submit" fullWidth variant="contained" size="large" sx={{ mb: 2 }}>
+              <Button type="submit" fullWidth variant="contained" size="large" sx={{ mt: 3 }}>
                 Sign Up
               </Button>
 
-              <Typography variant="body2" align="center">
+              <Typography variant="body2" align="center" sx={{ mt: 2 }}>
                 Already have an account?{' '}
                 <Link href="/login" variant="body2">
                   Log In

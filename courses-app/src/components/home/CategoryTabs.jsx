@@ -1,21 +1,20 @@
 import React from 'react';
 import { Tabs, Tab, Box } from '@mui/material';
-import CoursesDatabase from '../../data/CoursesDatabase'; 
-
+import { useAppData } from '../../contexts/AppData';
 
 const CategoryTabs = ({ onCategoryChange }) => {
-
     // useState to keep track of the selected tab
     const [selectedTab, setSelectedTab] = React.useState(0);
+    const { courses } = useAppData();
 
     const categories = React.useMemo(() => {
 
         // bring all categroes from coursesdata, creates an array
-        const allCategories = CoursesDatabase.map(course => course.category);
+        const allCategories = courses.map(course => course.category);
 
         //remove duplicates, convert it to array
         return [...new Set(allCategories)];
-    }, []);
+    }, [courses]);
 
     const handleTabChange = (event, newValue) => {
         setSelectedTab(newValue);

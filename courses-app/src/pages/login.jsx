@@ -1,7 +1,8 @@
-// src/pages/login.jsx
+// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
+
 import {
   Avatar,
   Box,
@@ -20,6 +21,15 @@ import SchoolIcon from '@mui/icons-material/School';
 import loginIllustration from '../assets/images/bwink_edu_01_single_04.jpg';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
+
+import { auth } from '../firebase';
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence
+} from 'firebase/auth';
+
 export default function Login() {
   return (
     <ThemeProvider theme={theme}>
@@ -32,45 +42,67 @@ export default function Login() {
 function LoginContent() {
   const muiTheme  = useTheme();
   const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));
-  const navigate  = useNavigate();          // optional – redirect after login
+  const navigate  = useNavigate();
 
-  // form state
-  const [email,    setEmail]    = useState('');
-  const [password, setPassword] = useState('');
 
-  // feedback state
+  const [email,       setEmail]       = useState('');
+  const [password,    setPassword]    = useState('');
+  const [rememberMe,  setRememberMe]  = useState(false);
+
+
   const [error,   setError]   = useState('');
   const [success, setSuccess] = useState('');
 
-  /* ─── submit ───────────────────────── */
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
     try {
-      const res = await fetch('http://localhost:4000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), password })
-      });
+      /* pick persistence from the checkbox */
+      await setPersistence(
+        auth,
+        rememberMe ? browserLocalPersistence : browserSessionPersistence
+      );
 
-      if (!res.ok) {
-        const { msg } = await res.json();
-        throw new Error(msg || 'Login failed');
-      }
+      const cred = await signInWithEmailAndPassword(
+        auth,
+        email.trim(),
+        password
+      );
 
-      // if you need user data, grab it here
-      const { user } = await res.json();
-      setSuccess(`Welcome back, ${user.firstName}!`);
+      
+      const name = cred.user.displayName || cred.user.email;
+      setSuccess(`Welcome back, ${name}!`);
 
-      // redirect after a short pause 
-      setTimeout(() => navigate('/dashboard'), 800);
+      
+      setTimeout(() => navigate('/', { replace: true }), 800);
 
     } catch (err) {
-      setError(err.message);
+   
+      let msg;
+
+      switch (err.code) {
+        case 'auth/user-not-found':
+        case 'auth/wrong-password':
+          msg = 'Combination email/password is wrong';
+          break;
+        case 'auth/invalid-email':
+          msg = 'Please enter a valid email address';
+          break;
+        default:
+          msg = (err.code || err.message)
+            .replace('auth/', '')
+            .replace(/-/g, ' ')
+            .replace(/\(.*?\)/, '')
+            .trim();
+      }
+
+      setError(msg);
     }
   };
+
 
   return (
     <Grid
@@ -82,7 +114,7 @@ function LoginContent() {
       spacing={8}
       sx={{ height: '70vh', backgroundColor: '#F0F2F5' }}
     >
-      {/* illustration */}
+  
       {showImage && (
         <Grid
           item md={6}
@@ -99,7 +131,7 @@ function LoginContent() {
         </Grid>
       )}
 
-      {/* form */}
+   
       <Grid
         item xs={12} md={6}
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 2 }}
@@ -163,7 +195,13 @@ function LoginContent() {
                 sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 2, mb: 3 }}
               >
                 <FormControlLabel
-                  control={<Checkbox color="primary" />}
+                  control={
+                    <Checkbox
+                      color="primary"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                    />
+                  }
                   label="Remember me"
                 />
                 <Link component={RouterLink} to="/ForgotPassword" variant="body2">

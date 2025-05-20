@@ -3,15 +3,16 @@ import { Box, Typography, Card, CardContent, IconButton } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-import CoursesDatabase from '../../data/CoursesDatabase';
+import { useAppData } from '../../contexts/AppData';
 
 const offerCourseIds = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11];
 
 const SpecialOffers = () => {
+  const { courses } = useAppData();
   const [showNext, setShowNext] = useState(false);
 
   // filter the courses only include discounted ones
-  const offers = CoursesDatabase.filter(course => offerCourseIds.includes(course.id));
+  const offers = courses.filter(course => offerCourseIds.includes(course.id));
   const currentOffers = showNext ? offers.slice(5) : offers.slice(0, 5);
 
   return (
@@ -106,17 +107,17 @@ const SpecialOffers = () => {
                 color="error"
                 display="inline"
                 >
-                  €{offer.price}
+                  {offer.priceDisplay}
                 </Typography>
 
-                {offer.originalPrice && (
+                {offer.originalPriceDisplay && (
                 <Typography
                 variant="body2"
                 color="text.secondary"
                 display="inline"
                 sx={{ textDecoration: 'line-through', ml: 1 }}
                 >
-                  €{offer.originalPrice}
+                  {offer.originalPriceDisplay}
                 </Typography>
               )}
               </Box>   

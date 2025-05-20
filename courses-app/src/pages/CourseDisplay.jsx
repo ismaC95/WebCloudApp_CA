@@ -6,21 +6,21 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useParams } from 'react-router-dom';
 
-import coursesDatabase from '../data/CoursesDatabase';
+import { useAppData } from '../contexts/AppData';
 import RatingStars from '../components/RatingStars';
-import InstructorDetails from '../data/InstructorDetails';
 
 
 const CourseDisplay = () => {
+    const { courses, instructors } = useAppData();
     const { id } = useParams(); // get course ID from URL
 
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [course, setCourse] = useState(null); // selected course storage
 
     useEffect(() => {
-        const courseFound = coursesDatabase.find(c => c.id === parseInt(id));
+        const courseFound = courses.find(c => c.id === parseInt(id));
         setCourse(courseFound);
-    }, [id]);
+    }, [id, courses]);
 
     const toggleDrawer = (open) => () => {
         setDrawerOpen(open);
@@ -29,7 +29,7 @@ const CourseDisplay = () => {
     if (!course) return <Typography sx={{ mt: 8, p: 4}}>Course not found.</Typography>
 
     // find instructor and display the err msg if not found
-    const instructor = InstructorDetails.find((ins) => ins.id === course.instructor_id);
+    const instructor = instructors.find((ins) => ins.id === course.instructor_id);
     if (!instructor) return <Typography sx={{ mt: 8, p: 4}}>Instructor not found.</Typography>
     
     return (
@@ -114,7 +114,7 @@ const CourseDisplay = () => {
                                             <>
                                                 Check out more courses from {instructor.name}:&nbsp;
                                                 {otherCourses.map((cid, index) => {
-                                                    const relatedCourse = coursesDatabase.find(c => c.id === cid);
+                                                    const relatedCourse = courses.find(c => c.id === cid);
                                                     if (!relatedCourse) return null;
                                                     return (
                                                         <span key={cid}>

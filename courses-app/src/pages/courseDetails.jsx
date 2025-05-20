@@ -1,5 +1,4 @@
 // src/pages/CourseDetails.jsx   (capital “C” keeps the filename consistent)
-import { useEffect, useState } from 'react';
 import {
   Box,
   Container,
@@ -7,19 +6,23 @@ import {
   Button,
   useTheme,
   useMediaQuery,
+  Stack,
 } from '@mui/material';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';        
 import RatingStars from '../components/RatingStars';
-import courses from '../data/CoursesDatabase';
-import reviewsData from '../data/ReviewsDataBase';
 import CourseIntroCard from '../components/CourseIntroCard';
 import CourseContentDetails from '../components/CourseContentDetails';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { useCart } from '../contexts/CartContext';
+import { useAppData } from '../contexts/AppData';
+
 
 const CourseDetails = () => {
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const { courses, reviews } = useAppData();
 
   /* ─── 1.  Get the ID from the URL  ─── */
   const { courseId } = useParams();                 
@@ -28,21 +31,17 @@ const CourseDetails = () => {
   /* ─── 2.  Look up the course  ─── */
   const course = courses.find(c => c.id === selectedCourseId);
 
-  const [reviews, setReviews] = useState([]);
+  // Add course to cart functionality
+  const {addToCart} = useCart();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
 
-    const timeout = setTimeout(() => {
-      const filtered = reviewsData.filter(
-        r => r.courseId === selectedCourseId
-      );
-      // randomise & take 8
-      setReviews(filtered.sort(() => 0.5 - Math.random()).slice(0, 8));
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [selectedCourseId]);                          
+  const filteredReviews = reviews
+  .filter(r => parseInt(r.courseId) === selectedCourseId)
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 8);                         
 
   if (!course) {
     return (
@@ -54,10 +53,9 @@ const CourseDetails = () => {
     );
   }
 
-  const { title, description, rating, no_reviews } = course;
+  const { title, description, rating, no_reviews, originalPriceDisplay, priceDisplay } = course;
 
-  // Add course to cart functionality
-  const {addToCart} = useCart();
+  
 
   return (
     <Box sx={{ boxSizing: 'border-box', mt:10}}>
@@ -86,19 +84,34 @@ const CourseDetails = () => {
               {rating}
             </Typography>
             <Typography variant="body2" sx={{ ml: 1 }}>
-              {no_reviews}
+              ({no_reviews} Reviews)
             </Typography>
           </Box>
-
-          <Button
-            variant="type1"
-            color="secondary"
-            size="large"
-            sx={{ color: '#FFFFFF' }}
-            onClick={() => addToCart(course)}
-          >
-            Enroll Now
-          </Button>
+          <Box sx={{display: "flex", gap: 5}}>
+            <Stack alignItems="flex-end" justifyContent="center">
+              <Typography variant="h6" fontWeight="bold" noWrap>
+                {priceDisplay}
+              </Typography>
+              <Typography
+                variant="body1"
+                color="red"
+                fontWeight="bold"
+                sx={{ textDecoration: 'line-through' }}
+              >
+                {originalPriceDisplay}
+              </Typography>
+            </Stack>
+            <Button
+              variant="type1"
+              color="secondary"
+              size="large"
+              sx={{ color: '#FFFFFF' }}
+              onClick={() => addToCart(course)}
+            >
+              Enroll Now
+            </Button>
+          </Box>
+          
         </Container>
       </Box>
 
@@ -114,7 +127,7 @@ const CourseDetails = () => {
 
       {/* — Testimonials — */}
       <Box sx={{ width: '100%', overflow: 'visible', pb: isSmDown ? 2 : 6 }}>
-        <TestimonialCarousel reviews={reviews} />
+        <TestimonialCarousel reviews={filteredReviews} />
 
         {/* — Enroll Button — */}
         <Box className="d-flex justify-content-center mt-6">

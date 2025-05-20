@@ -1,15 +1,15 @@
 // src/components/CourseIntroCard.jsx
-import React from 'react';
 import { Container, Grid, Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import InstructorCard from './InstructorCard';
-import courses from '../data/CoursesDatabase';
+import { useAppData } from '../contexts/AppData';
 
 const CourseIntroCard = ({ courseId }) => {
+  const { courses } = useAppData();
   const course = courses.find(c => c.id === courseId);
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
-  if (!course) return null;
+  // if (!course) return null;
 
   return (
     <Container
