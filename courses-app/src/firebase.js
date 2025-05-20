@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from 'firebase/auth';
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -11,9 +12,10 @@ const firebaseConfig = {
   projectId: "coursesmarketplace",
   storageBucket: "coursesmarketplace.firebasestorage.app",
   messagingSenderId: "955319533092",
-  appId: "1:955319533092:web:e21fb22250917bf21c62b1"
+  appId: "1:955319533092:web:e21fb22250917bf21c62b1",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app);

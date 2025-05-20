@@ -62,7 +62,7 @@ const ShoppingCart = () => {
     <Grid container justifyContent={"center"} spacing={4} >
 
       {/* Shopping Cart */}
-      <Grid size={{xs: 12, lg: 8}}  sx={{padding:{xs: 1, lg: 3}}}>
+      <Grid size={{xs: 12, lg: 8}}  sx={{padding:{xs: 2, lg: 3}}}>
           <Typography variant="h2" sx={{mb:{xs: 2, lg: 4}}}> Shopping Cart </Typography>
           <Typography variant="body1" fontWeight="bold">{addedToCart.length > 1 ? `${addedToCart.length} Courses in Cart` : `${addedToCart.length} Course in Cart`}</Typography>
           <Divider sx={{border: "1px solid black", my: 0.5}}/>
@@ -84,8 +84,8 @@ const ShoppingCart = () => {
               ))}
       </Grid>
 
-      {/* Total price + coupons */}
-      <Grid size={{xs: 12, lg: 4}} sx={{padding:{xs: 1, lg: 3}, display:"flex", flexDirection:"column", justifyContent:"center"}}>
+      {/* ORDER SUMMARY */}
+      <Grid size={{xs: 12, lg: 4}} sx={{padding:{xs: 2, lg: 3}, display:"flex", flexDirection:"column", justifyContent:"center"}}>
 
         {/* PRICE DISPLAY */}
         <Box >

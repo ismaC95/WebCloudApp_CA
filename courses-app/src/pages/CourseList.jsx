@@ -6,13 +6,15 @@ import SearchBar from "../components/SearchBar"
 import CourseFilterBtn from "../components/courseList/CourseFilterBtn"
 import FilterChip from "../components/courseList/FilterChip"
 
-import courses from '../data/CoursesDatabase'
 import CoursesDisplay from '../components/courseList/CoursesDisplay'
 import FilterSelection from '../components/courseList/FilterSelection'
 import PaginationComp from '../components/PaginationComp'
+import { useAppData } from '../contexts/AppData'
+
 
 
 function CourseList() {
+    const { courses } = useAppData();
     const [filters, setFilters] = useState({
         // Providing filters categories
         duration:[],

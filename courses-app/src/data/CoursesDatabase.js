@@ -79,7 +79,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/hr1.png",
     category: "HR",
-    intro_video: "https://www.youtube.com/watch?v=F1kY9ywfFVg",
+    intro_video:
+      "https://www.youtube.com/embed/aPEUKLxxh_k?si=4mEx_NNIbhBIXcGW",
     long_description:
       "This course explores hr management essentials in detail, equipping learners with practical tools and",
     instructor_id: 17,
@@ -111,7 +112,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/hr2.png",
     category: "HR",
-    intro_video: "https://www.youtube.com/watch?v=F1kY9ywfFVg",
+    intro_video:
+      "https://www.youtube.com/embed/QpbHMX6yJNk?si=P-6FayOfXIHjySPj",
     long_description:
       "This course explores recruitment and talent acquisition in detail, equipping learners with practical",
     instructor_id: 7,
@@ -144,7 +146,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/finance1.png",
     category: "Finance",
-    intro_video: "https://www.youtube.com/watch?v=I0YgDT7fBqI",
+    intro_video:
+      "https://www.youtube.com/embed/Fi1wkUczuyk?si=SfoU1QhbYUbKN7x0",
     long_description:
       "This course explores finance for non-finance professionals in detail, equipping learners with practi",
     instructor_id: 3,
@@ -177,7 +180,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/finance2.png",
     category: "Finance",
-    intro_video: "https://www.youtube.com/watch?v=I0YgDT7fBqI",
+    intro_video:
+      "https://www.youtube.com/embed/ELddtcZouP0?si=vrJLY0CpbRcUyBX1",
     long_description:
       "This course explores budgeting and forecasting fundamentals in detail, equipping learners with pract",
     instructor_id: 20,
@@ -211,7 +215,8 @@ const rawCourses = [
     level: "Advanced",
     image: "/Course_images/finance3.png",
     category: "Finance",
-    intro_video: "https://www.youtube.com/watch?v=vjVazr3xdns",
+    intro_video:
+      "https://www.youtube.com/embed/qcrtDOQxmkc?si=sHkoRl9wesvKrEUE",
     long_description:
       "This course explores investment analysis and portfolio management in detail, equipping learners with",
     instructor_id: 17,
@@ -244,7 +249,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/dev1.png",
     category: "Software Development",
-    intro_video: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
+    intro_video:
+      "https://www.youtube.com/embed/GxmfcnU3feo?si=zc26pRREXvzT1ajD",
     long_description:
       "This course explores full stack web development bootcamp in detail, equipping learners with practica",
     instructor_id: 17,
@@ -276,7 +282,8 @@ const rawCourses = [
     level: "Advanced",
     image: "/Course_images/dev2.png",
     category: "Software Development",
-    intro_video: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
+    intro_video:
+      "https://www.youtube.com/embed/Rh3tobg7hEo?si=QEiKdoR2lnzQW5lr",
     long_description:
       "This course explores reactjs advanced patterns in detail, equipping learners with practical tools an",
     instructor_id: 7,
@@ -308,7 +315,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/dev3.png",
     category: "Software Development",
-    intro_video: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
+    intro_video:
+      "https://www.youtube.com/embed/kqtD5dpn9C8?si=vB8bch17wBopUQ0C",
     long_description:
       "This course explores python programming for beginners in detail, equipping learners with practical t",
     instructor_id: 9,
@@ -340,7 +348,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/data1.png",
     category: "Data Analytics",
-    intro_video: "https://www.youtube.com/watch?v=nKxLfUrkLE8",
+    intro_video:
+      "https://www.youtube.com/embed/OT1RErkfLNQ?si=B5FSGZx1RI_fq-10",
     long_description:
       "This course explores sql masterclass: from basics to advanced in detail, equipping learners with pra",
     instructor_id: 3,
@@ -372,7 +381,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/data2.png",
     category: "Data Analytics",
-    intro_video: "https://www.youtube.com/watch?v=nKxLfUrkLE8",
+    intro_video:
+      "https://www.youtube.com/embed/pCJ15nGFgVg?si=OCRfZLOzNMUkSEyJ",
     long_description:
       "This course explores excel for data analysis in detail, equipping learners with practical tools and ",
     instructor_id: 14,
@@ -404,7 +414,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/data3.png",
     category: "Data Analytics",
-    intro_video: "https://www.youtube.com/watch?v=nKxLfUrkLE8",
+    intro_video:
+      "https://www.youtube.com/embed/NNSHu0rkew8?si=2BWaZfUEvpC4ig-9",
     long_description:
       "This course explores introduction to power bi in detail, equipping learners with practical tools and",
     instructor_id: 20,
@@ -436,7 +447,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/data4.png",
     category: "Data Analytics",
-    intro_video: "https://www.youtube.com/watch?v=ua-CiDNNj30",
+    intro_video:
+      "https://www.youtube.com/embed/TPMlZxRRaBQ?si=GvhthtLiv-tNld6p",
     long_description:
       "This course explores data visualization with tableau in detail, equipping learners with practical to",
     instructor_id: 17,
@@ -468,7 +480,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/sales1.png",
     category: "Sales & Customer Success",
-    intro_video: "https://www.youtube.com/watch?v=Q6W7Jg1iaEk",
+    intro_video:
+      "https://www.youtube.com/embed/afp9hr4ltH0?si=Y6628HWJCZoghdY8",
     long_description:
       "This course explores mastering sales techniques in detail, equipping learners with practical tools a",
     instructor_id: 9,
@@ -500,7 +513,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/sales2.png",
     category: "Sales & Customer Success",
-    intro_video: "https://www.youtube.com/watch?v=Q6W7Jg1iaEk",
+    intro_video:
+      "https://www.youtube.com/embed/kpkRD6KnjKI?si=Cm_tmDBNbvxQKeJ3",
     long_description:
       "This course explores customer success foundations in detail, equipping learners with practical tools",
     instructor_id: 3,
@@ -532,7 +546,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/sales3.png",
     category: "Sales & Customer Success",
-    intro_video: "https://www.youtube.com/watch?v=DhFZzGZg7VA",
+    intro_video:
+      "https://www.youtube.com/embed/IlogQSTRoAc?si=My2JK-uWfz2sfe0O",
     long_description:
       "This course explores b2b sales strategies in detail, equipping learners with practical tools and con",
     instructor_id: 7,
@@ -564,7 +579,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/sales4.png",
     category: "Sales & Customer Success",
-    intro_video: "https://www.youtube.com/watch?v=sT6aap5aRvI",
+    intro_video:
+      "https://www.youtube.com/embed/RHNgi2uyW90?si=vRe_oqUoYoQDi6zy",
     long_description:
       "This course explores cold email mastery in detail, equipping learners with practical tools and conce",
     instructor_id: 11,
@@ -596,7 +612,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/hr3.png",
     category: "HR",
-    intro_video: "https://www.youtube.com/watch?v=JvuM37AlrE0",
+    intro_video:
+      "https://www.youtube.com/embed/T0u2kwM8qMU?si=61Bm_S60ey8EHPc-",
     long_description:
       "This course explores agile project management for hr teams in detail, equipping learners with practi",
     instructor_id: 5,
@@ -629,7 +646,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/finance4.png",
     category: "Finance",
-    intro_video: "https://www.youtube.com/watch?v=I0YgDT7fBqI",
+    intro_video:
+      "https://www.youtube.com/embed/Fi1wkUczuyk?si=rp4z8zWDGtDD6w8v",
     long_description:
       "This course explores understanding financial statements in detail, equipping learners with practical",
     instructor_id: 18,
@@ -662,7 +680,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/dev4.png",
     category: "Technology",
-    intro_video: "https://www.youtube.com/watch?v=rJesac0_Ftw",
+    intro_video:
+      "https://www.youtube.com/embed/-MTSQjw5DrM?si=Y8HQoAqL4zZY94-s",
     long_description:
       "This course explores building rest apis with node.js in detail, equipping learners with practical to",
     instructor_id: 18,
@@ -694,7 +713,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/marketing4.png",
     category: "Marketing",
-    intro_video: "https://www.youtube.com/watch?v=qSqVVswa420",
+    intro_video:
+      "https://www.youtube.com/embed/eg4I-RU_vKU?si=TghIuDZ-x5s9fxRL",
     long_description:
       "This course explores marketing analytics essentials in detail, equipping learners with practical too",
     instructor_id: 5,
@@ -727,7 +747,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/data5.png",
     category: "Data Analytics",
-    intro_video: "https://www.youtube.com/watch?v=ua-CiDNNj30",
+    intro_video:
+      "https://www.youtube.com/embed/JL_grPUnXzY?si=KIw8gPP_gVg47wzL",
     long_description:
       "This course explores data science for beginners in detail, equipping learners with practical tools a",
     instructor_id: 3,
@@ -759,7 +780,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/sales5.png",
     category: "Sales & Customer Success",
-    intro_video: "https://www.youtube.com/watch?v=DhFZzGZg7VA",
+    intro_video:
+      "https://www.youtube.com/embed/NxsVb08vDmI?si=ViaVlUeuvsZUBWHT",
     long_description:
       "This course explores negotiation skills for sales professionals in detail, equipping learners with p",
     instructor_id: 6,
@@ -791,7 +813,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/hr4.png",
     category: "HR",
-    intro_video: "https://www.youtube.com/watch?v=vG0tS7gMh_A",
+    intro_video:
+      "https://www.youtube.com/embed/88EhLHO5xA4?si=Oq85zA0guylSWSNE",
     long_description:
       "This course explores performance management for hr leaders in detail, equipping learners with practi",
     instructor_id: 19,
@@ -823,7 +846,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/dev5.png",
     category: "Software Development",
-    intro_video: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
+    intro_video:
+      "https://www.youtube.com/embed/M988_fsOSWo?si=UWB14LgKSIt8xG9a",
     long_description:
       "This course explores cloud computing basics for developers in detail, equipping learners with practi",
     instructor_id: 16,
@@ -855,7 +879,8 @@ const rawCourses = [
     level: "Beginner",
     image: "/Course_images/sales6.png",
     category: "Sales & Customer Success",
-    intro_video: "https://www.youtube.com/watch?v=sT6aap5aRvI",
+    intro_video:
+      "https://www.youtube.com/embed/iONQNwRHd7Y?si=w1jr1Vt9nAnNXPKD",
     long_description:
       "This course explores personal branding for sales success in detail, equipping learners with practica",
     instructor_id: 4,
@@ -888,7 +913,8 @@ const rawCourses = [
     level: "Intermediate",
     image: "/Course_images/data6.png",
     category: "Data Analytics",
-    intro_video: "https://www.youtube.com/watch?v=2zKjWnMtwvs",
+    intro_video:
+      "https://www.youtube.com/embed/7rs0i-9nOjo?si=vqY86dWEADwCGr2j",
     long_description:
       "This course explores intro to data mining in detail, equipping learners with practical tools and con",
     instructor_id: 15,
@@ -920,7 +946,8 @@ const rawCourses = [
     level: "Advanced",
     image: "/Course_images/finance5.png",
     category: "Finance",
-    intro_video: "https://www.youtube.com/watch?v=vjVazr3xdns",
+    intro_video:
+      "https://www.youtube.com/embed/Iiq4Sem9GPM?si=xHSFW5dSbcEqEWfo",
     long_description:
       "This course explores financial modeling with excel in detail, equipping learners with practical tool",
     instructor_id: 15,
@@ -940,6 +967,45 @@ const rawCourses = [
     ],
     paymentType: "Paid",
   },
+  {
+    id: 30,
+    title: "Instagram Growth Mastery",
+    description:
+      "Learn advanced strategies to grow your audience on Instagram.",
+    price: 14.99,
+    originalPrice: 34.99,
+    rating: 4.6,
+    no_reviews: 378,
+    duration: "3-6 Hours",
+    modules: 10,
+    level: "Intermediate",
+    image: "/Course_images/marketing4.jpg",
+    category: "Marketing",
+    intro_video:
+      "https://www.youtube.com/embed/JLfkBRRvtPc?si=Eygd0JAJ51btMVIg",
+    long_description:
+      "This course dives deep into proven Instagram marketing tactics, from building a loyal audience to optimizing content and using analytics for sustained growth.",
+    instructor_id: 10,
+    learning: [
+      "Create engaging Instagram content",
+      "Use Reels and Stories effectively",
+      "Analyze engagement metrics",
+      "Leverage hashtags and trends for visibility",
+    ],
+    modules_list: [
+      "Instagram Algorithm Demystified",
+      "Profile Optimization",
+      "Content Strategy & Planning",
+      "Stories & Highlights Mastery",
+      "Hashtag Research Techniques",
+      "Reels for Viral Growth",
+      "Engagement Hacks",
+      "Collaboration & Influencer Tactics",
+      "Instagram Analytics Deep Dive",
+      "Monetization Strategies",
+    ],
+    paymentType: "Paid",
+  },
 ];
 const euro = new Intl.NumberFormat("en-DE", {
   style: "currency",
@@ -947,7 +1013,6 @@ const euro = new Intl.NumberFormat("en-DE", {
 });
 const courses = rawCourses.map((course) => ({
   ...course,
-  paymentType: course.price == "Free" ? "Free" : "Paid",
   reviews: course.no_reviews,
   priceDisplay: course.price == 0.0 ? "Free" : euro.format(course.price),
   originalPriceDisplay: euro.format(course.originalPrice),

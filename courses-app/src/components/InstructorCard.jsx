@@ -2,12 +2,13 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { PersonOutline as PersonIcon } from '@mui/icons-material';
-import instructors from '../data/InstructorDetails';
+import { useAppData } from '../contexts/AppData';
 
 const InstructorCard = ({ instructorId }) => {
+  const { instructors } = useAppData();
   const instructor = instructors.find(inst => inst.id === instructorId);
 
-  if (!instructor) return null;
+  // if (!instructor) return null;
 
   return (
     <Box

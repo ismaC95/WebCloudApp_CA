@@ -22,6 +22,8 @@ import Footer             from './components/Footer';
 
 import { useAuth } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
+import { AppDataProvider } from './contexts/AppData';
+
 
 const App = () => {
   const { currentUser } = useAuth();          
@@ -29,6 +31,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
+      <AppDataProvider>
       <CartProvider>
 
       {currentUser ? <UserNavbar /> : <Navbar />}
@@ -72,6 +75,7 @@ const App = () => {
 
       <Footer />
       </CartProvider>
+      </AppDataProvider>
     </>
   );
 };
