@@ -3,31 +3,17 @@ import { Box, Typography, Card, CardContent, Avatar, Stack, IconButton } from '@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-import CoursesDatabase from '../../data/CoursesDatabase';
 import RatingStars from '../RatingStars';
-
-// static array of manually written reviews
-const reviewsData = [
-  { courseId: 8, reviewer: 'Anna Muller', text: "This course exceeded my expectations. Clear explanations and practical examples!" },
-  { courseId: 6, reviewer: 'James OConnor', text: "Engaging from start to finish. The instructor really knows their stuff." },
-  { courseId: 10, reviewer: 'Fatima Beaty', text: "Perfect for beginners. Loved the pace and the visuals!" },
-  { courseId: 22, reviewer: 'Lukas McCann', text: "Very detailed and helpful for my job in analytics." },
-  { courseId: 30, reviewer: 'Isabelle Higgins', text: "Exactly what I needed to improve my skills quickly." },
-  { courseId: 1, reviewer: 'Eleanor Hughes', text: "An insightful and concise course. Really helped me grasp the basics." },
-  { courseId: 2, reviewer: 'Carl Lucas', text: "Loved the structure and hands-on examples. Highly recommend!" },
-  { courseId: 9, reviewer: 'Sophia Lee', text: "Well-organized and informative. The quizzes were a nice touch." },
-  { courseId: 14, reviewer: 'Terry Slattery', text: "Excellent pace and very beginner-friendly. Great visuals too." },
-  { courseId: 18, reviewer: 'Linda OBrien', text: "I learned more in this short course than in weeks of self-study!" },
-];
+import { useAppData } from '../../contexts/AppData';
 
 
 // functional component
 const ReviewSection =() => {
-
+  const { courses, reviews } = useAppData();
   // Toggle between the first and the second page.
   // showNext is a boolean, and setShowNext is the function to toggle
   const [showNext, setShowNext] = useState(false);
-  const currentReviews = showNext ? reviewsData.slice(5) : reviewsData.slice(0,5); // (0,5) is the first 5 
+  const currentReviews = showNext ? reviews.slice(5) : reviews.slice(0,5); // (0,5) is the first 5 
   
   // // filter the courses that have reviews <not needed>
   // const reviewedCourses = CoursesDatabase.filter(course => 
@@ -39,7 +25,7 @@ const ReviewSection =() => {
 
   // find matching reviews with course id
   const reviewsToRender = currentReviews.map(review => {
-    const course = CoursesDatabase.find(c => c.id === review.courseId);
+    const course = courses.find(c => c.id === review.courseId);
     return course ? { ...review, course } : null; //filter out null entries
   }).filter(Boolean);
 
@@ -101,7 +87,7 @@ const ReviewSection =() => {
         pb: '2em',
         }}
       >
-        {reviewsToRender.map(({ course, reviewer, text }, idx) => (
+        {reviewsToRender.map(({ course, name, comment }, idx) => (
           <Card 
             key={idx} 
             sx={{ 
@@ -137,12 +123,12 @@ const ReviewSection =() => {
               <Typography variant="body2" color="text.secondary" mt={1}>
 
                 {/* from coursesDatabase */}
-                "{text}"
+                "{comment}"
               </Typography>
               
               <Stack direction="row" spacing={1} alignItems="center" mt={2}>
-                <Avatar sx={{ bgcolor: '#2674B2' }}>{reviewer.charAt(0)}</Avatar>
-                <Typography variant="body2">{reviewer}</Typography>
+                <Avatar sx={{ bgcolor: '#2674B2' }}>{name.charAt(0)}</Avatar>
+                <Typography variant="body2">{name}</Typography>
               </Stack>
             </CardContent>
           </Card>

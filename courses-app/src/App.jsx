@@ -20,36 +20,39 @@ import Checkout from './pages/Checkout';
 
 import theme from './theme';
 import { CartProvider } from './contexts/CartContext';
+import { AppDataProvider } from './contexts/AppData';
 
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <CartProvider>
-        <CssBaseline />
-        {/* <Navbar /> */}
-        <UserNavbar />
-          <Grid container justifyContent={"center"} >
-            <Grid size={{xs: 12, sm: 8}}>
-              <Box mt={10} component="main" sx={{ flex: 1 }}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/coursedisplay/:id" element={<CourseDisplay />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/payment-successful" element={<PaymentSuccessful />} />
-                  <Route path="/courses" element={<CourseList />} />
-                  <Route path="courses/:courseId" element={<CourseDetails />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/forgotpassword" element={<ForgotPassword />} />
-                  <Route path="/shoppingcart" element={<ShoppingCart />} />
-                </Routes>
-              </Box>
+      <AppDataProvider>
+        <CartProvider>
+          <CssBaseline />
+          <Navbar />
+          {/* <UserNavbar /> */}
+            <Grid container justifyContent={"center"} >
+              <Grid size={{xs: 12, sm: 8}}>
+                <Box mt={10} component="main" sx={{ flex: 1 }}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/coursedisplay/:id" element={<CourseDisplay />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/payment-successful" element={<PaymentSuccessful />} />
+                    <Route path="/courses" element={<CourseList />} />
+                    <Route path="courses/:courseId" element={<CourseDetails />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/forgotpassword" element={<ForgotPassword />} />
+                    <Route path="/shoppingcart" element={<ShoppingCart />} />
+                  </Routes>
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
-          <Footer />
-      </CartProvider>
+            <Footer />
+        </CartProvider>
+      </AppDataProvider>
     </ThemeProvider>
   );
 

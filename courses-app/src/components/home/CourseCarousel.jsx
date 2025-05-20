@@ -1,11 +1,12 @@
 // src/components/home/CourseCarousel.jsx
 import { Box, Typography, Card, CardContent, CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';                // → NEW
-import CoursesDatabase from '../../data/CoursesDatabase';
+import { useAppData } from '../../contexts/AppData';
 import RatingStars from '../../components/RatingStars';
 
 const CourseCarousel = ({ selectedCategory }) => {
-  const featuredCourses = CoursesDatabase.filter(
+  const { courses } = useAppData();
+  const featuredCourses = courses.filter(
     course => course.category === selectedCategory
   );
 

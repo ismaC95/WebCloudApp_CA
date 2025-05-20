@@ -3,9 +3,10 @@ import React from 'react';
 import { Container, Grid, Typography, Box } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import courses from '../data/CoursesDatabase';
+import { useAppData } from '../contexts/AppData';
 
 const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
+  const { courses } = useAppData();
   const course = courses.find(c => c.id === courseId);
 
   if (!course) return null;
