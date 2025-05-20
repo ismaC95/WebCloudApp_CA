@@ -70,7 +70,7 @@ function CourseList() {
   return (
             <Grid container spacing={2} justifyContent={"center"} alignItems="center">
                 <Grid size={12}>
-                    <SearchBar />
+                <SearchBar />
                 </Grid>
 
                 {/* ----Top Content---- */}
