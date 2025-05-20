@@ -60,7 +60,7 @@ const CourseDetails = () => {
   const {addToCart} = useCart();
 
   return (
-    <Container sx={{ boxSizing: 'border-box', minWidth: '100vw', mt:10 }}>
+    <Box sx={{ boxSizing: 'border-box', mt:10}}>
       {/* — Hero Section — */}
       <Box
         sx={{
@@ -123,7 +123,7 @@ const CourseDetails = () => {
           </Button>
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

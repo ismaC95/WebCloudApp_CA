@@ -19,10 +19,11 @@ const ShoppingCartComp = ({openCart, toggleCart}) => {
         onClose={toggleCart(false)}
     >
         <Stack height="100%" 
-            sx={{Width: {
+            sx={{width: {
                 //To refine width
-                xs: 'fullWidth',
-                sm: '100%'}}}
+                xs: '100vw',
+                sm: '550px'},
+                minWidth:{sm:'550px'}}}
             paddingX={2}
             paddingY={3}>
             {/* Header     */}
@@ -60,6 +61,19 @@ const ShoppingCartComp = ({openCart, toggleCart}) => {
                 <Box>
                     <Typography variant="h6" fontWeight="bold">Total: {totalPriceCart.toFixed(2)}€</Typography>
                 </Box>
+                <Box display='flex' justifyContent="center">
+                    <Button 
+                    variant='outlined' 
+                    color="primary" 
+                    size="large" 
+                    sx={{width:'auto', mt:5}} 
+                    component={Link} to="/shoppingcart" 
+                    onClick={toggleCart(false)}
+                    >
+                        Shopping Cart
+                    </Button>
+                </Box>
+                
              </Box>
             ) : (
                 //If there are no courses in the cart:

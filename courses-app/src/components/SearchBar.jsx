@@ -1,42 +1,52 @@
-import React from 'react'
-import { TextField, InputAdornment, Box } from '@mui/material'
+import React from 'react';
+import { TextField, InputAdornment, Box, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchBar = () => ({ keyword, onKeywordChange }) => {
-  const handleChange = (event) => {
+const SearchBar = ({ keyword, onKeywordChange, onSearch }) => {
+  const handleInputChange = (event) => {
     onKeywordChange(event.target.value);
   };
 
+  const handleSearchClick = () => {
+    if (onSearch) onSearch();
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && onSearch) {
+      onSearch();
+    }
+  };
+
   return (
-    <Box 
-    sx = {{
-      position: 'relative',
-      zIndex: 1,
-      px: '2em', 
-      maxWidth: '100em',
-      mx: 'auto', // center horizontally
-      width: '100%',
-      border: '1px solid red',
-      height: '5em'
-    }}
-    >
-      <TextField
-        fullWidth
-        value={keyword}
-        onChange={handleChange}
-        variant="outlined"
-        placeholder="Type to Search..."
-        inputProps={{
+    <Box sx={{ px:2, mt: 2, mb: 2 }}>
+      <Box
+        sx={{
+          display:'flex',
+          alignItems: 'center',
+          px: 20,
+        }}
+      >
+        <TextField
+          fullWidth
+          value={keyword}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          placeholder="Search for..."
+          InputProps={{
+            disableUnderline: true,
             startAdornment: (
               <InputAdornment position="start">
                 <SearchIcon />
               </InputAdornment>
             ),
-        }}  
-      />
+          }}
+        />
+        <IconButton onClick={handleSearchClick}>
+          <SearchIcon />
+        </IconButton>
+      </Box>
     </Box>
-  )
-}
-
+  );
+};
 
 export default SearchBar;

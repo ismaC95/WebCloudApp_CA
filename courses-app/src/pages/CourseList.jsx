@@ -66,8 +66,6 @@ function CourseList() {
     );
     
   return (
-    <Grid container justifyContent={"center"} >
-        <Grid size={{xs: 12, sm: 8}}>
             <Grid container spacing={2} justifyContent={"center"} alignItems="center">
                 <Grid size={12}>
                     <SearchBar />
@@ -137,8 +135,6 @@ function CourseList() {
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
-    </Grid>
   )
 }
 
