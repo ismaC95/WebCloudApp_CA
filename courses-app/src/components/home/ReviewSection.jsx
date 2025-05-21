@@ -12,15 +12,15 @@ const ReviewSection =() => {
   const { courses, reviews } = useAppData();
   // Toggle between the first and the second page.
   // showNext is a boolean, and setShowNext is the function to toggle
-  const [showNext, setShowNext] = useState(false);
-  const currentReviews = showNext ? reviews.slice(5) : reviews.slice(0,5); // (0,5) is the first 5 
-  
-  // // filter the courses that have reviews <not needed>
-  // const reviewedCourses = CoursesDatabase.filter(course => 
+  const [page, setPage] = useState(0);
+  const REVIEWS_PER_PAGE = 5;
 
-  //   // get course ids from reviewsData
-  //   reviewsData.map(r => r.courseId).includes(course.id)
-  // );
+  const currentReviews = reviews.slice(
+    page * REVIEWS_PER_PAGE,
+    (page + 1) * REVIEWS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(reviews.length / REVIEWS_PER_PAGE);
 
 
   // find matching reviews with course id
@@ -45,9 +45,9 @@ const ReviewSection =() => {
         </Typography>
 
         {/* Left Arrow */}
-        {showNext && (
+        {page > 0 && (
           <IconButton
-          onClick={() => setShowNext(false)}
+          onClick={() => setPage((prev) => prev - 1)}
           sx={{
             position: 'absolute',
             top:'50%',
@@ -61,9 +61,9 @@ const ReviewSection =() => {
         )}
 
         {/* Right Arrow */}
-        {!showNext && (
+        {page < totalPages - 1 && (
           <IconButton
-          onClick={() => setShowNext(true)}
+          onClick={() => setPage((prev) => prev + 1)}
           sx={{
             position: 'absolute',
             top:'50%',
@@ -107,7 +107,7 @@ const ReviewSection =() => {
                 href={`/courses/${course.id}`} // for each course details course
                 sx={{ textDecoration: 'none', color: 'inherit', '&:hover': {textDecoration: 'underline'} }}
               >
-                {/* from coursesDatabase */}
+                {/* from courses */}
                 {course.title}
               </Typography>
 
@@ -115,14 +115,14 @@ const ReviewSection =() => {
                 <RatingStars rating={course.rating} />
                 <Typography variant="body2" sx={{ color: '#8A58F5' }}> 
 
-                   {/* from coursesDatabase */}
+                   {/* from courses */}
                   ({course.no_reviews}) 
                 </Typography>
               </Box>
 
               <Typography variant="body2" color="text.secondary" mt={1}>
 
-                {/* from coursesDatabase */}
+                {/* from reviews */}
                 "{comment}"
               </Typography>
               
