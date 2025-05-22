@@ -33,40 +33,42 @@ const CourseDisplay = () => {
     if (!instructor) return <Typography sx={{ mt: 8, p: 4}}>Instructor not found.</Typography>
     
     return (
-        <Box /* Main content */sx={{ display: 'flex', mt: '5em'}}> 
-            <Box /*Main content*/ sx={{
-                flexGrow: 1, 
-                // transition: 'padding-right 0.3s ease',
-                pr: drawerOpen ? '18em' : '2em',
-                pl: '2em',
-                
-            }}
-            > 
-                {/* Menu button */}
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <IconButton onClick={toggleDrawer(true)}>
-                        <MenuIcon fontSize="large" />
-                    </IconButton>
-                </Box>
+        <Box sx={{ 
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 6,
+            position: 'relative',
+            px: { xs: 2, sm: 3 }, // Responsive padding
+        }}>
+            {/* Menu Button */}
+            <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'flex-end',
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                zIndex: 1
+            }}>
+                <IconButton onClick={toggleDrawer(true)}>
+                    <MenuIcon fontSize="large" />
+                </IconButton>
+            </Box>
 
-
-                <Box // Outer box for gap
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '5em', // Add vertical spacing between child sections
-                    mt: 2,
-                    }}
-                >
-                    <Box /* Course Video */
-                    sx={{
-                        position: 'relative',
-                        width: '50%',
-                        paddingTop: '28.125%', // 60% & 33.75%
-                        mx: 'auto', // horizontally center
-                        mt: 2,
-                    }}>
-                        <iframe
+            {/* Video Section */}
+            <Box sx={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '800px',
+                mx: 'auto',
+                mt: 6
+            }}>
+                <Box sx={{
+                    position: 'relative',
+                    width: '100%',
+                    paddingTop: '56.25%', // 16:9 aspect ratio
+                }}>
+                    <iframe
                         src={course.intro_video}
                         title={course.title}
                         frameBorder="0"
@@ -77,53 +79,48 @@ const CourseDisplay = () => {
                             left: 0,
                             width: '100%',
                             height: '100%',
+                            borderRadius: '8px'
                         }}
-                        ></iframe>
-                    </Box>
+                    />
+                </Box>
+            </Box>
 
-                    <Box /* Instructor Info */ 
-                    sx={{ 
-                        display: 'flex',
-                        alignItems: 'center',
-                        bgcolor: '#f5f5f5', 
-                        p: 2,
-                        borderRadius:2,
-                        mx: '5em',
-                    }}
-                    >
-                        {/* Avatar for first initial */}
-                        <Avatar sx={{width: 60, height: 60, mr: 2, bgcolor: '#5C3D90'}}>
-                            {instructor?.name?.charAt(0)}
-                        </Avatar>
+            {/* Instructor Info */}
+            <Box sx={{ 
+                bgcolor: '#f5f5f5',
+                p: 3,
+                borderRadius: 2,
+                display: 'flex',
+                alignItems: 'flex-start',
+                width: '100%'
+            }}>
+                <Avatar sx={{width: 60, height: 60, mr: 2, bgcolor: '#5C3D90'}}>
+                    {instructor?.name?.charAt(0)}
+                </Avatar>
 
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                            <Typography fontWeight="bold" fontSize='large' sx={{ color: '#5C3D90' }}>
-                                {instructor?.name}
-                            </Typography>
-
-                            <Typography variant="body2">{instructor?.role}</Typography>
-
-                            {/* Bring other courses from the same instructor */}
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, flex: 1 }}>
+                    <Typography fontWeight="bold" fontSize='large' sx={{ color: '#5C3D90' }}>
+                        {instructor?.name}
+                    </Typography>
+                    <Typography variant="body2">{instructor?.role}</Typography>
+                    {/* Bring other courses from the same instructor */}
                             <Typography variant="body2" fontStyle='italic'>
                                 {(() => {
-                                    const otherCourses = instructor.courses.filter(cid => cid !== course.id);
+                                    const instructorCourses = courses.filter(c => c.instructor_id === instructor.id);
+                                    const otherCourses = instructorCourses.filter(c => c.id !== course.id);
                                     if (otherCourses.length === 0) {
                                         return `No other courses from ${instructor.name}`;
                                     } else { 
                                         return (
-                                            <>
+                                            <Typography variant="body2" fontStyle='italic'>
                                                 Check out more courses from {instructor.name}:&nbsp;
-                                                {otherCourses.map((cid, index) => {
-                                                    const relatedCourse = courses.find(c => c.id === cid);
-                                                    if (!relatedCourse) return null;
-                                                    return (
-                                                        <span key={cid}>
-                                                            <a href={`/coursedisplay/${cid}`}>{relatedCourse.title}</a>
-                                                            {index < instructor.courses.filter(id => id !== course.id).length - 1 ? ", " : ""}
-                                                        </span>
-                                                    );
-                                                })}
-                                            </>
+                                                {otherCourses.map((relatedCourse, index) => (
+                                                <span key={relatedCourse.id}>
+                                                    <a href={`/coursedisplay/${relatedCourse.id}`}>{relatedCourse.title}</a>
+                                                    {index < otherCourses.length - 1 ? ', ' : ''}
+                                                </span>
+                                                ))}
+                                            </Typography>
                                         );
                                     }
                                 })()}                        
@@ -131,63 +128,94 @@ const CourseDisplay = () => {
                         </Box>
                     </Box>
 
-                    <Box /*Course Description*/
-                    sx={{
-                        bgcolor: '#f5f5f5', 
-                        p: 3,
-                        borderRadius: 2,
-                        mx: '5em',
-                    }}>
-                        <Typography fontWeight="bold" gutterBottom>{course.title}</Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2, py:'1.5em' }}>
-                            <AccessTime fontSize="small" />
-                            <Typography variant="body2">{course.duration}</Typography>
-                            <VideoLibrary fontSize="small" />
-                            <Typography variant="body2">{course.modules} Modules</Typography>
-                            
-                            <Box sx={{ color: '#ffb700' }}>
-                                <RatingStars rating={course.rating} />  
-                            </Box>
-                            
-                            <Typography variant="body2" fontStyle='italic' >({course.no_reviews} Reviews)</Typography>
-                        </Box>
-                            <Typography variant="body2" sx={{ lineHeight: 1.8 }}>{course.long_description}</Typography>
-                            <Typography fontWeight="bold" gutterBottom sx={{ mt: 4 }}>What you'll learn from this course</Typography>
-                            <List>
-                                {course.learning && course.learning.map((item, index) => (
-                                    <ListItem key={index} sx={{ pl: 0, display: 'flex', alignItems: 'flex-start' }}>
-                                        <Chip 
-                                            icon={<DoneIcon sx={{ color: '#4caf50 !important', mr: 1, mt: '4px' }} />}
-                                            label={item}
-                                            sx={{ bgcolor: '#D9D9D9', color: '#333', fontWeight: 'bold' }}
-                                        />
-                                    </ListItem>
-                                ))}
-                            </List>
-                    </Box>
-                </Box>
-            </Box>
+            {/* Course Description */}
+            <Box sx={{
+                bgcolor: '#f5f5f5',
+                p: 3,
+                borderRadius: 2,
+                width: '100%'
+            }}>
+                <Typography fontWeight="bold" gutterBottom variant="h6">
+                    {course.title}
+                </Typography>
                 
+                <Box sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: 1.2, 
+                    py: 2,
+                    flexWrap: 'wrap'
+                }}>
+                    <AccessTime fontSize="small" />
+                    <Typography variant="body2">{course.duration}</Typography>
+                    <VideoLibrary fontSize="small" />
+                    <Typography variant="body2">{course.modules} Modules</Typography>
+                    <Box sx={{ color: '#ffb700' }}>
+                        <RatingStars rating={course.rating} />  
+                    </Box>
+                    <Typography variant="body2" fontStyle='italic'>
+                        ({course.no_reviews} Reviews)
+                    </Typography>
+                </Box>
 
-            {/* Right Drawer - Module List */}
+                <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+                    {course.long_description}
+                </Typography>
+
+                <Typography fontWeight="bold" variant="h6" sx={{ mt: 4, mb: 2 }}>
+                    What you'll learn from this course
+                </Typography>
+
+                <List sx={{ width: '100%' }}>
+                    {course.learning && course.learning.map((item, index) => (
+                        <ListItem key={index} sx={{ pl: 0, display: 'flex', alignItems: 'flex-start' }}>
+                            <Chip 
+                                icon={<DoneIcon sx={{ color: '#4caf50 !important', mr: 1, mt: '4px' }} />}
+                                label={item}
+                                sx={{ 
+                                    bgcolor: '#D9D9D9', 
+                                    color: '#333', 
+                                    fontWeight: 'bold',
+                                    maxWidth: '100%',
+                                    height: 'auto',
+                                    '& .MuiChip-label': {
+                                        whiteSpace: 'normal',
+                                        padding: '8px 12px'
+                                    }
+                                }}
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
+
+            {/* Drawer */}
             <Drawer 
-            anchor="right"
-            open={drawerOpen}
-            onClose={toggleDrawer(false)}
-            PaperProps={{
-                sx: {
-                    width: '16em',
-                    mt: '4em',
-                    bgcolor: '#f0f0f0'},
-            }}
+                anchor="right"
+                open={drawerOpen}
+                onClose={toggleDrawer(false)}
+                PaperProps={{
+                    sx: {
+                        width: { xs: '280px', sm: '320px' },
+                        mt: '64px',
+                        bgcolor: '#f0f0f0'
+                    },
+                }}
             >
-                <Typography variant="subtitle1" sx={{ p: 2}}>Modules</Typography>
+                <Typography variant="subtitle1" sx={{ p: 2, fontWeight: 'bold' }}>
+                    Modules
+                </Typography>
                 <Divider />
                 <List>
                     {course.modules_list.map((mod, index) => (
                         <ListItem key={index} sx={{ display: 'flex', alignItems: 'center' }}>
                             <PlayCircleOutlineIcon sx={{ mr: 1, color: '#5C3D90', fontSize: '1rem' }} />
-                            <ListItemText primary={mod} />
+                            <ListItemText 
+                                primary={mod}
+                                primaryTypographyProps={{
+                                    sx: { fontSize: '0.9rem' }
+                                }}
+                            />
                         </ListItem>
                     ))}
                 </List>
