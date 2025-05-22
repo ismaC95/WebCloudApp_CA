@@ -37,7 +37,7 @@ const App = () => {
       {currentUser ? <UserNavbar /> : <Navbar />}
 
       <Grid container justifyContent="center">
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={8} >
           <Box mt={10} component="main" sx={{ flexGrow: 1 }}>
             <Routes>
               <Route path="/" element={<Home />} />

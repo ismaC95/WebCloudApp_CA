@@ -59,10 +59,12 @@ const ShoppingCart = () => {
   const subtotalDiscount = addedToCart.reduce((sum, course) => sum + (course.originalPrice - course.price), 0);
 
   return (
-    <Grid container justifyContent={"center"} spacing={4} >
-
-      {/* Shopping Cart */}
-      <Grid size={{xs: 12, lg: 8}}  sx={{padding:{xs: 2, lg: 3}}}>
+    <Box width="100%">
+      {addedToCart.length > 0 ? (
+      <Grid container justifyContent={"center"} spacing={20}>
+      
+       {/* Shopping Cart */}
+      <Grid item xs={12} lg={8}  sx={{padding:{xs: 2, lg: 3}, display:"flex", flexDirection:"column"}}>
           <Typography variant="h2" sx={{mb:{xs: 2, lg: 4}}}> Shopping Cart </Typography>
           <Typography variant="body1" fontWeight="bold">{addedToCart.length > 1 ? `${addedToCart.length} Courses in Cart` : `${addedToCart.length} Course in Cart`}</Typography>
           <Divider sx={{border: "1px solid black", my: 0.5}}/>
@@ -85,7 +87,7 @@ const ShoppingCart = () => {
       </Grid>
 
       {/* ORDER SUMMARY */}
-      <Grid size={{xs: 12, lg: 4}} sx={{padding:{xs: 2, lg: 3}, display:"flex", flexDirection:"column", justifyContent:"center"}}>
+      <Grid item xs={12} lg={4} sx={{padding:{xs: 2, lg: 3}, display:"flex", flexDirection:"column", justifyContent:"center"}}>
 
         {/* PRICE DISPLAY */}
         <Box >
@@ -161,6 +163,33 @@ const ShoppingCart = () => {
         </Box>
       </Grid>
     </Grid>
+    ):(
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        height="70vh"
+        textAlign="center"
+        sx={{ padding: 3 }}
+      >
+        <Typography variant="h2" sx={{ mb: 2 }}>Shopping Cart</Typography>
+        <Typography variant="body1" fontWeight="bold" sx={{ mb: 4 }}>
+          No Courses in Cart
+        </Typography>
+
+        <Button
+          component={Link}
+          to="/courses"
+          variant="contained"
+          size="large"
+        >
+          Keep Shopping
+        </Button>
+      </Box>
+    )}
+    
+    </Box>
   )
 }
 
