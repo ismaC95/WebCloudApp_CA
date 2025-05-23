@@ -18,8 +18,8 @@ const SpecialOffers = () => {
   return (
     <Box // outer container
     sx={{
-      m: '3em',
-      mx: '10em',
+      my: '3em',
+      // mx: '10em',
       mb: '10em',
       p: '3em',
       bgcolor: '#f5f5f5',
@@ -72,6 +72,7 @@ const SpecialOffers = () => {
         gap: '1.5em',
         p: '1em',
         px: '0',
+        justifyContent:"space-between"
       }}
       >
         {currentOffers.map((offer) => (

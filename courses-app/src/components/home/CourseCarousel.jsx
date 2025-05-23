@@ -13,8 +13,8 @@ const CourseCarousel = ({ selectedCategory }) => {
   return (
     <Box
       sx={{
-        m: '3em',
-        mx: '10em',
+        my: '3em',
+        // mx: '10em',
         p: '3em',
         bgcolor: '#f5f5f5',
         borderRadius: 2,
@@ -31,6 +31,7 @@ const CourseCarousel = ({ selectedCategory }) => {
           gap: '1.5em',
           p: '1em',
           pb: '2em',
+          justifyContent:"space-between"
         }}
       >
         {featuredCourses.map(course => (

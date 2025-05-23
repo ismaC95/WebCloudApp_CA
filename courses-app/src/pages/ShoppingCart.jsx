@@ -5,11 +5,14 @@ import { red } from '@mui/material/colors';
 
 import { useCart } from "../contexts/CartContext"
 import CourseCard from "../components/courseList/CourseCard";
-import promoCodes from "../data/PromoCodeDatabase";
+import { useAppData } from "../contexts/AppData";
 import { Link } from "react-router-dom";
+import OrderSummary from "../components/shoppingCart/OrderSummary";
 
 const ShoppingCart = () => {
   const {addedToCart, removeFromCart} = useCart();
+
+  const {promoCodes} = useAppData();
   //PromoCode functionality
   const [promoCode, setPromoCode] = useState([]);
 
@@ -59,9 +62,10 @@ const ShoppingCart = () => {
   const subtotalDiscount = addedToCart.reduce((sum, course) => sum + (course.originalPrice - course.price), 0);
 
   return (
-    <Box width="100%">
+    <Box>
+      {/* Behavior of the page whenever there are courses in the shopping cart or not */}
       {addedToCart.length > 0 ? (
-      <Grid container justifyContent={"center"} spacing={20}>
+      <Grid container justifyContent={"space-between"}>
       
        {/* Shopping Cart */}
       <Grid item xs={12} lg={8}  sx={{padding:{xs: 2, lg: 3}, display:"flex", flexDirection:"column"}}>
@@ -87,71 +91,21 @@ const ShoppingCart = () => {
       </Grid>
 
       {/* ORDER SUMMARY */}
-      <Grid item xs={12} lg={4} sx={{padding:{xs: 2, lg: 3}, display:"flex", flexDirection:"column", justifyContent:"center"}}>
-
-        {/* PRICE DISPLAY */}
-        <Box >
-          <Typography variant="h6" fontWeight="bold" sx={{mb:{xs: 1, lg: 3}, mt:{xs:1, lg: 10}}}> Order Summary </Typography>
-
-          {/* SUBTOTAL + DISCOUNT */}
-          <Box display="flex" flexDirection="row" justifyContent="space-between" sx={{mb:{xs: 1, lg: 3}}}>
-              <Typography variant="body1">Subtotal</Typography>
-              <Typography variant="body1">€{subtotalPrice.toFixed(2)}</Typography>
-          </Box>
-          <Box display="flex" flexDirection="row" justifyContent="space-between" sx={{mb:{xs: 1, lg: 3}}}>
-              <Typography variant="body1">Discount</Typography>
-              <Typography variant="body1" color="red">- €{subtotalDiscount.toFixed(2)}</Typography>
-          </Box>
-
-          {/* IS THERE A PROMOCODE? */}
-          {promoCodeFlag &&
-            promoCode.map((code) => (
-              <Box key={code.id} display="flex" flexDirection="row" justifyContent="space-between" sx={{mb:{xs: 1, lg: 3}}}>
-                <Typography variant="body1">{code.code}</Typography>
-                <Typography variant="body1" color="red">
-                  {code.discountType === "fixed"
-                    ? `- €${code.discountValue.toFixed(2)}`
-                    : `- ${code.discountValue}%`}
-                </Typography>
-              </Box>
-            ))}
-          <Divider  sx={{border: "1px solid black", mb:{xs: 1.5, lg: 4}}} />
-
-          {/* TOTAL */}
-          <Box display="flex" flexDirection="row" justifyContent="space-between" sx={{mb:{xs: 1, lg: 3}}}>
-              <Typography variant="body1" fontSize="large" fontWeight="bold">Total</Typography>
-              <Typography variant="body1" fontSize="large" fontWeight="bold">€{calculateTotalPrice(totalPriceCart).toFixed(2)}</Typography>
-          </Box>
-        </Box>
-        
-        {/* PROMO CODE  */}
-        <Box sx={{
-          display:"flex",
-          justifyContent:"center"
-        }}>
-          <Stack direction="row" gap={2} alignItems="flex-start" sx={{mb:{xs: 2, lg: 4}}}>
-            <TextField 
-              label="Promo code"
-              size="small"
-              value={promoCodeInput}
-              onChange={(e) => {
-                setPromoCodeInput(e.target.value);
-                if (promoError) setPromoError(false);
-              }}
-              error={promoError}
-              helperText={promoError ? (promoCodeInput.trim() === "" ? "Enter a code" : `${promoCodeInput} is not a valid code`) : ""}
-            />
-            <Button 
-              variant="contained"
-              sx={{padding: 1, flexGrow: "none"}}
-              onClick={handlePromoCodeInput}
-
-              >
-              Apply
-            </Button>
-          </Stack>
-        </Box>
-        
+      <Grid size={{xs:12, lg:4}}>
+        <OrderSummary
+          subtotalPrice={subtotalPrice}
+          subtotalDiscount={subtotalDiscount}
+          promoCode={promoCode}
+          promoCodeInput={promoCodeInput}
+          promoError={promoError}
+          onPromoCodeChange={(e) => {
+            setPromoCodeInput(e.target.value);
+            if (promoError) setPromoError(false);
+          }}
+          onApplyPromoCode={handlePromoCodeInput}
+          totalPrice={totalPriceCart}
+          calculateTotalPrice={calculateTotalPrice}
+        />
         {/* CHECKOUT BUTTON */}
         <Box sx={{
           display: "flex",

@@ -7,8 +7,6 @@ const SearchBar = () => {
   return (
     <Box 
     sx = {{
-      px: '2em', 
-      maxWidth: '100em',
       mx: 'auto', // center horizontally
       width: '100%'
     }}

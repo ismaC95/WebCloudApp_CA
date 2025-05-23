@@ -34,12 +34,10 @@ const CourseDisplay = () => {
     
     return (
         <Box sx={{ 
-            width: '100%',
             display: 'flex',
             flexDirection: 'column',
             gap: 6,
             position: 'relative',
-            px: { xs: 2, sm: 3 }, // Responsive padding
         }}>
             {/* Menu Button */}
             <Box sx={{ 
@@ -59,7 +57,7 @@ const CourseDisplay = () => {
             <Box sx={{
                 position: 'relative',
                 width: '100%',
-                maxWidth: '800px',
+                maxWidth: '900px',
                 mx: 'auto',
                 mt: 6
             }}>

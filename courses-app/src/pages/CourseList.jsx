@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography, Box } from '@mui/material'
 
 
 import SearchBar from "../components/SearchBar"
@@ -69,9 +69,9 @@ function CourseList() {
     
   return (
             <Grid container spacing={2} justifyContent={"center"} alignItems="center">
-                <Grid size={12}>
-                    <SearchBar />
-                </Grid>
+                <Box width="100%" >
+                <SearchBar />
+                </Box>
 
                 {/* ----Top Content---- */}
                 <Grid container size= {12}>
@@ -81,7 +81,8 @@ function CourseList() {
                         xs: 12, 
                         sm: 4, 
                         md: 3,
-                        lg: 2}}>
+                        lg: 2}}
+                    >
                         <CourseFilterBtn 
                             onToggleFilter={toggleFilter}
                             sortBy={sortBy}
@@ -90,7 +91,7 @@ function CourseList() {
 
                     {/* Chips & Results */}
                     <Grid container size={{xs: 12, sm: 8, md: 9, lg: 10}} >
-                        <Grid size={9}>
+                        <Grid size={9} >
                             <FilterChip filters={filters} setFilters={setFilters} />
                         </Grid>
                         <Grid size={3} display={'flex'} alignItems="center" justifyContent={'flex-end'}>
@@ -114,7 +115,8 @@ function CourseList() {
                           sx={{
                               transition: 'all 0.5s ease',
                               display: 'block',
-                              width: '100%'}}>
+                              width: '100%',
+                              order: 0}}>
                           <FilterSelection filters={filters} setFilters={setFilters} visible={filtersVisible}/>
                       </Grid>
                     )}

@@ -93,46 +93,36 @@ function SignupContent() {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        minHeight: '100vh',
-        backgroundColor: '#F0F2F5',
-        overflowY: 'auto'
-      }}
-    >
-      {showImage && (
-        <Box
-          sx={{
-            flexBasis: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            px: 4
-          }}
-        >
-          <Box
-            component="img"
-            src={signupIllustration}
-            alt="Signup illustration"
-            sx={{ maxWidth: '500px', height: 'auto', width: '100%' }}
-          />
-        </Box>
-      )}
+   <Grid
+         container
+         component="main"
+         display="flex"
+         justifyContent="center"
+         alignItems="center"
+         spacing={8}
+         sx={{ py:5, mt:{xs:10, lg:5}, backgroundColor: '#F0F2F5'}}
+       >
+     
+         {showImage && (
+           <Grid
+             item md={6}
+             sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+           >
+             <Box sx={{ px: 4 }}>
+               <Box
+                 component="img"
+                 src={signupIllustration}
+                 alt="Sign up illustration"
+                 sx={{ maxWidth: '500px', height: 'auto' }}
+               />
+             </Box>
+           </Grid>
+         )}
 
-      <Box
-        sx={{
-          flexGrow: 1,
-          flexBasis: { xs: '100%', md: '50%' },
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          p: 2,
-          mt: 10,
-          mb: 10
-        }}
-      >
+      <Grid
+              item xs={12} md={6}
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 2}}
+            >
         <Paper
           elevation={8}
           sx={{
@@ -143,7 +133,7 @@ function SignupContent() {
             p: 4
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: 56, height: 56 }}>
               <SchoolIcon fontSize="large" />
             </Avatar>
@@ -156,9 +146,9 @@ function SignupContent() {
               Create Your Account
             </Typography>
 
-            <Box component="form" noValidate sx={{ width: '100%' }} onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+            <Box component="form" noValidate sx={{ width: '100%', display: "flex", flexDirection:"column"}} onSubmit={handleSubmit}>
+              <Grid container spacing={2} justifyContent="space-between">
+                <Grid size={{xs: 12, sm: 6}} >
                   <TextField
                     required
                     fullWidth
@@ -171,7 +161,7 @@ function SignupContent() {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{xs: 12, sm: 6}} >
                   <TextField
                     required
                     fullWidth
@@ -183,7 +173,7 @@ function SignupContent() {
                     onChange={handleChange}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12} >
                   <TextField
                     required
                     fullWidth
@@ -195,7 +185,7 @@ function SignupContent() {
                     onChange={handleChange}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{xs: 12, sm: 6}} >
                   <TextField
                     required
                     fullWidth
@@ -208,7 +198,7 @@ function SignupContent() {
                     onChange={handleChange}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{xs: 12, sm: 6}} >
                   <TextField
                     required
                     fullWidth
@@ -249,7 +239,7 @@ function SignupContent() {
             </Box>
           </Box>
         </Paper>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }

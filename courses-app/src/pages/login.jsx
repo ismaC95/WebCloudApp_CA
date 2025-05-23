@@ -112,7 +112,7 @@ function LoginContent() {
       justifyContent="center"
       alignItems="center"
       spacing={8}
-      sx={{ height: '70vh', backgroundColor: '#F0F2F5' }}
+      sx={{ py:5, mt:{xs:10, lg:5}, backgroundColor: '#F0F2F5' }}
     >
   
       {showImage && (
