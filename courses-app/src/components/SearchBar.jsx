@@ -34,12 +34,12 @@ const SearchBar = () => {
     };
 
     return (
-      <Box sx={{ px:2, mt: 2, mb: 2 }}>
+      <Box sx={{ mt: 2, mb: 2 }}>
         <Box
           sx={{
             display:'flex',
             alignItems: 'center',
-            px: 20,
+            
           }}
         >
           <TextField
@@ -52,14 +52,13 @@ const SearchBar = () => {
               disableUnderline: true,
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon />
+                  <IconButton onClick={handleSearch}>
+                    <SearchIcon />
+                  </IconButton>
                 </InputAdornment>
               ),
             }}
           />
-            <IconButton onClick={handleSearch}>
-            <SearchIcon />
-          </IconButton>
         </Box>
       </Box>
     );
