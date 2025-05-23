@@ -32,8 +32,8 @@ const ReviewSection =() => {
   return (
     <Box // main container
       sx={{ 
-        m: '3em', 
-        mx: '10em',
+        my: '3em', 
+        // mx: '10em',
         p: '3em',
         bgcolor: '#f5f5f5',
         borderRadius: 2,
@@ -85,6 +85,7 @@ const ReviewSection =() => {
         gap: '1.5em',
         p: '1em',
         pb: '2em',
+        justifyContent:"space-between"
         }}
       >
         {reviewsToRender.map(({ course, name, comment }, idx) => (

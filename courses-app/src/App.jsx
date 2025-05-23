@@ -35,10 +35,9 @@ const App = () => {
       <CartProvider>
 
       {currentUser ? <UserNavbar /> : <Navbar />}
-
-      <Grid container justifyContent="center">
-        <Grid item xs={12} sm={8}>
-          <Box mt={10} component="main" sx={{ flexGrow: 1 }}>
+        <Grid container>
+          <Grid size={{xs:12, md: 8}} offset={{md:2}} px={{xs: 2, md: 0}}>
+            <Box mt={10} component="main" sx={{ flexGrow: 1 }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -70,8 +69,9 @@ const App = () => {
               <Route path="/shoppingcart" element={<ShoppingCart />} />
             </Routes>
           </Box>
+          </Grid>
         </Grid>
-      </Grid>
+          
 
       <Footer />
       </CartProvider>
