@@ -21,19 +21,35 @@ const About = () => {
         }}>
           <Typography variant="h4" gutterBottom>About Us</Typography>
 
-          <Typography variant="body1" paragraph >
-              Welcome to "LOGO" — your gateway to online learning. <br/>Our platform empowers students,
-              professionals, and lifelong learners by offering thousands of courses created by expert instructors
-              around the world.
+          <Typography 
+          paragraph
+          sx={{ 
+            fontSize: { xs: '0.95rem', sm: '1rem', md: '1.1rem' } 
+          }}
+          >
+            Welcome to <strong>Academix Course</strong> — your destination for flexible, high-quality online learning. 
+            Our platform connects curious minds with expert-led courses designed to inspire, educate, and empower learners 
+            at every stage of their journey.
           </Typography>
 
-          <Typography variant="body1" paragraph>
-              Whether you're leveling up your career, exploring new hobbies, or seeking knowledge just for fun,
-              "LOGO" is designed to make quality education accessible anytime, anywhere.
+          <Typography 
+          paragraph
+          sx={{ 
+            fontSize: { xs: '0.95rem', sm: '1rem', md: '1.1rem' } 
+          }}
+          >
+            Whether you're advancing your career, diving into a new passion, or simply expanding your horizons, 
+            <strong> Academix Course</strong> makes learning accessible anytime, anywhere. With thousands of diverse courses 
+            from trusted instructors around the globe, knowledge is always within reach.
           </Typography>
 
-          <Typography variant="body1">
-            Join our growing community of learners and unlock your full potential today!
+          <Typography
+          paragraph
+          sx={{ 
+            fontSize: { xs: '0.95rem', sm: '1rem', md: '1.1rem' } 
+          }}
+          >
+            Join a thriving community of learners and start your journey toward growth and achievement today.
           </Typography>
         </Box>
 
