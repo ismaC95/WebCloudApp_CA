@@ -15,7 +15,7 @@ const OrderSummary = ({
 
   return (
     //   {/* ORDER SUMMARY */}
-    <Box sx={{ padding: { xs: 2, lg: 3 }, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+    <Box sx={{ padding: { xs: 2, lg: 3 }}}>
       <Typography variant="h6" fontWeight="bold" sx={{ mb: { xs: 1, lg: 3 }, mt: { xs: 1, lg: 10 } }}>
         Order Summary
       </Typography>

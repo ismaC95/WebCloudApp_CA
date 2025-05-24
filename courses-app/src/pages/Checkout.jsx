@@ -1,12 +1,16 @@
 import {useState} from 'react';
-import { Box, Typography, TextField, Button, Divider, Paper, InputAdornment } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Box, Typography, TextField, Button, Grid, Stack, Card, CardActionArea, Link, CardMedia } from '@mui/material';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import visaLogo from '../assets/images/visa.png';
 import masterLogo from '../assets/images/master.png';
 import applepayLogo from '../assets/images/applepay.png';
 import amexLogo from '../assets/images/amex.png';
 
+import { useCart } from '../contexts/CartContext';
+import RatingStars from '../components/RatingStars';
+
 const Checkout = () => {
+    const { addedToCart } = useCart();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
@@ -68,83 +72,134 @@ const Checkout = () => {
     };
 
     return (
-        <Box sx={{
-            mt: '6em',
-            mb: '4em',
-            display: 'flex',
-            justifyContent: 'center',
-            px: '2em'
-            }}>
-            <Box sx={{ flex: 1, maxWidth: '50em'}}>
-                <Typography variant="h6" gutterBottom>Payment Method</Typography>
-                <Box sx={{display: 'flex', gap: 2, mb: 3 }}>
-                    <img src={visaLogo} alt="Visa Card logo" width="50" />
-                    <img src={masterLogo} alt="Master Card logo" width="50" />
-                    <img src={applepayLogo} alt="Apple Pay logo" width="50" />
-                    <img src={amexLogo} alt="American Express logo" width="50" />
-                </Box>
+        <Grid container justifyContent={"space-between"}>
+      
+        {/* Checkout */}
+            <Grid size={{xs:12, lg:7}}  sx={{padding:{xs: 2, lg: 3}, px:{lg:15}, display:"flex", }}>
+                <Box width="100%">
+                    <Typography variant="h2" sx={{mb:{xs: 2, lg: 4}}}> Checkout </Typography> 
+                    <Typography variant="h6" gutterBottom>Payment Method</Typography>
+                    <Box sx={{display: 'flex', gap: 2, mb: 3 }}>
+                        <img src={visaLogo} alt="Visa Card logo" width="50" />
+                        <img src={masterLogo} alt="Master Card logo" width="50" />
+                        <img src={applepayLogo} alt="Apple Pay logo" width="50" />
+                        <img src={amexLogo} alt="American Express logo" width="50" />
+                    </Box>
 
-                <Typography variant="h6" gutterBottom>Payment Details</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 3}}>
-                    <TextField 
-                        label="Enter Name on Card" 
-                        name="name"
-                        variant="standard" 
-                        fullWidth 
-                        value={formData.name}
-                        onChange={handleChange}
-                        error={!!errors.name}
-                        helperText={errors.name}
-                    />
-                    <TextField 
-                        label="Card Number" 
-                        name="cardNumber"
-                        variant="standard" 
-                        fullWidth 
-                        value={formData.cardNumber}
-                        onChange={handleChange}
-                        error={!!errors.cardNumber}
-                        helperText={errors.cardNumber}
-                    />
-                    
-                    <Box sx={{display: 'flex', gap: 2}}>
+                    <Typography variant="h6" gutterBottom>Payment Details</Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 3}}>
                         <TextField 
-                            label="Expire Date (MM/YY)" 
-                            name="expireDate"
-                            variant="standard" 
-                            fullWidth
-                            value={formData.expireDate}
-                            onChange={handleChange}
-                            error={!!errors.expireDate}
-                            helperText={errors.expireDate} 
-                        />
-                        <TextField 
-                            label="CVV" 
-                            name="cvv"
+                            label="Enter Name on Card" 
+                            name="name"
                             variant="standard" 
                             fullWidth 
-                            value={formData.cvv}
+                            value={formData.name}
                             onChange={handleChange}
-                            error={!!errors.cvv}
-                            helperText={errors.cvv}
+                            error={!!errors.name}
+                            helperText={errors.name}
                         />
+                        <TextField 
+                            label="Card Number" 
+                            name="cardNumber"
+                            variant="standard" 
+                            fullWidth 
+                            value={formData.cardNumber}
+                            onChange={handleChange}
+                            error={!!errors.cardNumber}
+                            helperText={errors.cardNumber}
+                        />
+                        
+                        <Box sx={{display: 'flex', gap: 2}}>
+                            <TextField 
+                                label="Expire Date (MM/YY)" 
+                                name="expireDate"
+                                variant="standard" 
+                                fullWidth
+                                value={formData.expireDate}
+                                onChange={handleChange}
+                                error={!!errors.expireDate}
+                                helperText={errors.expireDate} 
+                            />
+                            <TextField 
+                                label="CVV" 
+                                name="cvv"
+                                variant="standard" 
+                                fullWidth 
+                                value={formData.cvv}
+                                onChange={handleChange}
+                                error={!!errors.cvv}
+                                helperText={errors.cvv}
+                            />
+                        </Box>
+                    </Box>
+
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                        <Button variant="outlined" onClick={() => navigate(-1)}>Back</Button>
+                        <Button variant="contained" color="primary" onClick={handleSubmit}>Confirm Payment</Button>
+                    </Box>
+
+                    <Box sx={{ mt: 5 }}>
+                        <Typography variant="body2" fontWeight="bold" gutterBottom>Terms & Conditions</Typography>
+                        <Typography variant="caption" color="text.secondary">
+                            Please read the following terms and conditions carefully as it sets out the terms of a legally binding agreement between you (the reader) and us [Logo].
+                        </Typography>
                     </Box>
                 </Box>
+            </Grid>
 
-
-                <Box sx={{ display: 'flex', gap: 2 }}>
-                    <Button variant="outlined" onClick={() => navigate(-1)}>Back</Button>
-                    <Button variant="contained" color="primary" onClick={handleSubmit}>Confirm Payment</Button>
-                </Box>
-
-                <Box sx={{ mt: 5 }}>
-                    <Typography variant="body2" fontWeight="bold" gutterBottom>Terms & Conditions</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                        Please read the following terms and conditions carefully as it sets out the terms of a legally binding agreement between you (the reader) and us [Logo].
-                    </Typography>
-                </Box>
-            </Box>
-        </Box>
+            {/* Review your cart */}
+            <Grid size={{xs:12, lg:5}} sx={{ display: "flex", flexDirection:"column", justifyContent:"center",padding:{xs: 2, lg: 3}, px:{lg:5}}}>
+                <Typography variant="h6" fontWeight="bold" mb={{xs:1, md:3}}>
+                    Review your cart
+                </Typography>
+                {addedToCart.map((course) =>(
+                    <Box key={course.id} mb={2}>
+                        <Stack direction="row" flex={1} alignItems="center" gap={1} >
+                            <Card 
+                                component={RouterLink} 
+                                to={`/courses/${course.id}`}
+                                sx={{ textDecoration:"none", width:"100%"}}
+                                >
+                                <Box 
+                                    padding={{xs:2, md: 1}}
+                                    flex={1}
+                                    fontSize={{xs: "small", lg:"medium"}}>
+                                    <CardActionArea>
+                                        <Stack gap={2} alignItems="center" flexDirection="row">
+                                            {/* Image */}
+                                            <CardMedia
+                                                component="img"
+                                                sx={{ height: 'auto', width: 120, borderRadius: 1 }}
+                                                image={course.image}
+                                                title={course.title}
+                                            />
+                                            <Stack flexDirection="column" gap={{xs:1, lg:1.5}} flex={1}>
+                                                {/* Title */}
+                                                <Typography variant='body1' fontWeight="bold" >
+                                                    {course.title}
+                                                </Typography>
+                                                <Stack gap={1} flexDirection="row" alignItems="center" justifyContent="space-between" pr={1}>
+                                                    <Stack flexDirection="row" gap={1}>
+                                                        <RatingStars rating={course.rating}/>
+                                                        <Typography variant='body1' fontWeight="bold">
+                                                            {course.rating}
+                                                        </Typography>
+                                                    </Stack>
+                                                    <Typography variant='body1' fontWeight="bold">
+                                                    {course.priceDisplay}
+                                                    </Typography>
+                                                </Stack>
+                                            </Stack>
+                                        </Stack>
+                                    </CardActionArea>
+                                </Box>
+                            </Card>
+                        </Stack>
+                    </Box>
+                ))}
+                
+            </Grid>
+    </Grid>
     );
 };
 
