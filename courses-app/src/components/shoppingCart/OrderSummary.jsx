@@ -13,12 +13,14 @@ const OrderSummary = ({
 }) => {
   const promoCodeFlag = promoCode.length > 0;
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') onApplyPromoCode();
+    };
+
   return (
     //   {/* ORDER SUMMARY */}
-    <Box sx={{ padding: { xs: 2, lg: 3 }}}>
-      <Typography variant="h6" fontWeight="bold" sx={{ mb: { xs: 1, lg: 3 }, mt: { xs: 1, lg: 10 } }}>
-        Order Summary
-      </Typography>
+    <Box>
+      
 
       {/* Subtotal and discount */}
       <Box display="flex" justifyContent="space-between" sx={{ mb: { xs: 1, lg: 3 } }}>
@@ -62,6 +64,7 @@ const OrderSummary = ({
             value={promoCodeInput}
             onChange={onPromoCodeChange}
             error={promoError}
+            onKeyDown={handleKeyDown}
             helperText={promoError ? (promoCodeInput.trim() === "" ? "Enter a code" : `${promoCodeInput} is not a valid code`) : ""}
           />
           <Button variant="contained" sx={{ padding: 1 }} onClick={onApplyPromoCode}>

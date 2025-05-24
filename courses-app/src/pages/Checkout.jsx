@@ -8,6 +8,8 @@ import amexLogo from '../assets/images/amex.png';
 
 import { useCart } from '../contexts/CartContext';
 import RatingStars from '../components/RatingStars';
+import { usePricing } from '../contexts/PrincingContext';
+import OrderSummary from '../components/shoppingCart/OrderSummary';
 
 const Checkout = () => {
     const { addedToCart } = useCart();
@@ -18,6 +20,19 @@ const Checkout = () => {
         expireDate: '',
         cvv: ''
     });
+
+    const {
+        promoCode,
+        promoCodeInput,
+        promoError,
+        setPromoCodeInput,
+        applyPromoCode,
+        subtotalPrice,
+        subtotalDiscount,
+        totalPrice,
+        calculateTotalPrice,
+        setPromoError
+      } = usePricing();
 
     const [errors, setErrors] = useState({});
 
@@ -198,6 +213,23 @@ const Checkout = () => {
                     </Box>
                 ))}
                 
+                {/* Order Summary with information from shopping cart */}
+                <Box mt={{xs: 1, lg: 4}}>
+                    <OrderSummary
+                        subtotalPrice={subtotalPrice}
+                        subtotalDiscount={subtotalDiscount}
+                        promoCode={promoCode}
+                        promoCodeInput={promoCodeInput}
+                        promoError={promoError}
+                        onPromoCodeChange={(e) => {
+                            setPromoCodeInput(e.target.value);
+                            if (promoError) setPromoError(false);
+                        }}
+                        onApplyPromoCode={applyPromoCode}
+                        totalPrice={totalPrice}
+                        calculateTotalPrice={calculateTotalPrice}
+                        />
+                </Box>
             </Grid>
     </Grid>
     );

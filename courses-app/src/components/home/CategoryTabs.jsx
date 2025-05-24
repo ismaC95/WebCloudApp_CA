@@ -17,6 +17,12 @@ const CategoryTabs = ({ onCategoryChange }) => {
         return [...new Set(allCategories)];
     }, [courses]);
 
+    React.useEffect(() => {
+    if (categories.length > 0) {
+      onCategoryChange(categories[selectedTab]);
+    }
+  }, [categories, selectedTab]);
+
     const handleTabChange = (event, newValue) => {
         setSelectedTab(newValue);
         onCategoryChange(categories[newValue]); // parent component

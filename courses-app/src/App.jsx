@@ -24,6 +24,7 @@ import Footer             from './components/Footer';
 import { useAuth } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { AppDataProvider } from './contexts/AppData';
+import { PrincingProvider } from './contexts/PrincingContext';
 
 
 const App = () => {
@@ -33,10 +34,8 @@ const App = () => {
     <>
       <CssBaseline />
       <AppDataProvider>
-    <>
-      <CssBaseline />
-      <AppDataProvider>
       <CartProvider>
+      <PrincingProvider>
 
       {currentUser ? <UserNavbar /> : <Navbar />}
         <Grid container>
@@ -78,11 +77,11 @@ const App = () => {
           
 
       <Footer />
+      </PrincingProvider>
       </CartProvider>
       </AppDataProvider>
     </>
-      </AppDataProvider>
-    </>
+
   );
 };
 

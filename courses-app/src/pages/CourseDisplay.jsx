@@ -114,7 +114,7 @@ const CourseDisplay = () => {
                                                 Check out more courses from {instructor.name}:&nbsp;
                                                 {otherCourses.map((relatedCourse, index) => (
                                                 <span key={relatedCourse.id}>
-                                                    <a href={`/coursedisplay/${relatedCourse.id}`}>{relatedCourse.title}</a>
+                                                    <a href={`/courses/${relatedCourse.id}`}>{relatedCourse.title}</a>
                                                     {index < otherCourses.length - 1 ? ', ' : ''}
                                                 </span>
                                                 ))}
