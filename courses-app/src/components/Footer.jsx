@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Link, Stack } from '@mui/material';
-import { Router, Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import logo from '../assets/images/Logo-full2.png';
 
 const Footer = () => {
   return (
@@ -25,14 +26,14 @@ const Footer = () => {
         }}
         >
             <Box>
-                <Typography variant="subtitle1" fontWeight="bold" mb={1}>Logo</Typography>
+                <Typography variant="subtitle1" fontWeight="bold" mb={1}>AcademixCourse</Typography>
                 <Stack spacing={1}>
                     <Link component={RouterLink} to="/about" underline="hover" color="inherit" fontSize="small">
                     About Us
                     </Link>
-                    <Link component={RouterLink} to="/contact" underline="hover" color="inherit" fontSize="small">
+                    {/* <Link component={RouterLink} to="/contact" underline="hover" color="inherit" fontSize="small">
                     Contact Us
-                    </Link>
+                    </Link> */}
                 </Stack>
             </Box>
             <Box>
@@ -44,7 +45,7 @@ const Footer = () => {
                 </Stack>
             </Box>
             <Box>
-                <Typography variant="subtitle1" fontWeight="bold" mb={1}>Login</Typography>
+                <Typography variant="subtitle1" fontWeight="bold" mb={1}>Accounts</Typography>
                 <Stack spacing={1}>
                     <Link component={RouterLink} to="/signup" underline="hover" color="inherit" fontSize="small">
                     Sign Up
@@ -55,14 +56,31 @@ const Footer = () => {
                 </Stack>
             </Box>
         </Box>
-        <Typography 
-        variant="body2" 
-        color="text.secondary"
-        align="center"
-        sx={{ mt: '3em' }}
+
+        {/* Logo at the bottom */}
+        <Box 
+            sx={{ 
+                mt: 1.5,
+                display:'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '1em',
+                flexWrap: 'wrap',
+                }} 
         >
-            © {new Date().getFullYear()} MyCourseApp. All rights reserved.
-        </Typography>
+            <img
+             src={logo} 
+             alt="AcademixCourse Logo"
+             style={{ 
+                height: '80px',
+                objectFit: 'contain',
+             }}
+            />
+
+            <Typography variant="body2" color="text.secondary">
+                © {new Date().getFullYear()} AcademixCourse. All rights reserved.
+            </Typography>
+            </Box>
     </Box>
   );
 };

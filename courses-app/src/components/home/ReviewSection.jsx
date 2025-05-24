@@ -32,10 +32,11 @@ const ReviewSection =() => {
   return (
     <Box // main container
       sx={{ 
-        my: '3em', 
-        // mx: '10em',
-        p: '3em',
+        mt: 6,
+        px: { xs: 2, sm: 3 },
+        py: 5,
         bgcolor: '#f5f5f5',
+        // borderColor: '#e6dbfd',
         borderRadius: 2,
         position: 'relative', // allowing arrows inside placed absolute position
         }}
@@ -92,8 +93,15 @@ const ReviewSection =() => {
           <Card 
             key={idx} 
             sx={{ 
-                width: '17em',
-                minHeight: '18em',
+                width: { xs: '90vw', // mobile
+                  sm: '45vw', // tablets
+                  md: '17em', // default ,
+                },
+                minHeight: {
+                  xs: '14em',
+                  sm: '16em',
+                  md: '18em',
+                },
                 flex: '0 0 auto',
                 display: 'flex',
                 flexDirection: 'column',
@@ -106,7 +114,16 @@ const ReviewSection =() => {
                 fontWeight='bold' 
                 component="a"
                 href={`/courses/${course.id}`} // for each course details course
-                sx={{ textDecoration: 'none', color: 'inherit', '&:hover': {textDecoration: 'underline'} }}
+                sx={{ 
+                  textDecoration: 'none', 
+                  color: 'inherit', 
+                  '&:hover': {textDecoration: 'underline'},
+                  fontSize: {
+                    xs: '0.95rem',
+                    sm: '1.05rem',
+                    md: '1.15rem',
+                  },
+                 }}
               >
                 {/* from courses */}
                 {course.title}
@@ -114,22 +131,52 @@ const ReviewSection =() => {
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#8A58F5' }}>
                 <RatingStars rating={course.rating} />
-                <Typography variant="body2" sx={{ color: '#8A58F5' }}> 
+                <Typography 
+                variant="body2" 
+                sx={{ 
+                  color: '#8A58F5', 
+                  fontSize: {
+                    xs: '0.75rem',
+                    sm: '0.85rem',
+                    md: '0.9rem',
+                  },
+                  }}> 
 
                    {/* from courses */}
                   ({course.no_reviews}) 
                 </Typography>
               </Box>
 
-              <Typography variant="body2" color="text.secondary" mt={1}>
-
+              <Typography 
+              variant="body2" 
+              color="text.secondary" 
+              mt={1}
+              sx={{
+                fontSize: {
+                  xs: '0.8rem',
+                  sm: '0.9rem',
+                  md: '1rem',
+                },
+              }}
+              >
                 {/* from reviews */}
                 "{comment}"
               </Typography>
               
               <Stack direction="row" spacing={1} alignItems="center" mt={2}>
                 <Avatar sx={{ bgcolor: '#2674B2' }}>{name.charAt(0)}</Avatar>
-                <Typography variant="body2">{name}</Typography>
+                <Typography 
+                variant="body2"
+                sx={{
+                  fontSize: {
+                    xs: '0.75rem',
+                    sm: '0.85rem',
+                    md: '0.9rem',
+                  },
+                }}
+                >
+                  {name}
+                </Typography>
               </Stack>
             </CardContent>
           </Card>

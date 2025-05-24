@@ -1,4 +1,5 @@
 // src/App.jsx
+// src/App.jsx
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CssBaseline, Box, Grid } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
@@ -26,9 +27,12 @@ import { AppDataProvider } from './contexts/AppData';
 
 
 const App = () => {
-  const { currentUser } = useAuth();          
+  const { currentUser } = useAuth();             
 
   return (
+    <>
+      <CssBaseline />
+      <AppDataProvider>
     <>
       <CssBaseline />
       <AppDataProvider>
@@ -75,6 +79,8 @@ const App = () => {
 
       <Footer />
       </CartProvider>
+      </AppDataProvider>
+    </>
       </AppDataProvider>
     </>
   );
