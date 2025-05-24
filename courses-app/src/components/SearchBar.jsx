@@ -1,15 +1,22 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, InputAdornment, Box, IconButton } from '@mui/material';
+import { TextField, InputAdornment, Box, IconButton, Typography } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppData } from '../contexts/AppData';
+import { keyframes } from '@mui/system';
+
+const fadeIn = keyframes`
+from {opacity: 0; }
+to {opacity: 1; }
+`;
 
 
 const SearchBar = () => {
   const { courses } = useAppData();
   const [keyword, setKeyword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -21,14 +28,16 @@ const SearchBar = () => {
     );
 
     if (matchedCourse) {
+      setErrorMessage('');
       navigate(`/courses/${matchedCourse.id}`);
     } else {
-      alert('No course found matching your search.');
+      setErrorMessage('No Matching course found');
     }
   };
 
   const handleInputChange = (event) => {
     setKeyword(event.target.value);
+    if (errorMessage) setErrorMessage('');
   };
 
   const handleKeyDown = (event) => {
@@ -49,7 +58,7 @@ const SearchBar = () => {
             value={keyword}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder="Search for..."
+            placeholder="Search for Courses..."
             InputProps={{
               disableUnderline: true,
               startAdornment: (
@@ -62,6 +71,18 @@ const SearchBar = () => {
             }}
           />
         </Box>
+        {errorMessage && (
+          <Typography
+          sx={{
+            color: 'red',
+            mt: 1,
+            animation: `${fadeIn} 0.5s ease-in`,
+            // textAlign: 'center'
+          }}
+          >
+            {errorMessage}
+          </Typography>
+        )}
       </Box>
     );
 
