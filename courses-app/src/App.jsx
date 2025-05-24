@@ -1,4 +1,5 @@
 // src/App.jsx
+// src/App.jsx
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CssBaseline, Box, Grid } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
@@ -23,12 +24,18 @@ import Footer             from './components/Footer';
 import { useAuth } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { AppDataProvider } from './contexts/AppData';
+import { AppDataProvider } from './contexts/AppData';
 
 
 const App = () => {
   const { currentUser } = useAuth();          
 
+  const { currentUser } = useAuth();          
+
   return (
+    <>
+      <CssBaseline />
+      <AppDataProvider>
     <>
       <CssBaseline />
       <AppDataProvider>
@@ -75,6 +82,8 @@ const App = () => {
 
       <Footer />
       </CartProvider>
+      </AppDataProvider>
+    </>
       </AppDataProvider>
     </>
   );

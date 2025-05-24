@@ -11,9 +11,12 @@ import FilterSelection from '../components/courseList/FilterSelection'
 import PaginationComp from '../components/PaginationComp'
 import { useAppData } from '../contexts/AppData'
 
+import { useAppData } from '../contexts/AppData'
+
 
 
 function CourseList() {
+    const { courses } = useAppData();
     const { courses } = useAppData();
     const [filters, setFilters] = useState({
         // Providing filters categories
@@ -136,6 +139,9 @@ function CourseList() {
                             setCurrentPage={setCurrentPage}
                             totalCourses={sortedCourses.length}
                             coursesPerPage={coursesPerPage}/>
+                    </Grid>
+                </Grid>
+            </Grid>
                     </Grid>
                 </Grid>
             </Grid>

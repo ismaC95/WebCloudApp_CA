@@ -18,10 +18,10 @@ const SpecialOffers = () => {
   return (
     <Box // outer container
     sx={{
-      my: '3em',
-      // mx: '10em',
-      mb: '10em',
-      p: '3em',
+      mt: 6,
+      px: { xs: 2, sm: 3, md: 3 },
+      py: 5,
+      mb: { xs: '3em', md: '10em' },
       bgcolor: '#f5f5f5',
       borderRadius: 2,
       position: 'relative',
@@ -71,15 +71,13 @@ const SpecialOffers = () => {
         overflowX: 'auto',
         gap: '1.5em',
         p: '1em',
-        px: '0',
-        justifyContent:"space-between"
       }}
       >
         {currentOffers.map((offer) => (
           <Card 
           key={offer.id} 
           sx={{ 
-            width: '17em',
+            width: { xs: '80vw', sm: '17em' },
             minHeight: '14em',
             flex: '0 0 auto',
             display: 'flex',
@@ -93,7 +91,16 @@ const SpecialOffers = () => {
               fontWeight="bold"
               component="a"
               href={`/courses/${offer.id}`}
-              sx={{ textDecoration: 'none', color: 'inherit', '&:hover': {textDecoration: 'underline'} }}
+              sx={{ 
+                textDecoration: 'none', 
+                color: 'inherit', 
+                '&:hover': {textDecoration: 'underline'},
+                fontSize: {
+                    xs: '0.95rem',
+                    sm: '1.05rem',
+                    md: '1.15rem',
+                },              
+              }}
               >
                 {offer.title}
               </Typography>
@@ -107,6 +114,14 @@ const SpecialOffers = () => {
                 variant="h6"
                 color="error"
                 display="inline"
+                mt={1}
+                sx={{
+                  fontSize: {
+                    xs: '0.8rem',
+                    sm: '0.9rem',
+                    md: '1rem',
+                  },
+                }}
                 >
                   {offer.priceDisplay}
                 </Typography>
