@@ -7,12 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useParams } from 'react-router-dom';
 
 import { useAppData } from '../contexts/AppData';
-import { useAppData } from '../contexts/AppData';
 import RatingStars from '../components/RatingStars';
 
 
 const CourseDisplay = () => {
-    const { courses, instructors } = useAppData();
     const { courses, instructors } = useAppData();
     const { id } = useParams(); // get course ID from URL
 
@@ -21,9 +19,7 @@ const CourseDisplay = () => {
 
     useEffect(() => {
         const courseFound = courses.find(c => c.id === parseInt(id));
-        const courseFound = courses.find(c => c.id === parseInt(id));
         setCourse(courseFound);
-    }, [id, courses]);
     }, [id, courses]);
 
     const toggleDrawer = (open) => () => {
@@ -33,7 +29,6 @@ const CourseDisplay = () => {
     if (!course) return <Typography sx={{ mt: 8, p: 4}}>Course not found.</Typography>
 
     // find instructor and display the err msg if not found
-    const instructor = instructors.find((ins) => ins.id === course.instructor_id);
     const instructor = instructors.find((ins) => ins.id === course.instructor_id);
     if (!instructor) return <Typography sx={{ mt: 8, p: 4}}>Instructor not found.</Typography>
     

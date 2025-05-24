@@ -2,13 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, InputAdornment, Box, IconButton } from '@mui/material';
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { TextField, InputAdornment, Box, IconButton } from '@mui/material';
+
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppData } from '../contexts/AppData';
-import { useAppData } from '../contexts/AppData';
+
 
 const SearchBar = () => {
   const { courses } = useAppData();
