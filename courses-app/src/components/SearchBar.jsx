@@ -66,7 +66,7 @@ const SearchBar = () => {
             }}
           />
             <IconButton onClick={handleSearch}>
-            <SearchIcon />
+            {/* <SearchIcon /> */}
           </IconButton>
         </Box>
       </Box>

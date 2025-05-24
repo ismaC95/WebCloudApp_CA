@@ -1,6 +1,6 @@
 // src/App.jsx
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CssBaseline, Box, Grid } from '@mui/material';
+import { CssBaseline, Box, Container } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 
 import Navbar       from './components/Navbar';
@@ -36,43 +36,40 @@ const App = () => {
 
       {currentUser ? <UserNavbar /> : <Navbar />}
 
-      <Grid container justifyContent="center">
-        <Grid item xs={12} sm={8}>
-          <Box mt={10} component="main" sx={{ flex: 1 }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/coursedisplay/:id" element={<CourseDisplay />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/payment-successful" element={<PaymentSuccessful />} />
-              <Route path="/courses" element={<CourseList />} />
-              <Route path="/courses/:courseId" element={<CourseDetails />} />
+      <Container maxWidth="xl" sx={{ mt: 10 }}>
+        <Box component="main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/coursedisplay/:id" element={<CourseDisplay />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payment-successful" element={<PaymentSuccessful />} />
+            <Route path="/courses" element={<CourseList />} />
+            <Route path="/courses/:courseId" element={<CourseDetails />} />
 
-              {/* public routes – bounce away if already signed in */}
-              <Route
-                path="/login"
-                element={
-                  <RedirectIfAuth>
-                    <Login />
-                  </RedirectIfAuth>
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <RedirectIfAuth>
-                    <Signup />
-                  </RedirectIfAuth>
-                }
-              />
+            {/* public routes – bounce away if already signed in */}
+            <Route
+              path="/login"
+              element={
+                <RedirectIfAuth>
+                  <Login />
+                </RedirectIfAuth>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <RedirectIfAuth>
+                  <Signup />
+                </RedirectIfAuth>
+              }
+            />
 
-              <Route path="/forgotpassword" element={<ForgotPassword />} />
-              <Route path="/shoppingcart" element={<ShoppingCart />} />
-            </Routes>
-          </Box>
-        </Grid>
-      </Grid>
-
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
+          </Routes>
+        </Box>
+      </Container>
       <Footer />
       </CartProvider>
       </AppDataProvider>

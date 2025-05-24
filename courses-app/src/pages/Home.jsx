@@ -1,11 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import CategoryTabs from '../components/home/CategoryTabs';
 import CourseCarousel from '../components/home/CourseCarousel';
 import ReviewSection from '../components/home/ReviewSection';
 import SpecialOffers from '../components/home/SpecialOffers';
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 
 const Home = () => {
@@ -13,14 +12,16 @@ const Home = () => {
     const [selectedCategory, setSelectedCategory] = React.useState('Marketing'); 
 
     return (
-        <Box>
-          <SearchBar />
-          <CategoryTabs onCategoryChange={setSelectedCategory} />
-          <CourseCarousel selectedCategory={selectedCategory} />          
-          <ReviewSection />
-          <SpecialOffers />
-        </Box>
-      );
+        <Container maxWidth="xl" sx={{ mt: 4 }}>
+          <Box display="flex" flexDirection="column" gap={4}>
+            <SearchBar />
+            <CategoryTabs onCategoryChange={setSelectedCategory} />
+            <CourseCarousel selectedCategory={selectedCategory} />          
+            <ReviewSection />
+            <SpecialOffers />
+          </Box>
+        </Container> 
+    );
 };
 
 export default Home;

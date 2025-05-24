@@ -13,9 +13,9 @@ const CourseCarousel = ({ selectedCategory }) => {
   return (
     <Box
       sx={{
-        m: '3em',
-        mx: '10em',
-        p: '3em',
+        mt: 6,
+        px: { xs: 2, sm: 3, md: 3 },
+        py: 5,
         bgcolor: '#f5f5f5',
         borderRadius: 2,
       }}
@@ -39,9 +39,8 @@ const CourseCarousel = ({ selectedCategory }) => {
             component={Link}                         
             to={`/courses/${course.id}`}             
             sx={{
-              width: '25em',
+              width: { xs: '80vw', sm: '20em', md: '25em' },
               flex: '0 0 auto',
-              flexDirection: 'column',
               textDecoration: 'none',               
               color: 'inherit',
             }}
@@ -60,7 +59,17 @@ const CourseCarousel = ({ selectedCategory }) => {
                 gap: '0.8em',
               }}
             >
-              <Typography fontWeight="bold" gutterBottom noWrap>
+              <Typography 
+              gutterBottom
+              fontWeight="bold"
+              sx={{
+                fontSize: {
+                  xs: '0.95rem',  
+                  sm: '1.05rem',  
+                  md: '1.25rem',   // wide screens
+                }
+              }}
+              >
                 {course.title}
               </Typography>
 
@@ -68,6 +77,11 @@ const CourseCarousel = ({ selectedCategory }) => {
                 variant="body2"
                 color="text.secondary"
                 sx={{
+                  fontSize: {
+                    xs: '0.8rem',
+                    sm: '0.9rem',
+                    md: '1rem',
+                  },
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   display: '-webkit-box',
@@ -79,10 +93,17 @@ const CourseCarousel = ({ selectedCategory }) => {
               </Typography>
 
               <Typography
-                variant="body1"
+                gutterBottom
                 fontWeight="bold"
                 mt={1}
-                color="#2674B2"
+                sx={{
+                  fontSize: {
+                    xs: '0.95rem',
+                    sm: '1.05rem', 
+                    md: '1.25rem', 
+                    color: "#2674B2"
+                  }
+                }}
               >
                 {course.priceDisplay}&nbsp;
                 {course.originalPrice && (
@@ -90,6 +111,7 @@ const CourseCarousel = ({ selectedCategory }) => {
                     style={{
                       textDecoration: 'line-through',
                       color: 'gray',
+                      fontSize: '0.9em',
                     }}
                   >
                     {course.originalPriceDisplay}
@@ -98,7 +120,9 @@ const CourseCarousel = ({ selectedCategory }) => {
               </Typography>
 
               <RatingStars rating={course.rating} />
-              <Typography variant="caption">
+
+              <Typography 
+              variant="caption">
                 (
                 {/* Use whichever field is present */}
                 {course.reviews ?? course.no_reviews} reviews)
