@@ -1,4 +1,3 @@
-// src/pages/CourseDetails.jsx   (capital “C” keeps the filename consistent)
 import {
   Box,
   Container,
@@ -7,8 +6,13 @@ import {
   useTheme,
   useMediaQuery,
   Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';        
 import RatingStars from '../components/RatingStars';
 import CourseIntroCard from '../components/CourseIntroCard';
@@ -16,6 +20,8 @@ import CourseContentDetails from '../components/CourseContentDetails';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { useCart } from '../contexts/CartContext';
 import { useAppData } from '../contexts/AppData';
+import { useEnrollment } from '../contexts/EnrollmentContext';
+import { useAuth } from '../contexts/AuthContext';
 
 
 const CourseDetails = () => {
@@ -23,6 +29,11 @@ const CourseDetails = () => {
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { courses, reviews } = useAppData();
+  const { addEnrollment, enrollmentExists } = useEnrollment();
+  const { currentUser } = useAuth();
+  // Add course to cart functionality
+  const {addToCart} = useCart();
+  const [open, setOpen] = useState(false); 
 
   /* ─── 1.  Get the ID from the URL  ─── */
   const { courseId } = useParams();                 
@@ -31,8 +42,7 @@ const CourseDetails = () => {
   /* ─── 2.  Look up the course  ─── */
   const course = courses.find(c => c.id === selectedCourseId);
 
-  // Add course to cart functionality
-  const {addToCart} = useCart();
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -55,10 +65,40 @@ const CourseDetails = () => {
 
   const { title, description, rating, no_reviews, originalPriceDisplay, priceDisplay } = course;
 
-  
+  //Enroll courses that are free directly
+    
+    
+    const handleEnroll = (coursePrice) => {
+        coursePrice === 0 ? setOpen(true) : addToCart(course)
+    }
 
   return (
+    
     <Box sx={{ boxSizing: 'border-box', mt:10}}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>Free Enrollment</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This course is free. Do you want to enroll now?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button
+            onClick={async () => {
+              const exists = await enrollmentExists(currentUser.uid, course.id);
+                if (!exists) {
+                  await addEnrollment(currentUser.uid, course.id);
+              }
+                setOpen(false);
+            }}
+            color="primary"
+            variant="contained"
+          >
+            Confirm Enrollment
+          </Button>
+        </DialogActions>
+      </Dialog>
       {/* — Hero Section — */}
       <Box
         sx={{
@@ -106,7 +146,7 @@ const CourseDetails = () => {
               color="secondary"
               size="large"
               sx={{ color: '#FFFFFF' }}
-              onClick={() => addToCart(course)}
+              onClick={() => handleEnroll(course.price)}
             >
               Enroll Now
             </Button>
