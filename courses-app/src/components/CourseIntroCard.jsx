@@ -1,15 +1,23 @@
 // src/components/CourseIntroCard.jsx
-import { Container, Grid, Typography, Box, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Container,
+  Grid,
+  Typography,
+  Box,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import InstructorCard from './InstructorCard';
 import { useAppData } from '../contexts/AppData';
 
 const CourseIntroCard = ({ courseId }) => {
   const { courses } = useAppData();
-  const course = courses.find(c => c.id === courseId);
+  const course = courses.find((c) => c.id === courseId);
+
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // if (!course) return null;
+  if (!course) return null; 
 
   return (
     <Container
@@ -23,15 +31,16 @@ const CourseIntroCard = ({ courseId }) => {
         px={isSmDown ? 2 : 6}
         alignItems="center"
         justifyContent="space-evenly"
+        direction={{ xs: 'column', md: 'row' }}            
         sx={{ height: '100%' }}
       >
-        {/* 1. YouTube Video Placeholder */}
-        <Grid size={4} md={4} sx={{ height: '100%' }}>
+        {/* 1. Intro video */}
+        <Grid size={{ xs: 12, md: 4 }} sx={{ height: '100%' }}>
           <Box
             sx={{
               position: 'relative',
               width: '100%',
-              paddingTop: '56.25%',
+              paddingTop: '56.25%', 
               borderRadius: 2,
               overflow: 'hidden',
             }}
@@ -53,8 +62,8 @@ const CourseIntroCard = ({ courseId }) => {
           </Box>
         </Grid>
 
-        {/* 2. Description Text */}
-        <Grid size={4} md={4} sx={{ height: '100%' }}>
+        {/* 2. Long description */}
+        <Grid size={{ xs: 12, md: 4 }} sx={{ height: '100%' }}>
           <Box
             sx={{
               height: '100%',
@@ -80,8 +89,8 @@ const CourseIntroCard = ({ courseId }) => {
           </Box>
         </Grid>
 
-        {/* 3. Instructor Card */}
-        <Grid size={4} md={4} sx={{ height: '100%' }}>
+        {/* 3. Instructor card */}
+        <Grid size={{ xs: 12, md: 4 }} sx={{ height: '100%' }}>
           <InstructorCard instructorId={course.instructor_id} />
         </Grid>
       </Grid>

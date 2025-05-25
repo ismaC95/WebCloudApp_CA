@@ -8,7 +8,6 @@ import { useAppData } from '../contexts/AppData';
 const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
   const { courses } = useAppData();
   const course = courses.find(c => c.id === courseId);
-
   if (!course) return null;
 
   return (
@@ -19,14 +18,15 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
     >
       <Grid
         container
-        spacing={4}
-        alignItems="flex-start"
-        justifyContent="space-evenly"
+        spacing={{ xs: 1, lg: 6 }}
+        direction={{ xs: 'column', lg: 'row' }}
+        alignItems={{ xs: 'center', lg: 'center' }}
+        justifyContent={{ xs: 'center', lg: 'center' }}
+        textAlign={{ xs: 'center', lg: 'left' }}
         px={isSmDown ? 5 : 10}
         sx={{ height: '100%' }}
       >
-        {/* What You’ll Learn */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} lg={6}>
           <Typography variant="h4" fontWeight={900} gutterBottom>
             What You’ll Learn
           </Typography>
@@ -35,7 +35,7 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
               <Box
                 component="li"
                 key={idx}
-                sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}
+                sx={{ display: 'flex', alignItems: 'center', mb: 2 }}
               >
                 <DoneIcon sx={{ color: theme.palette.secondary.main, mr: 1, mt: '4px' }} />
                 <Typography
@@ -46,7 +46,7 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
                       md: '1.1rem',
                       lg: '1.2rem',
                       xl: '1.3rem',
-                    }
+                    },
                   }}
                 >
                   {item}
@@ -56,9 +56,8 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
           </Box>
         </Grid>
 
-        {/* Course Modules */}
-        <Grid item xs={12} md={6}>
-          <Typography variant="h4" fontWeight={900} gutterBottom>
+        <Grid item xs={12} lg={6}>
+          <Typography variant="h4" fontWeight={900} gutterBottom sx={{ mb: 4 }}>
             Course Modules
           </Typography>
           <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
@@ -80,7 +79,7 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
                       md: '1.1rem',
                       lg: '1.2rem',
                       xl: '1.3rem',
-                    }
+                    },
                   }}
                 >
                   {mod}

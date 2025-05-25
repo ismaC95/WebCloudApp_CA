@@ -1,4 +1,4 @@
-// src/pages/CourseDetails.jsx   (capital “C” keeps the filename consistent)
+// src/pages/CourseDetails.jsx
 import {
   Box,
   Container,
@@ -9,39 +9,41 @@ import {
   Stack,
 } from '@mui/material';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';        
+import { useParams } from 'react-router-dom';
 import RatingStars from '../components/RatingStars';
 import CourseIntroCard from '../components/CourseIntroCard';
 import CourseContentDetails from '../components/CourseContentDetails';
-import TestimonialCarousel from '../components/TestimonialCarousel';
+import ReviewSection from '../components/home/ReviewSection';        
 import { useCart } from '../contexts/CartContext';
-import { useAppData } from '../contexts/AppData';
+import { AppDataContext, useAppData } from '../contexts/AppData'; 
 
+
+const FilteredReviewSection = ({ courseId }) => {
+  const data = useAppData();
+
+  const filteredReviews = data.reviews.filter(
+    (r) => Number(r.courseId) === Number(courseId)
+  );
+
+  return (
+    <AppDataContext.Provider value={{ ...data, reviews: filteredReviews }}>
+      <ReviewSection />
+    </AppDataContext.Provider>
+  );
+};
 
 const CourseDetails = () => {
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { courses, reviews } = useAppData();
+  const { courses } = useAppData();
+  const { courseId } = useParams();
+  const selectedCourseId = parseInt(courseId, 10);
+  const course = courses.find((c) => parseInt(c.id) === selectedCourseId);
 
-  /* ─── 1.  Get the ID from the URL  ─── */
-  const { courseId } = useParams();                 
-  const selectedCourseId = parseInt(courseId, 10);  
+  const { addToCart } = useCart();
 
-  /* ─── 2.  Look up the course  ─── */
-  const course = courses.find(c => c.id === selectedCourseId);
-
-  // Add course to cart functionality
-  const {addToCart} = useCart();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const filteredReviews = reviews
-  .filter(r => parseInt(r.courseId) === selectedCourseId)
-  .sort(() => 0.5 - Math.random())
-  .slice(0, 8);                         
+  useEffect(() => window.scrollTo(0, 0), []);
 
   if (!course) {
     return (
@@ -53,13 +55,19 @@ const CourseDetails = () => {
     );
   }
 
-  const { title, description, rating, no_reviews, originalPriceDisplay, priceDisplay } = course;
-
-  
+  const {
+    id,
+    title,
+    description,
+    rating,
+    no_reviews,
+    originalPriceDisplay,
+    priceDisplay,
+  } = course;
 
   return (
-    <Box sx={{ boxSizing: 'border-box', mt:10}}>
-      {/* — Hero Section — */}
+    <Box sx={{ boxSizing: 'border-box', mt: 10 }}>
+      {/* ─ Hero Section ─ */}
       <Box
         sx={{
           backgroundColor: theme.palette.primary.main,
@@ -87,7 +95,8 @@ const CourseDetails = () => {
               ({no_reviews} Reviews)
             </Typography>
           </Box>
-          <Box sx={{display: "flex", gap: 5}}>
+
+          <Box sx={{ display: 'flex', gap: 5 }}>
             <Stack alignItems="flex-end" justifyContent="center">
               <Typography variant="h6" fontWeight="bold" noWrap>
                 {priceDisplay}
@@ -111,26 +120,29 @@ const CourseDetails = () => {
               Enroll Now
             </Button>
           </Box>
-          
         </Container>
       </Box>
 
-      {/* — Intro Section — */}
-      <CourseIntroCard courseId={course.id} />
+      {/* ─ Intro Section ─ */}
+      <CourseIntroCard courseId={id} />
 
-      {/* — Learning Outcomes + Modules — */}
+      {/* ─ Learning Outcomes + Modules ─ */}
       <CourseContentDetails
-        courseId={course.id}
+        courseId={id}
         isSmDown={isSmDown}
         theme={theme}
       />
 
-      {/* — Testimonials — */}
+      {/* ─ Reviews ─ */}
       <Box sx={{ width: '100%', overflow: 'visible', pb: isSmDown ? 2 : 6 }}>
-        <TestimonialCarousel reviews={filteredReviews} />
+        <FilteredReviewSection courseId={id} />
 
-        {/* — Enroll Button — */}
-        <Box className="d-flex justify-content-center mt-6">
+        {/* Enroll button*/}
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          mt: 6,            
+          }}>
           <Button variant="type1" size="large" onClick={() => addToCart(course)}>
             Enroll Now
           </Button>
