@@ -1,8 +1,10 @@
 // src/components/home/CourseCarousel.jsx
 import { Box, Typography, Card, CardContent, CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';                // → NEW
-import { useAppData } from '../../contexts/AppData';
 import RatingStars from '../../components/RatingStars';
+
+import { useAppData } from '../../contexts/AppData';
+
 
 const CourseCarousel = ({ selectedCategory }) => {
   const { courses } = useAppData();
@@ -16,14 +18,16 @@ const CourseCarousel = ({ selectedCategory }) => {
         mt: 6,
         px: { xs: 2, sm: 3, md: 3 },
         py: 5,
-        bgcolor: '#f5f5f5',
+        bgcolor: '#F0F2F5',
         borderRadius: 2,
       }}
     >
+      {/* Dynamic heading for selected cat */}
       <Typography variant="h6" gutterBottom>
         {selectedCategory} Courses
       </Typography>
 
+      {/* Horizontal scroll for cards */}
       <Box
         sx={{
           display: 'flex',
@@ -37,7 +41,7 @@ const CourseCarousel = ({ selectedCategory }) => {
         {featuredCourses.map(course => (
           <Card
             key={course.id}
-            component={Link}                         
+            component={Link}      // Entire care is clickable                   
             to={`/courses/${course.id}`}             
             sx={{
               width: { xs: '80vw', sm: '20em', md: '25em' },
@@ -67,7 +71,7 @@ const CourseCarousel = ({ selectedCategory }) => {
                 fontSize: {
                   xs: '0.95rem',  
                   sm: '1.05rem',  
-                  md: '1.25rem',   // wide screens
+                  md: '1.25rem',   
                 }
               }}
               >
@@ -84,10 +88,6 @@ const CourseCarousel = ({ selectedCategory }) => {
                     md: '1rem',
                   },
                   overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
                 }}
               >
                 {course.description}
@@ -112,7 +112,7 @@ const CourseCarousel = ({ selectedCategory }) => {
                     style={{
                       textDecoration: 'line-through',
                       color: 'gray',
-                      fontSize: '0.9em',
+                      fontSize: '0.7em',
                     }}
                   >
                     {course.originalPriceDisplay}
@@ -125,7 +125,7 @@ const CourseCarousel = ({ selectedCategory }) => {
               <Typography 
               variant="caption">
                 (
-                {/* Use whichever field is present */}
+                {/* Use whichever field is present - Nullish*/}
                 {course.reviews ?? course.no_reviews} reviews)
               </Typography>
             </CardContent>
