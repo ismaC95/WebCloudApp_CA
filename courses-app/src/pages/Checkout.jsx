@@ -141,7 +141,7 @@ const Checkout = () => {
                     <Box sx={{ mt: 5 }}>
                         <Typography variant="body2" fontWeight="bold" gutterBottom>Terms & Conditions</Typography>
                         <Typography variant="caption" color="text.secondary">
-                            Please read the following terms and conditions carefully as it sets out the terms of a legally binding agreement between you (the reader) and us [Logo].
+                            Please read the following terms and conditions carefully as it sets out the terms of a legally binding agreement between you (the reader) and us [Academix Course].
                         </Typography>
                     </Box>
                 </Box>
