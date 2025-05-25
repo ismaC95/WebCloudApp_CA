@@ -8,12 +8,12 @@ const uploadCourses = async () => {
     try {
       // Use course.id as document ID
       await setDoc(doc(db, "courses", course.id.toString()), course);
-      console.log(`✅ Uploaded: ${course.title}`);
+      console.log(`Uploaded: ${course.title}`);
     } catch (error) {
-      console.error(`❌ Error uploading ${course.title}:`, error);
+      console.error(`Error uploading ${course.title}:`, error);
     }
   }
-  console.log("🚀 All courses uploaded to Firestore");
+  console.log("All courses uploaded to Firestore");
 };
 
 uploadCourses();

@@ -21,13 +21,13 @@ const uploadInstructors = async () => {
         instructorData
       );
 
-      console.log(`✅ Uploaded: ${instructor.name}`);
+      console.log(`Uploaded: ${instructor.name}`);
     } catch (error) {
-      console.error(`❌ Error uploading ${instructor.name}:`, error);
+      console.error(`Error uploading ${instructor.name}:`, error);
     }
   }
 
-  console.log("🚀 All instructors uploaded to Firestore");
+  console.log("All instructors uploaded to Firestore");
 };
 
 uploadInstructors();

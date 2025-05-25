@@ -8,12 +8,12 @@ const uploadPromoCodes = async () => {
     try {
       // Use promoCode.id as document ID
       await setDoc(doc(db, "promoCodes", code.id.toString()), code);
-      console.log(`✅ Uploaded: Promo code ${code.code}`);
+      console.log(`Uploaded: Promo code ${code.code}`);
     } catch (error) {
-      console.error(`❌ Error uploading promo code ${code.code}:`, error);
+      console.error(`Error uploading promo code ${code.code}:`, error);
     }
   }
-  console.log("🚀 All promo codes uploaded to Firestore");
+  console.log("All promo codes uploaded to Firestore");
 };
 
 uploadPromoCodes();
