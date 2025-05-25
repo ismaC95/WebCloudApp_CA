@@ -8,6 +8,8 @@ import {
   createUserWithEmailAndPassword,
   updateProfile
 } from 'firebase/auth';
+import { setDoc, doc } from "firebase/firestore";
+import { db } from '../firebase';
 
 import {
   Avatar,

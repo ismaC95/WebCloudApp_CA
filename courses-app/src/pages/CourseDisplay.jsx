@@ -102,29 +102,35 @@ const CourseDisplay = () => {
                     </Typography>
                     <Typography variant="body2">{instructor?.role}</Typography>
                     {/* Bring other courses from the same instructor */}
-                            <Typography variant="body2" fontStyle='italic'>
-                                {(() => {
-                                    const instructorCourses = courses.filter(c => c.instructor_id === instructor.id);
-                                    const otherCourses = instructorCourses.filter(c => c.id !== course.id);
-                                    if (otherCourses.length === 0) {
-                                        return `No other courses from ${instructor.name}`;
-                                    } else { 
-                                        return (
-                                            <Typography variant="body2" fontStyle='italic'>
-                                                Check out more courses from {instructor.name}:&nbsp;
-                                                {otherCourses.map((relatedCourse, index) => (
-                                                <span key={relatedCourse.id}>
-                                                    <a href={`/courses/${relatedCourse.id}`}>{relatedCourse.title}</a>
-                                                    {index < otherCourses.length - 1 ? ', ' : ''}
-                                                </span>
-                                                ))}
-                                            </Typography>
-                                        );
-                                    }
-                                })()}                        
-                            </Typography>
+                    <Box>
+                        {(() => {
+                            const instructorCourses = courses.filter(c => c.instructor_id === instructor.id);
+                            const otherCourses = instructorCourses.filter(c => c.id !== course.id);
+                            if (otherCourses.length === 0) {
+                                return (
+                                    <Typography variant="body2" fontStyle="italic">
+                                        No other courses from {instructor.name}
+                                    </Typography>
+                                );
+                            } else { 
+                                return (
+                                    <Box>
+                                        <Typography variant="body2" fontStyle="italic">
+                                            Check out more courses from {instructor.name}:{' '}
+                                            {otherCourses.map((relatedCourse, index) => (
+                                            <span key={relatedCourse.id}>
+                                                <a href={`/courses/${relatedCourse.id}`}>{relatedCourse.title}</a>
+                                                {index < otherCourses.length - 1 ? ', ' : ''}
+                                            </span>
+                                            ))}
+                                        </Typography>
+                                    </Box>
+                                );
+                            }
+                        })()}                        
                         </Box>
                     </Box>
+                </Box>
 
             {/* Course Description */}
             <Box sx={{

@@ -10,9 +10,14 @@ import { useCart } from '../contexts/CartContext';
 import RatingStars from '../components/RatingStars';
 import { usePricing } from '../contexts/PrincingContext';
 import OrderSummary from '../components/shoppingCart/OrderSummary';
+import { useAuth } from '../contexts/AuthContext';
+import { useEnrollment } from '../contexts/EnrollmentContext';
 
 const Checkout = () => {
-    const { addedToCart } = useCart();
+    const { addedToCart, clearCart } = useCart();
+    const { currentUser } = useAuth();
+    const { addEnrollment, enrollmentExists } = useEnrollment();
+
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
@@ -80,11 +85,22 @@ const Checkout = () => {
         
     };
 
-    const handleSubmit = () => {
-        if (validate()) {
-            navigate("/payment-successful");
+   const handleSubmit = async () => {
+    if (validate()) {
+        //Go through all courses in addedToCart
+        for (const course of addedToCart) {
+        const exists = await enrollmentExists(currentUser.uid, course.id);
+        if (!exists) {
+            await addEnrollment(currentUser.uid, course.id);
         }
+        }
+        clearCart();
+        navigate("/payment-successful");
+    }
     };
+
+    
+
 
     return (
         <Grid container justifyContent={"space-between"}>
