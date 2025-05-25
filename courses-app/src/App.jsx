@@ -17,7 +17,7 @@ import CourseList         from './pages/CourseList';
 import CourseDetails      from './pages/courseDetails';
 import Login              from './pages/login';
 import Signup             from './pages/signup';
-import ForgotPassword     from './pages/ForgotPassword';
+import ForgotPassword     from './pages/forgotPassword';
 import ShoppingCart       from './pages/ShoppingCart';
 import Footer             from './components/Footer';
 
