@@ -34,7 +34,7 @@ const UserNavbar = () => {
   const navItems = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
-    { label: 'My Courses', path: '/coursedisplay/3' },
+    { label: 'My Courses', path: '/student-dashboard' },
     { label: 'Courses', path: '/courses' },
   ];
 

@@ -15,6 +15,7 @@ import Checkout           from './pages/Checkout';
 import PaymentSuccessful  from './pages/PaymentSuccessful';
 import CourseList         from './pages/CourseList';
 import CourseDetails      from './pages/courseDetails';
+import StudentDashboard   from './pages/StudentDashboard';
 import Login              from './pages/login';
 import Signup             from './pages/signup';
 import ForgotPassword     from './pages/forgotPassword';
@@ -24,6 +25,8 @@ import Footer             from './components/Footer';
 import { useAuth } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { AppDataProvider } from './contexts/AppData';
+import { PrincingProvider } from './contexts/PrincingContext';
+import { EnrollmentProvider } from './contexts/EnrollmentContext';
 
 
 const App = () => {
@@ -33,10 +36,9 @@ const App = () => {
     <>
       <CssBaseline />
       <AppDataProvider>
-    <>
-      <CssBaseline />
-      <AppDataProvider>
       <CartProvider>
+      <PrincingProvider>
+      <EnrollmentProvider>
 
       {currentUser ? <UserNavbar /> : <Navbar />}
         <Grid container>
@@ -50,6 +52,7 @@ const App = () => {
               <Route path="/payment-successful" element={<PaymentSuccessful />} />
               <Route path="/courses" element={<CourseList />} />
               <Route path="/courses/:courseId" element={<CourseDetails />} />
+              <Route path="/student-dashboard" element={<StudentDashboard />} />
 
               {/* public routes – bounce away if already signed in */}
               <Route
@@ -78,11 +81,12 @@ const App = () => {
           
 
       <Footer />
+      </EnrollmentProvider>
+      </PrincingProvider>
       </CartProvider>
       </AppDataProvider>
     </>
-      </AppDataProvider>
-    </>
+
   );
 };
 

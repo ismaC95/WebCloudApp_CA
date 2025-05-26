@@ -26,9 +26,9 @@ const PaymentSuccessful = () => {
                 <Button 
                     variant="contained" 
                     sx={{bgcolor: '#5C3D90', '&:hover': { bgcolor: '#4a3075' }, fontWeight: 'bold' }}
-                    onClick={() => navigate('/CourseDisplay')}
+                    onClick={() => navigate('/student-dashboard')}
                 >
-                    View Course
+                    View Courses Dashboard
                 </Button>
                 <Button 
                 variant="contained" 

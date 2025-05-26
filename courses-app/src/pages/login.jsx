@@ -60,7 +60,7 @@ function LoginContent() {
     setSuccess('');
 
     try {
-      /* pick persistence from the checkbox */
+    
       await setPersistence(
         auth,
         rememberMe ? browserLocalPersistence : browserSessionPersistence
