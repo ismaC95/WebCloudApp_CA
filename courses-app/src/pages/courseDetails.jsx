@@ -1,4 +1,3 @@
-// src/pages/CourseDetails.jsx
 import {
   Box,
   Container,
@@ -7,15 +6,22 @@ import {
   useTheme,
   useMediaQuery,
   Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';        
 import RatingStars from '../components/RatingStars';
 import CourseIntroCard from '../components/CourseIntroCard';
 import CourseContentDetails from '../components/CourseContentDetails';
 import ReviewSection from '../components/home/ReviewSection';        
 import { useCart } from '../contexts/CartContext';
-import { AppDataContext, useAppData } from '../contexts/AppData'; 
+import { useAppData, AppDataContext } from '../contexts/AppData';
+import { useEnrollment } from '../contexts/EnrollmentContext';
+import { useAuth } from '../contexts/AuthContext';
 
 
 const FilteredReviewSection = ({ courseId }) => {
@@ -37,14 +43,21 @@ const CourseDetails = () => {
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { courses } = useAppData();
+  const { addEnrollment, enrollmentExists } = useEnrollment();
+  const { currentUser } = useAuth();
   const { courseId } = useParams();
+  // Add course to cart functionality
+  const {addToCart} = useCart();
+  const [open, setOpen] = useState(false); 
   const selectedCourseId = parseInt(courseId, 10);
-  const course = courses.find((c) => parseInt(c.id) === selectedCourseId);
 
-  const { addToCart } = useCart();
+  /* ─── 2.  Look up the course  ─── */
+  const course = courses.find(c => c.id === selectedCourseId);
 
-  useEffect(() => window.scrollTo(0, 0), []);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   if (!course) {
     return (
       <Box sx={{ p: 4 }}>
@@ -55,19 +68,43 @@ const CourseDetails = () => {
     );
   }
 
-  const {
-    id,
-    title,
-    description,
-    rating,
-    no_reviews,
-    originalPriceDisplay,
-    priceDisplay,
-  } = course;
+  const { title, description, rating, no_reviews, originalPriceDisplay, priceDisplay } = course;
+
+  //Enroll courses that are free directly
+    
+    
+    const handleEnroll = (coursePrice) => {
+        coursePrice === 0 ? setOpen(true) : addToCart(course)
+    }
 
   return (
-    <Box sx={{ boxSizing: 'border-box', mt: 10 }}>
-      {/* ─ Hero Section ─ */}
+    
+    <Box sx={{ boxSizing: 'border-box', mt:10}}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>Free Enrollment</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This course is free. Do you want to enroll now?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button
+            onClick={async () => {
+              const exists = await enrollmentExists(currentUser.uid, course.id);
+                if (!exists) {
+                  await addEnrollment(currentUser.uid, course.id);
+              }
+                setOpen(false);
+            }}
+            color="primary"
+            variant="contained"
+          >
+            Confirm Enrollment
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* — Hero Section — */}
       <Box
         sx={{
           backgroundColor: theme.palette.primary.main,
@@ -115,7 +152,7 @@ const CourseDetails = () => {
               color="secondary"
               size="large"
               sx={{ color: '#FFFFFF' }}
-              onClick={() => addToCart(course)}
+              onClick={() => handleEnroll(course.price)}
             >
               Enroll Now
             </Button>
@@ -124,18 +161,18 @@ const CourseDetails = () => {
       </Box>
 
       {/* ─ Intro Section ─ */}
-      <CourseIntroCard courseId={id} />
+      <CourseIntroCard courseId={selectedCourseId} />
 
       {/* ─ Learning Outcomes + Modules ─ */}
       <CourseContentDetails
-        courseId={id}
+        courseId={selectedCourseId}
         isSmDown={isSmDown}
         theme={theme}
       />
 
       {/* ─ Reviews ─ */}
       <Box sx={{ width: '100%', overflow: 'visible', pb: isSmDown ? 2 : 6 }}>
-        <FilteredReviewSection courseId={id} />
+        <FilteredReviewSection courseId={selectedCourseId} />
 
         {/* Enroll button*/}
         <Box sx={{

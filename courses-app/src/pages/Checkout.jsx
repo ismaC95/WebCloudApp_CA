@@ -8,9 +8,16 @@ import amexLogo from '../assets/images/amex.png';
 
 import { useCart } from '../contexts/CartContext';
 import RatingStars from '../components/RatingStars';
+import { usePricing } from '../contexts/PrincingContext';
+import OrderSummary from '../components/shoppingCart/OrderSummary';
+import { useAuth } from '../contexts/AuthContext';
+import { useEnrollment } from '../contexts/EnrollmentContext';
 
 const Checkout = () => {
-    const { addedToCart } = useCart();
+    const { addedToCart, clearCart } = useCart();
+    const { currentUser } = useAuth();
+    const { addEnrollment, enrollmentExists } = useEnrollment();
+
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
@@ -18,6 +25,19 @@ const Checkout = () => {
         expireDate: '',
         cvv: ''
     });
+
+    const {
+        promoCode,
+        promoCodeInput,
+        promoError,
+        setPromoCodeInput,
+        applyPromoCode,
+        subtotalPrice,
+        subtotalDiscount,
+        totalPrice,
+        calculateTotalPrice,
+        setPromoError
+      } = usePricing();
 
     const [errors, setErrors] = useState({});
 
@@ -65,11 +85,22 @@ const Checkout = () => {
         
     };
 
-    const handleSubmit = () => {
-        if (validate()) {
-            navigate("/payment-successful");
+   const handleSubmit = async () => {
+    if (validate()) {
+        //Go through all courses in addedToCart
+        for (const course of addedToCart) {
+        const exists = await enrollmentExists(currentUser.uid, course.id);
+        if (!exists) {
+            await addEnrollment(currentUser.uid, course.id);
         }
+        }
+        clearCart();
+        navigate("/payment-successful");
+    }
     };
+
+    
+
 
     return (
         <Grid container justifyContent={"space-between"}>
@@ -198,6 +229,23 @@ const Checkout = () => {
                     </Box>
                 ))}
                 
+                {/* Order Summary with information from shopping cart */}
+                <Box mt={{xs: 1, lg: 4}}>
+                    <OrderSummary
+                        subtotalPrice={subtotalPrice}
+                        subtotalDiscount={subtotalDiscount}
+                        promoCode={promoCode}
+                        promoCodeInput={promoCodeInput}
+                        promoError={promoError}
+                        onPromoCodeChange={(e) => {
+                            setPromoCodeInput(e.target.value);
+                            if (promoError) setPromoError(false);
+                        }}
+                        onApplyPromoCode={applyPromoCode}
+                        totalPrice={totalPrice}
+                        calculateTotalPrice={calculateTotalPrice}
+                        />
+                </Box>
             </Grid>
     </Grid>
     );
