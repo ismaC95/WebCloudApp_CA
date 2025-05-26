@@ -69,7 +69,7 @@ function CourseList() {
     
   return (
             <Grid container spacing={2} justifyContent={"center"} alignItems="center">
-                <Box width="100%" >
+                <Box width="100%" mb={2} >
                 <SearchBar />
                 </Box>
 
@@ -86,7 +86,8 @@ function CourseList() {
                         <CourseFilterBtn 
                             onToggleFilter={toggleFilter}
                             sortBy={sortBy}
-                            handleSortBy={handleSortBy}/>
+                            handleSortBy={handleSortBy}
+                            visible={filtersVisible}/>
                     </Grid>
 
                     {/* Chips & Results */}
@@ -127,7 +128,7 @@ function CourseList() {
                         lg: filtersVisible ? 10 : 12}}
                         sx={{
                             display: 'flex',
-                            flexDirection: 'column'
+                            flexDirection: 'column',
                         }}>
                         <CoursesDisplay 
                         filteredCourses={paginatedCourses}/>
@@ -135,7 +136,8 @@ function CourseList() {
                             currentPage={currentPage}
                             setCurrentPage={setCurrentPage}
                             totalCourses={sortedCourses.length}
-                            coursesPerPage={coursesPerPage}/>
+                            coursesPerPage={coursesPerPage}
+                            />
                     </Grid>
                 </Grid>
             </Grid>

@@ -16,11 +16,12 @@ const CourseCard = ({course}) => {
           direction={{ sm: 'column', md: 'row' }}
           spacing={2}
           alignItems="center"
+          padding= {1} 
         >
           {/* Image */}
           <CardMedia
             component="img"
-            sx={{ height: 'auto', width: 200, borderRadius: 1 }}
+            sx={{ height: 'auto', width: 200, borderRadius: 1}}
             image={course.image}
             title={course.title}
           />
@@ -32,9 +33,7 @@ const CourseCard = ({course}) => {
             justifyContent="space-between"
             sx={{ 
               flex: 1,
-              paddingRight: 1,
-              paddingBottom: 1,
-              paddingTop: 1 }}
+              }}
           >
             {/* Title + Price row */}
             <Stack

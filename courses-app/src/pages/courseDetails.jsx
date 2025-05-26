@@ -12,7 +12,7 @@ import {
   DialogContentText,
   DialogActions,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';        
 import RatingStars from '../components/RatingStars';
 import CourseIntroCard from '../components/CourseIntroCard';
@@ -53,10 +53,6 @@ const CourseDetails = () => {
 
   /* ─── 2.  Look up the course  ─── */
   const course = courses.find(c => c.id === selectedCourseId);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   
   if (!course) {
     return (
@@ -180,7 +176,7 @@ const CourseDetails = () => {
           justifyContent: 'center',
           mt: 6,            
           }}>
-          <Button variant="type1" size="large" onClick={() => addToCart(course)}>
+          <Button variant="type1" size="large" onClick={() => handleEnroll(course.price)}>
             Enroll Now
           </Button>
         </Box>

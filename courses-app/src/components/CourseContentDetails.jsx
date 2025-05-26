@@ -20,13 +20,11 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
         container
         spacing={{ xs: 1, lg: 6 }}
         direction={{ xs: 'column', lg: 'row' }}
-        alignItems={{ xs: 'center', lg: 'center' }}
-        justifyContent={{ xs: 'center', lg: 'center' }}
-        textAlign={{ xs: 'center', lg: 'left' }}
+        alignItems={{ xs:'flex-start' }}
         px={isSmDown ? 5 : 10}
         sx={{ height: '100%' }}
       >
-        <Grid item xs={12} lg={6}>
+        <Grid size={{xs: 12, lg: 6}}>
           <Typography variant="h4" fontWeight={900} gutterBottom>
             What You’ll Learn
           </Typography>
@@ -35,7 +33,7 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
               <Box
                 component="li"
                 key={idx}
-                sx={{ display: 'flex', alignItems: 'center', mb: 2 }}
+                sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
               >
                 <DoneIcon sx={{ color: theme.palette.secondary.main, mr: 1, mt: '4px' }} />
                 <Typography
@@ -57,7 +55,7 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
         </Grid>
 
         <Grid item xs={12} lg={6}>
-          <Typography variant="h4" fontWeight={900} gutterBottom sx={{ mb: 4 }}>
+          <Typography variant="h4" fontWeight={900} gutterBottom>
             Course Modules
           </Typography>
           <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>

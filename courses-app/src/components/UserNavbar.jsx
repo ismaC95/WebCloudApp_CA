@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
   AppBar, Toolbar, Button, IconButton, Box,
-  Badge, List, ListItem, useTheme, useMediaQuery, Drawer
+  Badge, List, ListItem, useTheme, useMediaQuery, Drawer, Stack
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import ShoppingCartComp from './shoppingCart/ShoppingCartComp';
-import logo from '../assets/images/Logo-full2.png';
+import logo from '../assets/images/Logo-full-transparent.png';
 
 const UserNavbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -65,21 +65,6 @@ const UserNavbar = () => {
           </ListItem>
         ))}
 
-        {/* Shopping Cart with text and icon */}
-        <ListItem disableGutters sx={{ justifyContent: 'center', width: '100%' }}>
-          <Button
-            onClick={toggleCart(true)}
-            startIcon={
-              <Badge badgeContent={addedToCart.length} color="primary">
-                <ShoppingCartIcon />
-              </Badge>
-            }
-            sx={{ color: 'black', textTransform: 'none', justifyContent: 'flex-start' }}
-          >
-            Shopping Cart
-          </Button>
-        </ListItem>
-
         {/* Sign Out with button styling like Sign Up */}
         <ListItem disableGutters sx={{ justifyContent: 'center', width: '100%' }}>
           <Button
@@ -114,12 +99,28 @@ const UserNavbar = () => {
 
           {isMobile ? (
             <>
+            <Stack display="flex" flexDirection="row">
+              {/* Shopping Cart with text and icon */}
+              <ListItem disableGutters sx={{ justifyContent: 'center', width: '100%' }}>
+                <Button
+                  onClick={toggleCart(true)}
+                  startIcon={
+                    <Badge badgeContent={addedToCart.length} color="primary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  }
+                  sx={{ color: 'black', textTransform: 'none', justifyContent: 'flex-end' }}
+                >
+                </Button>
+              </ListItem>
               <IconButton onClick={() => setDrawerOpen(true)} edge="end">
                 <MenuIcon />
               </IconButton>
               <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
                 {drawerContent}
               </Drawer>
+            </Stack>
+            
             </>
           ) : (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

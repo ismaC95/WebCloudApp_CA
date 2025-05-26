@@ -21,7 +21,6 @@ const SpecialOffers = () => {
       mt: 6,
       px: { xs: 2, sm: 3, md: 3 },
       py: 5,
-      mb: { xs: '3em', md: '10em' },
       bgcolor: '#f5f5f5',
       borderRadius: 2,
       position: 'relative',

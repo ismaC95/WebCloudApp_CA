@@ -37,7 +37,7 @@ export default function Signup() {
 
 function SignupContent() {
   const muiTheme  = useTheme();
-  const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const showImage = useMediaQuery(muiTheme.breakpoints.up('xl'));
 
   const [formData, setFormData] = useState({
     firstName: '',

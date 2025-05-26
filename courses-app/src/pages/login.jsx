@@ -41,7 +41,7 @@ export default function Login() {
 
 function LoginContent() {
   const muiTheme  = useTheme();
-  const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const showImage = useMediaQuery(muiTheme.breakpoints.up('xl'));
   const navigate  = useNavigate();
 
 

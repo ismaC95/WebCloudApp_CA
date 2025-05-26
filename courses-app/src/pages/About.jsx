@@ -78,11 +78,11 @@ const About = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Box sx={{
+      <Box maxWidth="lg" sx={{
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         gap: 4,
+        py: 6,
       }}>
 
         {/* About Us */}
@@ -189,7 +189,6 @@ const About = () => {
           </Box>
         </Paper>
       </Box>
-    </Container>
   );
 };
 
