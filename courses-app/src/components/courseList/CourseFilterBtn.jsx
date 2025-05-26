@@ -33,7 +33,8 @@ const CourseFilterBtn = ({onToggleFilter, sortBy, handleSortBy, visible}) => {
                     variant="outlined"
                     label="Sort by"
                     value={sortBy}
-                    onChange={handleSortBy}>
+                    onChange={handleSortBy}
+                    >
                     <MenuItem value={'Most Popular'}>Most Popular</MenuItem>
                     <MenuItem value={'Top Rated'}>Top Rated</MenuItem>
                     <MenuItem value={'Cheapest'}>Cheapest</MenuItem>

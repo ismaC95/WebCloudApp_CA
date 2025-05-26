@@ -1,6 +1,6 @@
 import { Box, Typography, Link, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import logo from '../assets/images/Logo-full-transparent.png';
+import logo from '../assets/images/logo-purple-transparent.png';
 
 const Footer = () => {
   return (

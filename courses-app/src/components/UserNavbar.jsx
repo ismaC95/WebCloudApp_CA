@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import ShoppingCartComp from './shoppingCart/ShoppingCartComp';
-import logo from '../assets/images/Logo-full-transparent.png';
+import logo from '../assets/images/logo-purple-transparent.png';
 
 const UserNavbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);

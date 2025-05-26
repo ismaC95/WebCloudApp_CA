@@ -8,8 +8,6 @@ import {
   createUserWithEmailAndPassword,
   updateProfile
 } from 'firebase/auth';
-import { setDoc, doc } from "firebase/firestore";
-import { db } from '../firebase';
 
 import {
   Avatar,
@@ -107,7 +105,7 @@ function SignupContent() {
      
          {showImage && (
            <Grid
-             item md={6}
+             size={{md:6}}
              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
            >
              <Box sx={{ px: 4 }}>
@@ -122,7 +120,7 @@ function SignupContent() {
          )}
 
       <Grid
-              item xs={12} md={6}
+              size={{xs:12, md:6}}
               sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 2}}
             >
         <Paper
