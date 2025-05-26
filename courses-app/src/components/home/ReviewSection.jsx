@@ -7,12 +7,12 @@ import RatingStars from '../RatingStars';
 import { useAppData } from '../../contexts/AppData';
 
 
-// functional component
 const ReviewSection =() => {
   const { courses, reviews } = useAppData();
-  // Toggle between the first and the second page.
-  // showNext is a boolean, and setShowNext is the function to toggle
+
+  // Toggle between the first and the second page. (pagination control)
   const [page, setPage] = useState(0);
+
   const REVIEWS_PER_PAGE = 5;
 
   const currentReviews = reviews.slice(
@@ -26,17 +26,18 @@ const ReviewSection =() => {
   // find matching reviews with course id
   const reviewsToRender = currentReviews.map(review => {
     const course = courses.find(c => c.id === review.courseId);
-    return course ? { ...review, course } : null; //filter out null entries
-  }).filter(Boolean);
+    return course ? { ...review, course } : null; //filter out null if course not found
+  }).filter(Boolean); // remove null
 
   return (
-    <Box // main container
+    
+    // Main container
+    <Box 
       sx={{ 
         mt: 6,
-        px: { xs: 2, sm: 3 },
+        px: { xs: 2, sm: 3, md: 3 },
         py: 5,
-        bgcolor: '#f5f5f5',
-        // borderColor: '#e6dbfd',
+        bgcolor: '#F0F2F5',
         borderRadius: 2,
         position: 'relative', // allowing arrows inside placed absolute position
         }}
@@ -78,37 +79,41 @@ const ReviewSection =() => {
         )}
 
 
-      {/* Review Cards */}
+      {/* Review Cards scrollable */}
       <Box
       sx={{
         display: 'flex',
-        overflowX: 'auto', 
+        overflowX: 'auto', // horizontal scroll if needed
         gap: '1.5em',
         p: '1em',
         pb: '2em',
-        justifyContent:"space-between"
+        justifyContent:"space-between" // between cards
         }}
       >
+
+        {/* Render each review */}
         {reviewsToRender.map(({ course, name, comment }, idx) => (
           <Card 
-            key={idx} 
+            key={idx} // static rendering
             sx={{ 
-                width: { xs: '90vw', // mobile
-                  sm: '45vw', // tablets
-                  md: '17em', // default ,
+                width: { xs: '90vw', 
+                  sm: '45vw', 
+                  md: '17em',
                 },
                 minHeight: {
                   xs: '14em',
                   sm: '16em',
                   md: '18em',
                 },
-                flex: '0 0 auto',
+                flex: '0 0 auto', // fix size
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-bewteen',
               }}
           >
             <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: '0.8em'}}>
+
+              {/* Course title */}
               <Typography 
                 variant="h6" 
                 fontWeight='bold' 
@@ -125,10 +130,11 @@ const ReviewSection =() => {
                   },
                  }}
               >
-                {/* from courses */}
+                {/* From courses */}
                 {course.title}
               </Typography>
 
+                 {/* Ratings */}
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#8A58F5' }}>
                 <RatingStars rating={course.rating} />
                 <Typography 
@@ -147,6 +153,7 @@ const ReviewSection =() => {
                 </Typography>
               </Box>
 
+              {/* Review comment */}
               <Typography 
               variant="body2" 
               color="text.secondary" 
@@ -163,6 +170,7 @@ const ReviewSection =() => {
                 "{comment}"
               </Typography>
               
+              {/* Avatar & name for reviewer */}
               <Stack direction="row" spacing={1} alignItems="center" mt={2}>
                 <Avatar sx={{ bgcolor: '#2674B2' }}>{name.charAt(0)}</Avatar>
                 <Typography 

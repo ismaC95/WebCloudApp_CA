@@ -12,20 +12,25 @@ import RatingStars from '../components/RatingStars';
 
 const CourseDisplay = () => {
     const { courses, instructors } = useAppData();
-    const { id } = useParams(); // get course ID from URL
+
+    // get course ID from URL
+    const { id } = useParams(); 
 
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [course, setCourse] = useState(null); // selected course storage
+
+    // selected course storage
+    const [course, setCourse] = useState(null); 
 
     useEffect(() => {
         const courseFound = courses.find(c => c.id === parseInt(id));
         setCourse(courseFound);
-    }, [id, courses]);
+    }, [id, courses]); // change dectects for id or courses
 
     const toggleDrawer = (open) => () => {
         setDrawerOpen(open);
     };
 
+    // error handling
     if (!course) return <Typography sx={{ mt: 8, p: 4}}>Course not found.</Typography>
 
     // find instructor and display the err msg if not found
@@ -85,7 +90,7 @@ const CourseDisplay = () => {
 
             {/* Instructor Info */}
             <Box sx={{ 
-                bgcolor: '#f5f5f5',
+                bgcolor: '#F0F2F5',
                 p: 3,
                 borderRadius: 2,
                 display: 'flex',
@@ -97,17 +102,22 @@ const CourseDisplay = () => {
                 </Avatar>
 
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, flex: 1 }}>
+
                     <Typography fontWeight="bold" fontSize='large' sx={{ color: '#5C3D90' }}>
                         {instructor?.name}
                     </Typography>
+
                     <Typography variant="body2">{instructor?.role}</Typography>
+
                     {/* Bring other courses from the same instructor */}
                             <Typography variant="body2" fontStyle='italic'>
                                 {(() => {
                                     const instructorCourses = courses.filter(c => c.instructor_id === instructor.id);
                                     const otherCourses = instructorCourses.filter(c => c.id !== course.id);
+                                    
                                     if (otherCourses.length === 0) {
                                         return `No other courses from ${instructor.name}`;
+
                                     } else { 
                                         return (
                                             <Typography variant="body2" fontStyle='italic'>
@@ -128,7 +138,7 @@ const CourseDisplay = () => {
 
             {/* Course Description */}
             <Box sx={{
-                bgcolor: '#f5f5f5',
+                bgcolor: '#F0F2F5',
                 p: 3,
                 borderRadius: 2,
                 width: '100%'
@@ -146,11 +156,14 @@ const CourseDisplay = () => {
                 }}>
                     <AccessTime fontSize="small" />
                     <Typography variant="body2">{course.duration}</Typography>
+
                     <VideoLibrary fontSize="small" />
                     <Typography variant="body2">{course.modules} Modules</Typography>
+
                     <Box sx={{ color: '#ffb700' }}>
                         <RatingStars rating={course.rating} />  
                     </Box>
+                    
                     <Typography variant="body2" fontStyle='italic'>
                         ({course.no_reviews} Reviews)
                     </Typography>

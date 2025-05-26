@@ -19,6 +19,7 @@ const Navbar = () => {
     { label: 'Sign Up', to: '/signup', isSignup: true } // special styling
   ];
 
+  // Drawer Navbar
   const drawerContent = (
     <Box sx={{ width: 250 }} onClick={() => setDrawerOpen(false)}>
       <List>
@@ -54,6 +55,8 @@ const Navbar = () => {
     </Box>
   );
 
+
+  // Main Navbar Rendering
   return (
     <>
       <AppBar position="fixed" color="default">
@@ -66,10 +69,13 @@ const Navbar = () => {
               sx={{ height: 50, cursor: 'pointer'}} 
             />
           </Link>
+
+          {/* Spacing the buttons to the right */}
           <Box sx={{ flexGrow: 1 }} />
 
           {isMobile ? (
             <>
+              {/* Menu icon in mobile */}
               <IconButton onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />
               </IconButton>
@@ -79,6 +85,8 @@ const Navbar = () => {
               </Drawer>
             </>
           ) : (
+
+            // Desktop navbar
             <Box sx={{ display: 'flex', gap: 2 }}>
               <Button color="inherit" component={Link} to="/about">About</Button>
               <Button color="inherit" component={Link} to="/courses">Courses</Button>

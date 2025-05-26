@@ -31,9 +31,6 @@ const Footer = () => {
                     <Link component={RouterLink} to="/about" underline="hover" color="inherit" fontSize="small">
                     About Us
                     </Link>
-                    {/* <Link component={RouterLink} to="/contact" underline="hover" color="inherit" fontSize="small">
-                    Contact Us
-                    </Link> */}
                 </Stack>
             </Box>
             <Box>

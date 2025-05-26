@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import {
   AppBar, Toolbar, Button, IconButton, Box,
   Badge, List, ListItem, useTheme, useMediaQuery, Drawer
@@ -17,7 +17,7 @@ const UserNavbar = () => {
   const [openCart, setOpenCart] = useState(false);
 
   const { addedToCart } = useCart();
-  const { logout } = useAuth();
+  const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
   const theme = useTheme();
@@ -27,7 +27,7 @@ const UserNavbar = () => {
 
   const handleSignOut = async () => {
     await logout();
-    navigate('/', { replace: true });
+    navigate('/', { replace: true }); 
   };
 
   // Full nav list (including Home for drawer)
@@ -41,9 +41,24 @@ const UserNavbar = () => {
   // navItems without Home for desktop navbar
   const desktopNavItems = navItems.filter(item => item.label !== 'Home');
 
+
+  // Drawer Navbar
   const drawerContent = (
     <Box sx={{ width: 250 }} onClick={() => setDrawerOpen(false)}>
       <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+        {/* Drawer - greeting with name */}
+        {currentUser && (
+          <ListItem disableGutters sx={{ justifyContent: 'center', width: '100%', mt: 1 }}>
+            <Box sx={{ fontWeight: 600, fontSize: '1.1rem' }}>
+              Hi,{' '}
+              <Box component="span" sx={{ color: '#5C3D90', fontSize: '1.3rem', fontStyle: 'italic' }}>
+                {currentUser.displayName}
+              </Box>
+            </Box>
+          </ListItem>
+        )}
+
         {/* Navigation Links (including Home) */}
         {navItems.map((item, index) => (
           <ListItem key={index} disableGutters sx={{ justifyContent: 'center', width: '100%' }}>
@@ -112,6 +127,7 @@ const UserNavbar = () => {
             <Box component="img" src={logo} alt="Logo" sx={{ height: 50, cursor: 'pointer' }} />
           </Link>
 
+           {/* Mobile = menu icon drawer */}
           {isMobile ? (
             <>
               <IconButton onClick={() => setDrawerOpen(true)} edge="end">
@@ -122,7 +138,27 @@ const UserNavbar = () => {
               </Drawer>
             </>
           ) : (
+
+            // Desktop design
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+
+              {/* User name before About */}
+              {currentUser && (
+                <Box 
+                sx={{ 
+                  display: {xs: 'none', sm: 'none', md: 'flex' },
+                  fontWeight: 500, 
+                  mr: 3,
+                  fontSize: {xs: '1rem', md: '1.3rem'},                  
+                  }}
+                >
+                  Welcome Back,  {' '}
+                  <Box component="span" sx={{ color: '#5C3D90', fontWeight: 600, fontSize: '1.3rem', fontStyle: 'italic' }}>
+                    {currentUser.displayName}
+                  </Box>
+                </Box>
+              )}
+              
               {desktopNavItems.map((item, index) => (
                 <Button key={index} component={Link} to={item.path} color="inherit">
                   {item.label}

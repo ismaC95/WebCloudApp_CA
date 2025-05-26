@@ -17,11 +17,14 @@ const Checkout = () => {
 
     const [errors, setErrors] = useState({});
 
+
     const handleChange = (e) => {
+        // spread existing form data and update the changed field.
         setFormData({...formData, [e.target.name]: e.target.value});
     };
 
     const validate = () => {
+        // temporary storage object for errors
         const newErrors = {};
         
         // Full name validation at least 2 words  
@@ -34,14 +37,13 @@ const Checkout = () => {
             newErrors.cardNumber = "Card number must be exactly 16 digits.";
         }
 
-        // Exp date validation: MM/YY format, needs to be future
+        // Exp date validation: MM/YY format
         if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expireDate.trim())) {
             newErrors.expireDate = "Expire date must be in MM/YY format.";
 
         } else {
             
             // Check if expiry date is in the future
-            
             const [month, year] = formData.expireDate.split('/');
             const now = new Date();
             const expDate = new Date(`20${year}`, month - 1);
@@ -57,6 +59,7 @@ const Checkout = () => {
 
         setErrors(newErrors);
 
+        // Return true if no errors
         return Object.keys(newErrors).length === 0;
         
     };
@@ -75,8 +78,12 @@ const Checkout = () => {
             justifyContent: 'center',
             px: '2em'
             }}>
+
+            {/* Inner box to control width */}
             <Box sx={{ flex: 1, maxWidth: '50em'}}>
                 <Typography variant="h6" gutterBottom>Payment Method</Typography>
+                
+                {/* Payments methods */}
                 <Box sx={{display: 'flex', gap: 2, mb: 3 }}>
                     <img src={visaLogo} alt="Visa Card logo" width="50" />
                     <img src={masterLogo} alt="Master Card logo" width="50" />
@@ -85,7 +92,10 @@ const Checkout = () => {
                 </Box>
 
                 <Typography variant="h6" gutterBottom>Payment Details</Typography>
+
+                {/* Payments form */}
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 3}}>
+                    
                     <TextField 
                         label="Enter Name on Card" 
                         name="name"
@@ -107,6 +117,7 @@ const Checkout = () => {
                         helperText={errors.cardNumber}
                     />
                     
+                    {/* horizontal row for both */}
                     <Box sx={{display: 'flex', gap: 2}}>
                         <TextField 
                             label="Expire Date (MM/YY)" 
@@ -118,6 +129,7 @@ const Checkout = () => {
                             error={!!errors.expireDate}
                             helperText={errors.expireDate} 
                         />
+
                         <TextField 
                             label="CVV" 
                             name="cvv"
@@ -131,12 +143,13 @@ const Checkout = () => {
                     </Box>
                 </Box>
 
-
+                {/* buttons */}
                 <Box sx={{ display: 'flex', gap: 2 }}>
                     <Button variant="outlined" onClick={() => navigate(-1)}>Back</Button>
                     <Button variant="contained" color="primary" onClick={handleSubmit}>Confirm Payment</Button>
                 </Box>
 
+                {/* T&S */}
                 <Box sx={{ mt: 5 }}>
                     <Typography variant="body2" fontWeight="bold" gutterBottom>Terms & Conditions</Typography>
                     <Typography variant="caption" color="text.secondary">

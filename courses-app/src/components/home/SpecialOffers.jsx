@@ -9,9 +9,11 @@ const offerCourseIds = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11];
 
 const SpecialOffers = () => {
   const { courses } = useAppData();
+
+  // Boolean toogle for pagination
   const [showNext, setShowNext] = useState(false);
 
-  // filter the courses only include discounted ones
+  // filter the courses only matching
   const offers = courses.filter(course => offerCourseIds.includes(course.id));
   const currentOffers = showNext ? offers.slice(5) : offers.slice(0, 5);
 
@@ -22,7 +24,7 @@ const SpecialOffers = () => {
       px: { xs: 2, sm: 3, md: 3 },
       py: 5,
       mb: { xs: '3em', md: '10em' },
-      bgcolor: '#f5f5f5',
+      bgcolor: '#F0F2F5',
       borderRadius: 2,
       position: 'relative',
     }}

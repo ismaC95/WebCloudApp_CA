@@ -137,7 +137,7 @@ const About = () => {
           <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
               fullWidth
-              label="Your Question"
+              label="Your Question *"
               name="question"
               value={formData.question}
               onChange={handleChange}
@@ -148,7 +148,7 @@ const About = () => {
             />
             <TextField
               fullWidth
-              label="Email"
+              label="Email *"
               name="email"
               value={formData.email}
               onChange={handleChange}
@@ -159,7 +159,7 @@ const About = () => {
             />
             <TextField
               fullWidth
-              label="Comments"
+              label="Comments *"
               name="comments"
               value={formData.comments}
               onChange={handleChange}
