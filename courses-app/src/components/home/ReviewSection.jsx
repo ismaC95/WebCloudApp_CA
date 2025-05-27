@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Box, Typography, Card, CardContent, Avatar, Stack, IconButton } from '@mui/material';
+import { Link } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
@@ -117,8 +118,8 @@ const ReviewSection =() => {
               <Typography 
                 variant="h6" 
                 fontWeight='bold' 
-                component="a"
-                href={`/courses/${course.id}`} // for each course details course
+                component= {Link}
+                to={`/courses/${course.id}`} // for each course details course
                 sx={{ 
                   textDecoration: 'none', 
                   color: 'inherit', 

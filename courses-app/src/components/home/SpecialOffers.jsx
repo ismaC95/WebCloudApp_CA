@@ -4,6 +4,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import { useAppData } from '../../contexts/AppData';
+import { Link } from 'react-router-dom';
 
 const offerCourseIds = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11];
 
@@ -91,8 +92,8 @@ const SpecialOffers = () => {
               <Typography
               variant="h6"
               fontWeight="bold"
-              component="a"
-              href={`/courses/${offer.id}`}
+              component={Link}
+              to={`/courses/${offer.id}`}
               sx={{ 
                 textDecoration: 'none', 
                 color: 'inherit', 
