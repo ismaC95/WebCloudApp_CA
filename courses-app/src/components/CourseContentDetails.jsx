@@ -69,7 +69,7 @@ const CourseContentDetails = ({ courseId, isSmDown, theme }) => {
                   sx={{ color: theme.palette.primary.main, mr: 1, fontSize: '1rem' }}
                 />
                 <Typography
-                  fontWeight={900}
+                  
                   sx={{
                     fontSize: {
                       xs: '0.9rem',

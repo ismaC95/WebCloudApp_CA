@@ -112,7 +112,7 @@ const CourseDetails = () => {
         <DialogTitle>You are not logged in</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To enrol in a course you need to be logged in
+            To enrol in a course you need to have an account
           </DialogContentText>
         </DialogContent>
         <DialogActions>
