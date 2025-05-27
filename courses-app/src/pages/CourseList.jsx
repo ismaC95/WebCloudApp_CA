@@ -110,7 +110,9 @@ function CourseList() {
                         </Grid>
                         <Grid size={{xs:4, md: 3}} display={'flex'} alignItems="center" justifyContent={'flex-end'}>
                             <Typography fontWeight={"bold"} variant="h6" fontSize={{xs: "medium", md:"large"}}>
-                                {filteredCourses.length} {filteredCourses.length === 1 ? "Result" : "Results"}
+                                {filteredCourses.length === 0? '' : 
+                                    `${filteredCourses.length} ${filteredCourses.length === 1 ? 'Result' : 'Results'}`
+                                }
                             </Typography>
                         </Grid>
                     </Grid>
