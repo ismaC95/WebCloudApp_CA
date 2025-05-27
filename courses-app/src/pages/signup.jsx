@@ -108,7 +108,7 @@ function SignupContent() {
              size={{md:6}}
              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
            >
-             <Box sx={{ px: 4 }}>
+             <Box sx={{ p: 4 }}>
                <Box
                  component="img"
                  src={signupIllustration}
@@ -121,7 +121,7 @@ function SignupContent() {
 
       <Grid
               size={{xs:12, md:6}}
-              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 2}}
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 4}}
             >
         <Paper
           elevation={8}
