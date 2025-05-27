@@ -1,4 +1,3 @@
-// src/components/CourseContentDetails.jsx
 import React from 'react';
 import { Container, Grid, Typography, Box } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';

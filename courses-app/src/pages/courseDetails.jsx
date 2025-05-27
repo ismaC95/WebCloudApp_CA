@@ -54,7 +54,7 @@ const CourseDetails = () => {
 
   const selectedCourseId = parseInt(courseId, 10);
 
-  /* ─── 2.  Look up the course  ─── */
+  /* Look up the course*/
   const course = courses.find(c => c.id === selectedCourseId);
   
   if (!course) {
@@ -164,7 +164,7 @@ const CourseDetails = () => {
         </DialogActions>
       </Dialog>
 
-      {/* — Hero Section — */}
+      {/*Hero Section */}
       <Box
         sx={{
           backgroundColor: theme.palette.primary.main,
@@ -220,17 +220,17 @@ const CourseDetails = () => {
         </Container>
       </Box>
 
-      {/* ─ Intro Section ─ */}
+      {/*Intro Section */}
       <CourseIntroCard courseId={selectedCourseId} />
 
-      {/* ─ Learning Outcomes + Modules ─ */}
+      {/*Learning Outcomes + Modules */}
       <CourseContentDetails
         courseId={selectedCourseId}
         isSmDown={isSmDown}
         theme={theme}
       />
 
-      {/* ─ Reviews ─ */}
+      {/* Reviews */}
       <Box sx={{ width: '100%', overflow: 'visible', pb: isSmDown ? 2 : 6 }}>
         <FilteredReviewSection courseId={selectedCourseId} />
 

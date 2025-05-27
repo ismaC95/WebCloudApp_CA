@@ -1,5 +1,3 @@
-// src/App.jsx
-// src/App.jsx
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { CssBaseline, Box, Grid } from '@mui/material';

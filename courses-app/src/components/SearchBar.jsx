@@ -88,7 +88,6 @@ const SearchBar = () => {
             onKeyDown={handleKeyDown}
             placeholder="Search for Courses..."
             InputProps={{
-              // disableUnderline: true,
               startAdornment: (
                 <InputAdornment position="start">
                   <IconButton onClick={handleSearch}>
@@ -107,7 +106,6 @@ const SearchBar = () => {
             color: 'red',
             mt: 1,
             animation: `${fadeIn} 0.5s ease-in`,
-            // textAlign: 'center'
           }}
           >
             {errorMessage}

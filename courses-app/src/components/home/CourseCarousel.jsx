@@ -1,6 +1,5 @@
-// src/components/home/CourseCarousel.jsx
 import { Box, Typography, Card, CardContent, CardMedia } from '@mui/material';
-import { Link } from 'react-router-dom';                // → NEW
+import { Link } from 'react-router-dom';
 import RatingStars from '../../components/RatingStars';
 
 import { useAppData } from '../../contexts/AppData';

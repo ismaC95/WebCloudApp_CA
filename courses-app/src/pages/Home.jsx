@@ -5,7 +5,7 @@ import CourseCarousel from '../components/home/CourseCarousel';
 import ReviewSection from '../components/home/ReviewSection';
 import SpecialOffers from '../components/home/SpecialOffers';
 
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import { useAppData } from '../contexts/AppData';
 
 

@@ -43,7 +43,7 @@ const Checkout = () => {
 
 
     const handleChange = (e) => {
-        // spread existing form data and update the changed field.
+        // spread existing form data and update the changed field
         setFormData({...formData, [e.target.name]: e.target.value});
     };
 

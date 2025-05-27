@@ -1,9 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Try to load dotenv if in Node.js (no `window` object)
+// Try to load dotenv if in Node.js (no "window" object)
 let env = {};
 if (typeof window === "undefined") {
   const dotenv = await import("dotenv");

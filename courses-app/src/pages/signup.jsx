@@ -1,4 +1,3 @@
-// src/pages/Signup.jsx
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';

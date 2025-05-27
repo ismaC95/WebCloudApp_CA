@@ -86,7 +86,7 @@ function CourseList() {
                 <SearchBar />
                 </Box>
 
-                {/* ----Top Content---- */}
+                {/* Top Content */}
                 <Grid container size= {12}>
     
                     {/* Filter buttons */}

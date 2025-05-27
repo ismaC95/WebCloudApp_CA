@@ -21,7 +21,6 @@ const OrderSummary = ({
     //   {/* ORDER SUMMARY */}
     <Box>
       
-
       {/* Subtotal and discount */}
       <Box display="flex" justifyContent="space-between" sx={{ mb: { xs: 1, lg: 3 } }}>
         <Typography variant="body1">Subtotal</Typography>

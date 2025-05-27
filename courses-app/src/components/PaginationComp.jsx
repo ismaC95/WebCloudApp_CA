@@ -1,4 +1,4 @@
-import { Grid, Select, FormControl, MenuItem } from '@mui/material';
+import { Grid } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 
 const PaginationComp = ({currentPage, setCurrentPage, totalCourses, coursesPerPage}) => {
