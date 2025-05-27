@@ -1,11 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { TextField, InputAdornment, Box, IconButton, Typography } from '@mui/material';
+import { keyframes } from '@mui/system';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppData } from '../contexts/AppData';
-import { keyframes } from '@mui/system';
+import { useSearch } from '../contexts/SearchContext';
 
 const fadeIn = keyframes`
 from {opacity: 0; }
@@ -15,33 +15,58 @@ to {opacity: 1; }
 
 const SearchBar = () => {
   const { courses } = useAppData();
-  const [keyword, setKeyword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const { searchKeyword, setSearchKeyword, errorMessage, setErrorMessage } = useSearch();
+  
+  const [ inputValue, setInputValue ] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
+  //Keep the error message updated all the time when clearing the chips in courseList, etc.
+  useEffect(() => {
+    if (
+      !searchKeyword ||
+      courses.some(course =>
+        course.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        course.description.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        course.category.toLowerCase().includes(searchKeyword.toLowerCase())
+      )
+    ) {
+      setErrorMessage('');
+    }
+  }, [searchKeyword, courses, setErrorMessage]);
+  
   const handleSearch = () => {
-    const searchTerm = keyword.trim().toLowerCase();
+    const searchTerm = inputValue.trim().toLowerCase();
     if (!searchTerm) return;
 
+    setSearchKeyword(inputValue);
+
     const matchedCourse = courses.find(course =>
-      course.title.toLowerCase().includes(searchTerm)
+      course.title.toLowerCase().includes(searchTerm) ||
+      course.description.toLowerCase().includes(searchTerm) ||
+      course.category.toLowerCase().includes(searchTerm)
     );
 
-    if (matchedCourse) {
-      setErrorMessage('');
-      navigate(`/courses/${matchedCourse.id}`);
-    } else {
-      setErrorMessage('No Matching course found');
-    }
+    location.pathname === '/courses' ? (
+      !matchedCourse ? setErrorMessage('No matching course found') : setErrorMessage('')
+    ):(
+      !matchedCourse ? setErrorMessage('No matching course found') : (
+        setErrorMessage(''),
+        navigate('/courses')
+      )
+    );
   };
 
   const handleInputChange = (event) => {
-    setKeyword(event.target.value);
+    setInputValue(event.target.value);
     if (errorMessage) setErrorMessage('');
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') handleSearch();
+    if (event.key === 'Enter') {
+      handleSearch();
+      setInputValue('');
+    }
     };
 
     return (
@@ -55,7 +80,7 @@ const SearchBar = () => {
         >
           <TextField
             fullWidth
-            value={keyword}
+            value={inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             placeholder="Search for Courses..."

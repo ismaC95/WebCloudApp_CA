@@ -28,6 +28,7 @@ import { CartProvider } from './contexts/CartContext';
 import { AppDataProvider } from './contexts/AppData';
 import { PrincingProvider } from './contexts/PrincingContext';
 import { EnrollmentProvider } from './contexts/EnrollmentContext';
+import { SearchProvider } from './contexts/SearchContext';
 
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
       <CartProvider>
       <PrincingProvider>
       <EnrollmentProvider>
+      <SearchProvider>
 
       {currentUser ? <UserNavbar /> : <Navbar />}
         <Grid container>
@@ -87,7 +89,8 @@ const App = () => {
         </Grid>
           
 
-      <Footer />
+        <Footer />
+      </SearchProvider>
       </EnrollmentProvider>
       </PrincingProvider>
       </CartProvider>
