@@ -34,8 +34,8 @@ const CategoryTabs = ({ onCategoryChange }) => {
             sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                mt: 2,
-                px: { xs: 2, sm: 3, md: 3 },
+                mt: 1,
+                px: { xs: 2, sm: 3},
                 width: '100%',
             }}
         >

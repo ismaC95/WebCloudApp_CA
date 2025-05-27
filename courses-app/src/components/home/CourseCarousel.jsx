@@ -15,7 +15,7 @@ const CourseCarousel = ({ selectedCategory }) => {
   return (
     <Box
       sx={{
-        mt: 6,
+        mt: {xs:2, lg: 3},
         px: { xs: 2, sm: 3, md: 3 },
         py: 5,
         bgcolor: '#F0F2F5',

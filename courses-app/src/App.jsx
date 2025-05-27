@@ -1,8 +1,9 @@
 // src/App.jsx
 // src/App.jsx
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect } from 'react';
 import { CssBaseline, Box, Grid } from '@mui/material';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Navbar       from './components/Navbar';
 import UserNavbar   from './components/UserNavbar';
@@ -27,10 +28,17 @@ import { CartProvider } from './contexts/CartContext';
 import { AppDataProvider } from './contexts/AppData';
 import { PrincingProvider } from './contexts/PrincingContext';
 import { EnrollmentProvider } from './contexts/EnrollmentContext';
+import { SearchProvider } from './contexts/SearchContext';
 
 
 const App = () => {
-  const { currentUser } = useAuth();             
+  const { currentUser } = useAuth();            
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <>
@@ -39,6 +47,7 @@ const App = () => {
       <CartProvider>
       <PrincingProvider>
       <EnrollmentProvider>
+      <SearchProvider>
 
       {currentUser ? <UserNavbar /> : <Navbar />}
         <Grid container>
@@ -80,7 +89,8 @@ const App = () => {
         </Grid>
           
 
-      <Footer />
+        <Footer />
+      </SearchProvider>
       </EnrollmentProvider>
       </PrincingProvider>
       </CartProvider>

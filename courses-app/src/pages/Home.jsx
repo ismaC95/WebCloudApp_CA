@@ -26,15 +26,13 @@ const Home = () => {
     }, [courses]);
 
     return (
-        <Container maxWidth="xl" sx={{ mt: 4 }}>
-          <Box display="flex" flexDirection="column" gap={4}>
+          <Box display="flex" flexDirection="column" gap={2} sx={{ mt: 4 }}>
             <SearchBar />
             <CategoryTabs onCategoryChange={setSelectedCategory} />
             <CourseCarousel selectedCategory={selectedCategory} />          
             <ReviewSection />
             <SpecialOffers />
           </Box>
-        </Container> 
     );
 };
 

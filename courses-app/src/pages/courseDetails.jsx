@@ -12,8 +12,8 @@ import {
   DialogContentText,
   DialogActions,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';        
+import { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';        
 import RatingStars from '../components/RatingStars';
 import CourseIntroCard from '../components/CourseIntroCard';
 import CourseContentDetails from '../components/CourseContentDetails';
@@ -48,15 +48,13 @@ const CourseDetails = () => {
   const { courseId } = useParams();
   // Add course to cart functionality
   const {addToCart} = useCart();
-  const [open, setOpen] = useState(false); 
+  const [openFree, setOpenFree] = useState(false);
+  const [openLogIn, setOpenLogIn] = useState(false); 
+
   const selectedCourseId = parseInt(courseId, 10);
 
   /* ─── 2.  Look up the course  ─── */
   const course = courses.find(c => c.id === selectedCourseId);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   
   if (!course) {
     return (
@@ -71,16 +69,20 @@ const CourseDetails = () => {
   const { title, description, rating, no_reviews, originalPriceDisplay, priceDisplay } = course;
 
   //Enroll courses that are free directly
-    
-    
-    const handleEnroll = (coursePrice) => {
-        coursePrice === 0 ? setOpen(true) : addToCart(course)
+    const handleEnrollFree = (coursePrice) => {
+        coursePrice === 0 ? setOpenFree(true) : addToCart(course);
     }
+
+  //Enrol only if the user is logged in
+  const handleEnrollLoggedIn = (coursePrice, currentUser) => {
+    currentUser ? handleEnrollFree(coursePrice) : setOpenLogIn(true);
+  }
 
   return (
     
     <Box sx={{ boxSizing: 'border-box', mt:10}}>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      {/* Enrolling on a free course dialog */}
+      <Dialog open={openFree} onClose={() => setOpenFree(false)}>
         <DialogTitle>Free Enrollment</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -88,14 +90,14 @@ const CourseDetails = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button onClick={() => setOpenFree(false)}>Cancel</Button>
           <Button
             onClick={async () => {
               const exists = await enrollmentExists(currentUser.uid, course.id);
                 if (!exists) {
                   await addEnrollment(currentUser.uid, course.id);
               }
-                setOpen(false);
+                setOpenFree(false);
             }}
             color="primary"
             variant="contained"
@@ -104,6 +106,27 @@ const CourseDetails = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      
+      {/* Enrolling on a course without being logged in */}
+      <Dialog open={openLogIn} onClose={() => setOpenLogIn(false)}>
+        <DialogTitle>You are not logged in</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To enrol in a course you need to have an account
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenLogIn(false)}>Cancel</Button>
+          <Button
+            component={Link} to="/login"
+            color="primary"
+            variant="contained"
+          >
+            Go to Log In
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       {/* — Hero Section — */}
       <Box
         sx={{
@@ -152,7 +175,7 @@ const CourseDetails = () => {
               color="secondary"
               size="large"
               sx={{ color: '#FFFFFF' }}
-              onClick={() => handleEnroll(course.price)}
+              onClick={() => handleEnrollLoggedIn(course.price, currentUser)}
             >
               Enroll Now
             </Button>
@@ -180,7 +203,7 @@ const CourseDetails = () => {
           justifyContent: 'center',
           mt: 6,            
           }}>
-          <Button variant="type1" size="large" onClick={() => addToCart(course)}>
+          <Button variant="type1" size="large" onClick={() => handleEnrollLoggedIn(course.price, currentUser)}>
             Enroll Now
           </Button>
         </Box>
