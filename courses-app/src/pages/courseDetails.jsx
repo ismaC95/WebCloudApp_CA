@@ -49,7 +49,8 @@ const CourseDetails = () => {
   // Add course to cart functionality
   const {addToCart} = useCart();
   const [openFree, setOpenFree] = useState(false);
-  const [openLogIn, setOpenLogIn] = useState(false); 
+  const [openLogIn, setOpenLogIn] = useState(false);
+  const [openAlreadyEnrolled, setOpenAlreadyEnrolled] = useState(false);
 
   const selectedCourseId = parseInt(courseId, 10);
 
@@ -69,14 +70,29 @@ const CourseDetails = () => {
   const { title, description, rating, no_reviews, originalPriceDisplay, priceDisplay } = course;
 
   //Enroll courses that are free directly
-    const handleEnrollFree = (coursePrice) => {
-        coursePrice === 0 ? setOpenFree(true) : addToCart(course);
-    }
+  const handleEnrollFree = async (coursePrice) => {
+  const exists = await enrollmentExists(currentUser.uid, course.id);
+
+  if (exists) {
+    setOpenAlreadyEnrolled(true);
+    return;
+  }
+
+  if (coursePrice === 0) {
+    setOpenFree(true);
+  } else {
+    addToCart(course);
+  }
+};
 
   //Enrol only if the user is logged in
-  const handleEnrollLoggedIn = (coursePrice, currentUser) => {
-    currentUser ? handleEnrollFree(coursePrice) : setOpenLogIn(true);
+  const handleEnrollLoggedIn = async (coursePrice, currentUser) => {
+  if (!currentUser) {
+    setOpenLogIn(true);
+    return;
   }
+  await handleEnrollFree(coursePrice);
+};
 
   return (
     
@@ -123,6 +139,27 @@ const CourseDetails = () => {
             variant="contained"
           >
             Go to Log In
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* If you are enrolled, you can't enrol again */}
+      <Dialog open={openAlreadyEnrolled} onClose={() => setOpenAlreadyEnrolled(false)}>
+        <DialogTitle>You're already enrolled</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            You’re already enrolled in this course. Please check your dashboard.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenAlreadyEnrolled(false)}>Close</Button>
+          <Button
+            component={Link}
+            to="/student-dashboard"
+            color="primary"
+            variant="contained"
+          >
+            Go to Your Courses
           </Button>
         </DialogActions>
       </Dialog>
