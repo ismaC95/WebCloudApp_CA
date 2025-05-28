@@ -152,7 +152,7 @@ const UserNavbar = () => {
                   fontSize: {xs: '1rem', md: '1.3rem'},                  
                   }}
                 >
-                  Welcome Back,  {' '}
+                  Welcome Back   , {'    '}
                   <Box component="span" sx={{ color: '#5C3D90', fontWeight: 600, fontSize: '1.3rem', fontStyle: 'italic' }}>
                     {currentUser.displayName}
                   </Box>
