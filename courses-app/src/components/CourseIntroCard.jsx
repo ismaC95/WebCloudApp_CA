@@ -1,4 +1,3 @@
-// src/components/CourseIntroCard.jsx
 import {
   Container,
   Grid,

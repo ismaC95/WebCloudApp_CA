@@ -1,7 +1,3 @@
-// src/data/InstructorDetails.js
-
-import courses from "./CoursesDatabase.js";
-
 const instructors = [
   {
     id: 1,

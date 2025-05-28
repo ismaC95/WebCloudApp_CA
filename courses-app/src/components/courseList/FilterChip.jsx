@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Chip, Stack, Button, Fade } from '@mui/material'
 
 
-const FilterChip = ({filters, setFilters}) => {
+const FilterChip = ({filters, setFilters, searchKeyword, setSearchKeyword, setErrorMessage}) => {
   const [showClear, setShowClear] = useState(false);
 
   const handleDelete = (category, value) => {
@@ -10,15 +10,18 @@ const FilterChip = ({filters, setFilters}) => {
     setFilters({ ...filters, [category]: updated });
   };
 
-  const chips = [];
-
+  
   //Once there's a chip, show Clear All button that will update Filters to empty
   const handleClearAll = () => {
     const cleared = Object.fromEntries(
       Object.keys(filters).map(key => [key, []])
     );
     setFilters(cleared);
+    setSearchKeyword('');
+    setErrorMessage('');
   };
+
+  const chips = [];
 
   //Check if there's at least on chip to show "clear all"
   useEffect(()=>{
@@ -40,6 +43,18 @@ const FilterChip = ({filters, setFilters}) => {
     });
   });
 
+  //set chips with the keyword
+  if (searchKeyword.trim()) {
+    chips.push(
+      <Chip
+        key={`keyword-${searchKeyword}`}
+        label={`${searchKeyword}`}
+        onDelete={() => setSearchKeyword('')}
+        variant="outlined"
+        sx={{ m: 0.5 }}
+      />
+    );
+  }
 
 
     return (

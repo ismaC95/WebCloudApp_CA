@@ -1,4 +1,3 @@
-// src/components/InstructorCard.jsx
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { PersonOutline as PersonIcon } from '@mui/icons-material';
@@ -8,7 +7,6 @@ const InstructorCard = ({ instructorId }) => {
   const { instructors } = useAppData();
   const instructor = instructors.find(inst => inst.id === instructorId);
 
-  // if (!instructor) return null;
 
   return (
     <Box

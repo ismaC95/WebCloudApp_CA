@@ -20,7 +20,6 @@ const ShoppingCartComp = ({openCart, toggleCart}) => {
     >
         <Stack height="100%" 
             sx={{width: {
-                //To refine width
                 xs: '100vw',
                 sm: '550px'},
                 minWidth:{sm:'550px'}}}

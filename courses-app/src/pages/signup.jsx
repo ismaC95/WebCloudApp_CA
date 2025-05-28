@@ -1,4 +1,3 @@
-// src/pages/Signup.jsx
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
@@ -8,8 +7,6 @@ import {
   createUserWithEmailAndPassword,
   updateProfile
 } from 'firebase/auth';
-import { setDoc, doc } from "firebase/firestore";
-import { db } from '../firebase';
 
 import {
   Avatar,
@@ -37,7 +34,7 @@ export default function Signup() {
 
 function SignupContent() {
   const muiTheme  = useTheme();
-  const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const showImage = useMediaQuery(muiTheme.breakpoints.up('xl'));
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -107,10 +104,10 @@ function SignupContent() {
      
          {showImage && (
            <Grid
-             item md={6}
+             size={{md:6}}
              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
            >
-             <Box sx={{ px: 4 }}>
+             <Box sx={{ p: 4 }}>
                <Box
                  component="img"
                  src={signupIllustration}
@@ -122,8 +119,8 @@ function SignupContent() {
          )}
 
       <Grid
-              item xs={12} md={6}
-              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 2}}
+              size={{xs:12, md:6}}
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 4}}
             >
         <Paper
           elevation={8}

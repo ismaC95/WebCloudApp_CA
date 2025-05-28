@@ -1,6 +1,5 @@
-// src/components/home/CourseCarousel.jsx
 import { Box, Typography, Card, CardContent, CardMedia } from '@mui/material';
-import { Link } from 'react-router-dom';                // → NEW
+import { Link } from 'react-router-dom';
 import RatingStars from '../../components/RatingStars';
 
 import { useAppData } from '../../contexts/AppData';
@@ -15,7 +14,7 @@ const CourseCarousel = ({ selectedCategory }) => {
   return (
     <Box
       sx={{
-        mt: 6,
+        mt: {xs:2, lg: 3},
         px: { xs: 2, sm: 3, md: 3 },
         py: 5,
         bgcolor: '#F0F2F5',

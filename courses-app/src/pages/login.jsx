@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
@@ -41,7 +40,7 @@ export default function Login() {
 
 function LoginContent() {
   const muiTheme  = useTheme();
-  const showImage = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const showImage = useMediaQuery(muiTheme.breakpoints.up('xl'));
   const navigate  = useNavigate();
 
 
@@ -117,10 +116,10 @@ function LoginContent() {
   
       {showImage && (
         <Grid
-          item md={6}
+          size={{md:6}}
           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
-          <Box sx={{ px: 4 }}>
+          <Box sx={{ p: 4 }}>
             <Box
               component="img"
               src={loginIllustration}
@@ -133,8 +132,8 @@ function LoginContent() {
 
    
       <Grid
-        item xs={12} md={6}
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 2 }}
+        size={{xs: 12, sm: 6}}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', p: 4 }}
       >
         <Paper
           elevation={8}

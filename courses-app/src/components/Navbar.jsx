@@ -1,9 +1,9 @@
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Toolbar, Button, Box, IconButton, Drawer, List, ListItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useTheme, useMediaQuery } from '@mui/material';
-import logo from '../assets/images/Logo-full2.png';
+import logo from '../assets/images/logo-purple-transparent.png';
 
 
 const Navbar = () => {

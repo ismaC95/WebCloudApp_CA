@@ -1,4 +1,3 @@
-// src/pages/forgotPassword.jsx
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import theme from '../theme';
@@ -35,7 +34,7 @@ export default function ForgotPassword() {
 
 function ForgotPasswordContent() {
   const muiTheme   = useTheme();
-  const showImage  = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const showImage  = useMediaQuery(muiTheme.breakpoints.up('xl'));
 
   
   const [email, setEmail]         = useState('');
